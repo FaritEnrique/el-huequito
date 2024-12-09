@@ -9,6 +9,9 @@ export default {
       fontFamily: {
         pacifico: ['Pacifico', 'cursive'],
       },
+      fontFamily: {
+        lobster: ['Lobster', 'cursive'],
+      },
     },
   },
   plugins: [],

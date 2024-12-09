@@ -1,6 +1,8 @@
 import React from 'react';
-import '@fontsource/pacifico'; // Importación de fuente
+import '@fontsource/pacifico'; // Importación de fuente Pacifico
+import '@fontsource/lobster'; // Importación de la fuente Lobster
 import CarruselMarcas from '../components/CarruselMarcas';
+import { Link } from 'react-router';
 
 const HomePage = () => {
   return (
@@ -23,8 +25,34 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <section>
-        {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/Z3qYJk307Po?si=zZLcXDVQDbvlXYgs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
+      <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black bg-white">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Z3qYJk307Po?si=zZLcXDVQDbvlXYgs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div className='w-full rounded-xl p-2'>
+          <p className="w-full font-lobster sm:text-xl md:text-2xl lg:text-4xl text-center text-blue-500 transform rotate-[-2deg] origin-top-center py-2">
+            Los Colores son Emociones; Elige Pintar Felicidad
+          </p>
+        </div>
+        <div className='w-full'>
+          <p className='font-bold text-center'>
+            Tipos de Productos
+          </p>
+        </div>
+        <div className='w-full px-2 md:px-4'>
+          <div className='w-3/4'>
+            <p className='w-full m-auto flex flex-wrap'>
+              <Link to='/productos' className='font-semibold'>
+                Pinturas Decorativas:
+              </Link>
+              <span className='text-justify'>
+                Estas pinturas, son las que se utilizan para el pintado de viviendas, es decir interiores y exteriores
+              </span>
+            </p>
+          </div>
+          <div>
+            <img src="" alt="" />
+          </div>
+          
+        </div>
       </section>
     </>
   );
