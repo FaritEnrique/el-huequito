@@ -28,8 +28,8 @@ const CarruselMarcas = () => {
     };
 
     return (
-        <div className="p-8 justify-items-center rounded-tr-xl rounded-br-xl">
-            <div className="relative group max-w-[768px] mx-auto rounded-tr-xl rounded-br-xl bg-white">
+        <div className="p-8 justify-items-center rounded-xl rounded-br-xl">
+            <div className="relative group max-w-[768px] mx-auto rounded-xl rounded-br-xl bg-white">
                 {/* Imagen del carrusel */}
                 <img 
                     className="w-full h-auto max-w-[920px] rounded-xl duration-500 transition-all transform scale-105" 

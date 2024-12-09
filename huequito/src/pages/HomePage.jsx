@@ -18,10 +18,13 @@ const HomePage = () => {
               className="w-3/4 md:w-1/2 lg:w-1/3"
             />
           </div>
-          <div className='w-full rounded-r-xl md:w-1/2'>
+          <div className='w-full rounded-xl md:w-1/2'>
             <CarruselMarcas/>
           </div>
         </div>
+      </section>
+      <section>
+        {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/Z3qYJk307Po?si=zZLcXDVQDbvlXYgs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
       </section>
     </>
   );
