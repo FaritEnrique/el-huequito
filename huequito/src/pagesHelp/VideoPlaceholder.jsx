@@ -15,7 +15,7 @@ const VideoPlaceholder = () => {
                     referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                     className="absolute top-0 left-0 w-full h-full rounded-xl"
-                    //loading="lazy"
+                    loading="lazy"
                 />
             ) : (
                 <button
