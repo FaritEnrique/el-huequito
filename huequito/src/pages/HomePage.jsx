@@ -9,8 +9,6 @@ import { Link } from 'react-router';
 
 const HomePage = () => {
 
-  
-
   return (
     <>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black">

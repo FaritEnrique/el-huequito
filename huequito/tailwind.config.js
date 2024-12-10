@@ -8,9 +8,8 @@ export default {
     extend: {
       fontFamily: {
         pacifico: ['Pacifico', 'cursive'],
-      },
-      fontFamily: {
         lobster: ['Lobster', 'cursive'],
+        playfair: ['"Playfair Display"', 'serif'],
       },
     },
   },
