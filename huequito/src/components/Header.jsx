@@ -46,13 +46,23 @@ const Header = () => {
                                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-400 rounded-lg bg-gray-300 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
                                         {['Inicio', 'Nosotros', 'Productos', 'Promociones', 'Ideas', 'Presupuestar', 'Contacto'].map((item) => (
                                             <li key={item}>
-                                                <Link
-                                                    to={`/${item.toLowerCase()}`}
-                                                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                                                    onClick={() => setAbrir(false)} // Cierra el menú al hacer clic
-                                                >
-                                                    {item}
-                                                </Link>
+                                                {item.toLowerCase() === 'inicio' ? (
+                                                    <Link
+                                                        to="/"
+                                                        className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                                                        onClick={() => setAbrir(false)}
+                                                    >
+                                                        {item}
+                                                    </Link>
+                                                ) : (
+                                                    <Link
+                                                        to={`/${item.toLowerCase()}`}
+                                                        className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                                                        onClick={() => setAbrir(false)} // Cierra el menú al hacer clic
+                                                    >
+                                                        {item}
+                                                    </Link>
+                                                )}
                                             </li>
                                         ))}
                                     </ul>
@@ -65,12 +75,21 @@ const Header = () => {
                             <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                                 {['Inicio', 'Nosotros', 'Productos', 'Promociones', 'Ideas', 'Presupuestar', 'Contacto'].map((item) => (
                                     <li key={item}>
-                                        <Link
-                                            to={`/${item.toLowerCase()}`}
-                                            className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                                        >
-                                            {item}
-                                        </Link>
+                                        {item.toLowerCase() === 'inicio' ? (
+                                            <Link
+                                                to="/"
+                                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                                            >
+                                                {item}
+                                            </Link>
+                                        ) : (
+                                            <Link
+                                                to={`/${item.toLowerCase()}`}
+                                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                                            >
+                                                {item}
+                                            </Link>
+                                         )}   
                                     </li>
                                 ))}
                             </ul>

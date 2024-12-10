@@ -9,7 +9,7 @@ import { Link } from 'react-router';
 
 const HomePage = () => {
 
-  const [showVideo, setShowVideo] = useState(false); // Estado para manejar si el video se carga
+  
 
   return (
     <>

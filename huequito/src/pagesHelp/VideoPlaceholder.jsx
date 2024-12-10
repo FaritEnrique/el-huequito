@@ -24,7 +24,7 @@ const VideoPlaceholder = () => {
                     >
                     <div className="flex-col justify-center">
                         <h2 className="font-bold w-full text-center md:text-2xl pb-2">
-                            Sugerencias para Fechadas
+                            Sugerencias para Fachadas
                         </h2>
                         <img
                         src="/images/dibujos/foto_video.png"
