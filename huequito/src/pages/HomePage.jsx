@@ -1,42 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
+import VisibilityWrapper from '../hooks/VisibilityWrapper';
 import '@fontsource/pacifico'; // Importación de fuente Pacifico
 import '@fontsource/lobster'; // Importación de la fuente Lobster
 import { TbPointFilled } from "react-icons/tb";
 import CarruselMarcas from '../components/CarruselMarcas';
+import VideoPlaceholder from '../pagesHelp/VideoPlaceholder';
 import { Link } from 'react-router';
 
 const HomePage = () => {
+
+  const [showVideo, setShowVideo] = useState(false); // Estado para manejar si el video se carga
+
   return (
     <>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black">
         {/* Contenedor principal */}
         <div className="max-w-[1300px] w-full bg-white rounded-xl flex flex-col p-4 md:flex-row items-center">
-          <div className="flex-col w-full text-center md:text-center justify-items-center md:w-1/2">
-            <h2 className="font-extrabold text-blue-900 font-pacifico text-2xl md:text-3xl lg:text-4xl mt-4 mx-4">
+          <div className="flex-col w-full text-center justify-items-center md:w-1/2">
+            <h2 className="font-extrabold text-blue-900 font-pacifico text-2xl md:text-3xl lg:text-4xl mx-4">
               Los Especialistas en Pinturas te Ayudamos
             </h2>
             <img
               src="/images/logos/logo_huequito_fecha.png"
               alt="Logo El Huequito"
-              className="w-3/4"
+              className="w-1/2"
             />
             <h2 className="font-extrabold text-blue-900 font-pacifico text-2xl md:text-3xl lg:text-4xl my-2">
               Tenemos Muy Buenos Precios
             </h2>  
           </div>
-          {/* <div className='w-full rounded-xl md:w-1/2 flex justify-center aspect-w-16 aspect-h-9'>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/Z3qYJk307Po?si=zZLcXDVQDbvlXYgs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen className='rounded-xl object-contain'></iframe>
-          </div> */}
-          <div className="relative max-w-1/2 w-full md:w-1/2 pb-[56.25%]">
-            <iframe 
-              src="https://www.youtube.com/embed/Z3qYJk307Po?si=zZLcXDVQDbvlXYgs" 
-              title="YouTube video player" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              referrerPolicy="strict-origin-when-cross-origin" 
-              allowFullScreen 
-              className='absolute top-0 left-0 w-full h-full rounded-xl'
-            />
+          <div className="relative max-w-1/2 w-full md:w-1/2 flex items-center bg-red">
+            <VideoPlaceholder/>
           </div>
         </div>
       </section>
@@ -59,12 +53,13 @@ const HomePage = () => {
         </div>
       </section>
       <section className="max-w-[1300px] w-full mx-auto my-4 pt-4 px-2 md:px-4 flex flex-wrap rounded-xl border-2 border-black bg-white">
-        
-        <div className='w-full rounded-xl md:px-4'>
-          <p className="w-full font-lobster sm:text-xl md:text-2xl lg:text-4xl text-center text-blue-500 transform rotate-[-2deg] origin-top-center py-2">
-            Los Colores son Emociones; Elige Pintar Felicidad
-          </p>
-        </div>
+        <VisibilityWrapper>
+          <div className='w-full rounded-xl md:px-4'>
+            <p className="w-full font-lobster sm:text-xl md:text-2xl lg:text-4xl text-center text-blue-500 transform rotate-[-2deg] origin-top-center py-2">
+              Los Colores son Emociones; Elige Pintar Felicidad
+            </p>
+          </div>
+        </VisibilityWrapper>
         <div className='w-full my-4'>
           <p className='font-bold text-center'>
             Tipos de Productos

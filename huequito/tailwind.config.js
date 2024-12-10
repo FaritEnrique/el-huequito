@@ -14,6 +14,14 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+          '.touch-manipulation': {
+              touchAction: 'manipulation',
+          },
+      });
+    },
+  ],
 }
 
