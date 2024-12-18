@@ -17,6 +17,7 @@ import AdminPage from './pages/AdminPage'
 import EditPreguntasPage from './pages/EditPreguntasPage'
 import NewQuestionPage from './pagesHelp/NewQuestionPage'
 import EditarPreguntaPage from './pagesHelp/EditarPreguntaPage'
+import GestionMensajes from './pages/GestionMensajes'
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
           <Route path='/edit-preg' element={<EditPreguntasPage />} />
           <Route path='/new-question' element={<NewQuestionPage />} />
           <Route path='/edit/pregunta/:id' element={<EditarPreguntaPage />} />
+          <Route path='/manage/messages' element={<GestionMensajes />} />
         </Route>
       </Routes>
 
