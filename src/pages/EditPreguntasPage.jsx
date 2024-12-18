@@ -69,11 +69,20 @@ const PreguntasFrecuentesPage = () => {
                 <div className='text-xl font-bold text-center mb-4'>
                     PREGUNTAS FRECUENTES
                 </div>
-                <Link to='/new-question'>
-                    <div className='w-1/2 md:w-1/4 p-2 bg-sky-500 text-center text-white rounded-xl mb-4 border-2 border-black'>
-                        Crear Pregunta
-                    </div>
-                </Link>
+                <div className='w-full flex justify-between'>
+                    <Link to='/new-question' className='w-1/2 md:w-1/4 p-2'>
+                        <button className='w-full bg-sky-500 text-center text-white font-bold p-2 rounded-xl mb-4 border-2 border-black'>
+                            Crear Pregunta
+                        </button>
+                    </Link>
+                    <Link to='/admin' className='w-1/2 md:w-1/4 p-2'>
+                        <button className='w-full bg-sky-500 text-center text-white font-bold p-2 rounded-xl mb-4 border-2 border-black'>
+                            Volver
+                        </button>
+                    </Link>
+                </div>
+
+                
                     {pregunta.map(pregunta => {
                         return (
                             <div key={pregunta.docId} className='border-2 border-blue-300 p-6 rounded-xl mb-4'>
