@@ -1,0 +1,33 @@
+.contents {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 100%; /* Asegura que el contenedor no exceda el ancho del viewport */
+    width: 1300px; /* Proporciona un ancho flexible */
+    height: auto; /* Permite que la altura sea proporcional al ancho */
+    aspect-ratio: 1300 / 517; /* Mantiene la relación de aspecto */
+    border-radius: 10px;
+    background-image: url('/images/backgrounds/fondo_encabezado_header.jpg');
+    background-size: contain; /* Asegura que la imagen se ajuste al contenedor sin recortarse */
+    background-position: center; /* Centra la imagen dentro del contenedor */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-color: rgb(245, 245, 245); /* Color de fondo visible si la imagen no llena todo */
+}
+
+/* Estilo para pantallas medianas (768px a 1200px) */
+@media (max-width: 1200px) {
+    .contents {
+        width: 100%; /* Ajusta el ancho para pantallas más pequeñas */
+        height: auto; /* Mantén la altura proporcional al ancho */
+    }
+}
+
+/* Estilo para pantallas pequeñas (menos de 768px) */
+@media (max-width: 768px) {
+    .contents {
+        width: 100%; /* Usar todo el ancho disponible */
+        height: auto; /* Altura proporcional */
+        border-radius: 5px; /* Bordes redondeados más pequeños */
+    }
+}
