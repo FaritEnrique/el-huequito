@@ -11,7 +11,7 @@ const GestionMensajes = () => {
         <div className="max-w-[1200px] w-full bg-black rounded-xl flex flex-col p-4 mx-auto my-4 md:flex-row items-center">
           <div className='w-full bg-slate-300'>
             <div className='w-full flex justify-end p-2'>
-              <Link>
+              <Link to='/admin'>
                 <button className='font-bold text-white bg-blue-500 border-2 border-black rounded-xl p-2'>
                   Ir Gestión
                 </button>
