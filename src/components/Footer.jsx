@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import { FaTimes } from "react-icons/fa";
+import { AiOutlineFacebook } from "react-icons/ai";
+import { BsInstagram } from "react-icons/bs";
+import { RiYoutubeLine } from "react-icons/ri";
 
 const Footer = () => {
 
@@ -16,7 +19,11 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-4">Información</h3>
           <ul>
-            <li><a href="/sobre-nosotros" className="text-gray-400 hover:text-orange-400">Sobre Nosotros</a></li>
+            <li>
+              <Link to='/nosotros' className="text-gray-400 hover:text-orange-400">
+                Sobre Nosotros
+              </Link>
+            </li>
             <li>
               <Link to='/preguntas-frecuentes' className="text-gray-400 hover:text-orange-400">
                 Preguntas Frecuentes
@@ -110,21 +117,51 @@ const Footer = () => {
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </li>
-            <li><a href="/telefono" className="text-gray-400 hover:text-orange-400">Teléfono</a></li>
-            <li><a href="/whatsapp" className="text-gray-400 hover:text-orange-400">WhatsApp</a></li>
+            <li className="mt-1">
+              <a href="https://api.whatsApp.com/send?phone=+51900569806&text=Hola" target="_blank">
+                <img src='https://i.ibb.co/Nsh0zjN/WhatsApp.png' className="rounded" alt="Imagen WhatsApp" />
+              </a>
+            </li>
           </ul>
         </div>
         {/* Redes Sociales */}
         <div>
           <h3 className="text-lg font-semibold mb-4">Redes Sociales</h3>
           <ul>
-            <li><a href="https://www.facebook.com/tu-tienda" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-orange-400">Facebook</a></li>
-            <li><a href="https://www.instagram.com/tu-tienda" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-orange-400">Instagram</a></li>
-            <li><a href="https://www.twitter.com/tu-tienda" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-orange-400">Twitter</a></li>
+            <li>
+              <a
+                href="https://www.facebook.com/profile.php?id=100057419862464&mibextid=LQQJ4d&_rdc=2&_rdr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-orange-400">
+                <div className="flex justify-between w-28 items-center mt-2">
+                  <span>Facebook</span><AiOutlineFacebook size='25' className='bg-blue-400 text-white' />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.instagram.com/p/DA5C54tO16m/"
+                target="_blank" rel="noopener noreferrer"
+                className="text-gray-400 hover:text-orange-400">
+                <div className="flex justify-between w-28 items-center mt-2">
+                  <span>Instagram</span><BsInstagram size='25' className='bg-red-400 text-white' />
+                </div>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.youtube.com/@danikahtravelsac7404"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-orange-400">
+                <div className="flex justify-between w-28 items-center mt-2">
+                  <span>YouTube</span><RiYoutubeLine size='25' className='bg-red-500 text-white' />
+                </div>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
