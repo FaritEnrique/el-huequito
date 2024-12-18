@@ -53,18 +53,17 @@ const GestionMensajes = () => {
                   </textarea>
                 </div>
                 <div className='flex justify-end p-1 md:p-4'>
-                  <div className='w-52 flex justify-between'>
-                    <button className='p-4 bg-white rounded-xl border-2 border-black'>
-                      <FaRegTrashAlt size='25' className='text-red-500' />
+                  <div className='w-96 flex justify-between'>
+                    <button className="text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded">
+                      <BiMailSend size='25' /> Enviar Mail
                     </button>
-                    <button className='p-4 bg-white rounded-xl border-2 border-black'>
-                      <BiMailSend size='25' className='text-black' />
+                    <button className="ml-4 text-white bg-green-500 hover:bg-green-700 px-4 py-2 rounded">
+                      <FaWhatsapp size='25' /> Enviar WhatsApp
                     </button>
-                    <button className='p-4 bg-white rounded-xl border-2 border-black'>
-                      <FaWhatsapp size='25' className='text-black' />
+                    <button className="ml-4 text-white bg-red-500 hover:bg-red-700 px-4 py-2 rounded">
+                      <FaRegTrashAlt size='20' /> Eliminar
                     </button>
                   </div>
-                  
                 </div>
               </div>
             </div>
