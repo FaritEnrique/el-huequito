@@ -215,9 +215,9 @@ const ContactoPage = () => {
               <br />
               <select {...register('comunicacion', {required: true})}>
                 <option value=""></option>
-                <option value="0">Celular (WhatsApp)</option>
-                <option value="1">Correo</option>
-                <option value="2">Llamada</option>
+                <option value="Celular">Celular (WhatsApp)</option>
+                <option value="Correo">Correo</option>
+                <option value="Llamada">Llamada</option>
               </select>
               {errors.comunicacion?.type === 'required' && <p className='text-red-500'>Este campo es necesario</p>}
             </div>

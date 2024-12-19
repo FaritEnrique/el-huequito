@@ -4,6 +4,8 @@ import useElHuequito from '../hooks/useElHuequito';
 import { FaRegTrashAlt } from "react-icons/fa";
 import { BiMailSend } from "react-icons/bi";
 import { FaWhatsapp } from "react-icons/fa";
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const GestionMensajes = () => {
 
@@ -15,14 +17,65 @@ const GestionMensajes = () => {
 
   useEffect(() => {
     fetchMensajesContacto()
-      .then(data => setMensaje(data))
-  }, [])
+      .then(data => {
+        if (Array.isArray(data)) {
+          setMensaje(data);
+        } else {
+          throw new Error("Datos no válidos");
+        }
+      })
+      .catch(err => {
+        console.error("Error al obtener los mensajes:", err);
+        toast.error("Hubo un problema al cargar los mensajes.");
+      });
+  }, []);
 
   const handleRespuestaChange = (docId, value) => {
     setRespuesta(prev => ({ ...prev, [docId]: value }));
   };
 
-  
+  const handleEnviarEmail = (correo, docId) => {
+    if (!respuesta[docId]) {
+      toast.warning('Por favor escribe una respuesta antes de enviar el email.');
+      return;
+    }
+    const subject = encodeURIComponent("Respuesta a tu mensaje");
+    const body = encodeURIComponent(respuesta[docId]);
+    window.location.href = `mailto:${correo}?subject=${subject}&body=${body}`;
+  };
+
+  const handleEnviarWhatsApp = (celular, docId) => {
+    if (!respuesta[docId]) {
+      toast.warning('Escribe una respuesta antes de enviar el mensaje de WhatsApp.');
+      return;
+    }
+    const mensajeWhatsApp = encodeURIComponent(respuesta[docId]);
+    window.open(`https://wa.me/${celular}?text=${mensajeWhatsApp}`, "_blank");
+  };
+
+  const handleDeleteMensaje = (id) => {
+    Swal.fire({
+      title: "¿Estás Seguro?",
+      text: "¡No lo podrás revertir!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, borrar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteMensaje(id)
+          .then(() => {
+            setMensaje(prevMensajes => prevMensajes.filter(m => m.docId !== id));
+            toast.success("El mensaje ha sido eliminado.");
+          })
+          .catch((error) => {
+            console.error("Error eliminando el mensaje:", error);
+            toast.error("No se pudo eliminar el mensaje.");
+          });
+      }
+    });
+  };
 
   return (
     <main>
@@ -42,7 +95,7 @@ const GestionMensajes = () => {
               </h1>
               {mensaje.map(mensaje => {
                 return(
-                  <div key={mensaje.docId} className='w-full mx-auto ring-2 ring-sky-400 space-y-2 rounded-xl'>
+                  <div key={mensaje.docId} className='w-full mx-auto ring-2 ring-sky-400 space-y-2 rounded-xl mt-4'>
                     <div className='flex flex-wrap justify-between items-center px-4 md:text-xl'>
                       <div className='flex gap-4'>
                         <span>Nombre:</span><p>{mensaje.nombre}</p>
@@ -65,10 +118,17 @@ const GestionMensajes = () => {
                     </div>
                     <div className='flex flex-wrap justify-between items-center px-4 md:text-xl'>
                       <div className='flex gap-7'>
-                        <span>Fecha:</span><p>{new Date(mensaje.fecha.seconds * 1000).toLocaleDateString()}</p>
+                        <span>Fecha:</span>
+                        <p>
+                        {mensaje.fecha 
+                          ? mensaje.fecha.seconds 
+                            ? new Date(mensaje.fecha.seconds * 1000).toLocaleDateString()
+                            : new Date(mensaje.fecha).toLocaleDateString()
+                          : "Fecha no disponible"}
+                        </p>
                       </div>
                     </div>
-                    <div className='w- full mt-4 text-justify p-2 lg:p-4'>
+                    <div className='w-full mt-4 text-justify p-2 lg:p-4'>
                       <textarea
                         name="mensaje"
                         id="mensaje"
@@ -77,24 +137,33 @@ const GestionMensajes = () => {
                         className='ring-2 ring-black w-full bg-white rounded-xl p-2' />
                     </div>
                     {mensaje.mensaje.trim() !== "" && (
-                        <div className='w- full mt-4 text-justify p-2 lg:p-4'>
+                        <div className='w-full mt-4 text-justify p-2 lg:p-4'>
                           <textarea
                             name="respuestaMensaje"
-                            id="respuestaMensaje"
-                            value=""
+                            id={`respuestaMensaje-${mensaje.docId}`}
+                            value={respuesta[mensaje.docId] || ""}
+                            onChange={(e) => handleRespuestaChange(mensaje.docId, e.target.value)}
+                            aria-label={`Respuesta para el mensaje de ${mensaje.nombre}`}
+                            aria-labelledby={`label-respuesta-${mensaje.docId}`}
                             placeholder="Escribe tu respuesta aquí..."
                             className='ring-2 ring-black w-full bg-white rounded-xl p-2' />
                         </div>
                       )}
                     <div className='flex justify-end p-1 md:p-4'>
                       <div className='w-96 flex justify-between'>
-                        <button className="text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded">
+                        <button
+                          onClick={() => handleEnviarEmail(mensaje.correo, mensaje.docId)}
+                          className="text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded">
                           <BiMailSend size='25' /> Enviar Mail
                         </button>
-                        <button className="text-white bg-green-500 hover:bg-green-700 px-4 py-2 rounded">
+                        <button
+                          onClick={() => handleEnviarWhatsApp(mensaje.celular, mensaje.docId)}
+                          className="text-white bg-green-500 hover:bg-green-700 px-4 py-2 rounded">
                           <FaWhatsapp size='25' /> Enviar WhatsApp
                         </button>
-                        <button className="text-white bg-red-500 hover:bg-red-700 px-4 py-2 rounded">
+                        <button
+                          onClick={() => handleDeleteMensaje(mensaje.docId)}
+                          className="text-white bg-red-500 hover:bg-red-700 px-4 py-2 rounded">
                           <FaRegTrashAlt size='20' /> Eliminar
                         </button>
                       </div>

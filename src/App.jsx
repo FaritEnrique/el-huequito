@@ -1,6 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'sonner'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
 import NosotrosPage from './pages/NosotrosPage'
@@ -23,6 +25,17 @@ const App = () => {
   return (
     <BrowserRouter>
       <Toaster richColors position='top-right' />
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
 
       <Routes>
         <Route path='/' element={<Layout />} >
