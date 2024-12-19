@@ -60,6 +60,15 @@ export const useElHuequito = () => {
         return mensaje.data()
     }
 
+    const deleteMensaje = async (id) => {
+
+        const documentMensaje = doc (refMensaje, id)
+
+        await deleteDoc(documentMensaje)
+
+        return {success: true, id}
+    } 
+
     const refIdeas = collection(db, 'ideas')
 
     const fetchIdeas = async () => {
@@ -217,6 +226,7 @@ export const useElHuequito = () => {
         fetchMensajesContacto,
         crearMensaje,
         obtenerMensaje,
+        deleteMensaje,
         fetchIdeas,
         fetchPreguntas,
         crearPregunta,
