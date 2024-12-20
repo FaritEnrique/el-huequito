@@ -18,6 +18,7 @@ export default {
         'nosotros2-background': "url('/images/backgrounds/fondo_nosotros2.png')",
         'nosotros3-background': "url('/images/backgrounds/fondo_nosotros3.png')",
         'nosotros4-background': "url('/images/backgrounds/fondo_nosotros4.png')",
+        'suscribirse': "url('/images/logos/logo_huequito.png')"
       },
     },
   },

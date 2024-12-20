@@ -11,6 +11,16 @@ const HomePage = () => {
 
   return (
     <>
+      <section className="max-w-[800px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black">
+        <div className="max-w-[800px] w-full bg-white rounded-xl items-center">
+          <Link to='/registro/cliente'>
+            <img
+              src="/images/backgrounds/Suscribirse.png"
+              alt="Imagen para Registrarse"
+              className='object-contain rounded-xl mx-auto'/>
+          </Link>
+        </div>
+      </section>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black">
         {/* Contenedor principal */}
         <div className="max-w-[1300px] w-full bg-white rounded-xl flex flex-col p-4 md:flex-row items-center">
