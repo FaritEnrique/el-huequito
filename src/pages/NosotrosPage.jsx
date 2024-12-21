@@ -128,7 +128,7 @@ const NosotrosPage = () => {
         </div>
       </section>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black p-4">
-        <div className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros2-background bg-contain bg-center bg-no-repeat
+        <div className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros5-background bg-contain bg-center bg-no-repeat
         ring-4 ring-slate-200 rounded-xl py-4 mb-4 justify-end">
           <div className='w-3/4 flex justify-center items-end p-2'>
             <h1 className='font-lobster italic text-white text-center font-bold text-xl sm:text-xl md:text-2xl lg:text-4xl'
