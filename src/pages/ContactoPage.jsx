@@ -87,7 +87,7 @@ const ContactoPage = () => {
           
           <div className='w-full md:w-[48%] flex items-center justify-center rounded-xl ring-4 ring-sky-400 bg-white'>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1183.6323308558437!2d-73.24876103017895!3d-3.7559405870522773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2spe!4v1733866184851!5m2!1ses-419!2spe"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1407.5836907623143!2d-73.24924790786484!3d-3.7561257546218934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ea106bf3548c2b%3A0x53709165c995ff5a!2sArica%20851%2C%20Iquitos%2016001!5e0!3m2!1ses-419!2spe!4v1734478971609!5m2!1ses-419!2spe"
               width="600"
               height="450"
               style={{ border: 0 }}
@@ -125,7 +125,7 @@ const ContactoPage = () => {
               <a
                 className="hover:bg-blue-300 p-2 rounded-full bg-blue-100 ring ring-gray-500 flex items-center
                 justify-center transition-transform transform hover:scale-105 active:scale-95 shadow-lg"
-                href="https://web.facebook.com/profile.php?id=100057419862464&mibextid=LQQJ4d&_rdc=1&_rdr"
+                href="https://www.facebook.com/almacenelhuequito"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook El Huequito"

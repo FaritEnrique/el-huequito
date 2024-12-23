@@ -132,7 +132,7 @@ const Footer = () => {
           <ul>
             <li>
               <a
-                href="https://www.facebook.com/profile.php?id=100057419862464&mibextid=LQQJ4d&_rdc=2&_rdr"
+                href="https://www.facebook.com/almacenelhuequito"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-orange-400">
