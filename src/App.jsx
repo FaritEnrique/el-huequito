@@ -21,6 +21,8 @@ import NewQuestionPage from './pagesHelp/NewQuestionPage'
 import EditarPreguntaPage from './pagesHelp/EditarPreguntaPage'
 import GestionMensajes from './pages/GestionMensajes'
 import RegistroCliente from './pages/RegistroCliente';
+import UserList from './pages/UserList';
+import VerClienteId from './pages/VerClienteId';
 
 const App = () => {
   return (
@@ -57,6 +59,8 @@ const App = () => {
           <Route path='/edit/pregunta/:id' element={<EditarPreguntaPage />} />
           <Route path='/manage/messages' element={<GestionMensajes />} />
           <Route path='/registro/cliente' element={<RegistroCliente />} />
+          <Route path='/admin/user-list' element={<UserList />} />
+          <Route path='/ver/cliente/:id' element={<VerClienteId />} />
         </Route>
       </Routes>
 

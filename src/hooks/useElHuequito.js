@@ -244,7 +244,8 @@ export const useElHuequito = () => {
             name: cliente.name,
             direccion: cliente.direccion,
             correo: cliente.correo,
-            celular: cliente.celular
+            celular: cliente.celular,
+            condicion: cliente.condicion
         }
         const responseCliente = await addDoc(refCliente, newCliente)
 

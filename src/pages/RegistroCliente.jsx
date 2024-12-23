@@ -81,7 +81,7 @@ const RegistroCliente = () => {
           </div>
           <div className='w-full mb-4'>
             <label htmlFor="" className='mr-10 p-2'>Condición:</label>
-            <select {...register('nacionalidad', {required: true})} className='border-2 border-black'>
+            <select {...register('condicion', {required: true})} className='border-2 border-black'>
               <option value=""></option>
               <option value="Propietario">Dueño de Obra</option>
               <option value="Pintor">Pintor</option>
