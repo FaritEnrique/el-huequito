@@ -3,7 +3,7 @@ import "@fontsource/playfair-display/400-italic.css"; // Italic
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
-import useElHuequito from '../hooks/useElHuequito';
+import { useMensajes } from '../hooks/useMensajes';
 
 const ContactoPage = () => {
 
@@ -11,7 +11,7 @@ const ContactoPage = () => {
 
   const { register, formState: { errors } , handleSubmit, reset } = useForm();
 
-  const { crearMensaje } = useElHuequito()
+  const { crearMensaje } = useMensajes();
 
   const onSubmit = async (data) => {
     try {
