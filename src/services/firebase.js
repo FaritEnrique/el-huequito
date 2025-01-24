@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import useElHuequito from "../hooks/pruebaUseElHuequito";
+import useElHuequito from "../hooks/useElHuequito";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAMTa8o1ESTinlMpORM90hUe9pRZlnNUF8",

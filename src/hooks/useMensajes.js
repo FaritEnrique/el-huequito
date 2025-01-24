@@ -1,5 +1,5 @@
 // hooks/useMensajes.js
-import { apiFetch } from "../api/apiFetch";
+import { apiFetch } from '../api/apiFetch.js'
 
 export const useMensajes = () => {
   const fetchMensajes = async () => {
