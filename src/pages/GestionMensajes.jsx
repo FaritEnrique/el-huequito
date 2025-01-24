@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import useElHuequito from '../hooks/useElHuequito';
+import { useMensajes } from '../hooks/useMensajes';
 import { FaRegTrashAlt } from "react-icons/fa";
 import { BiMailSend } from "react-icons/bi";
 import { FaWhatsapp } from "react-icons/fa";
@@ -9,14 +9,14 @@ import Swal from 'sweetalert2';
 
 const GestionMensajes = () => {
 
-  const { fetchMensajesContacto, obtenerMensaje, deleteMensaje } = useElHuequito()
+  const { fetchMensajes, obtenerMensaje, removeMensaje } = useMensajes()
 
   const [ mensaje, setMensaje] = useState([])
 
   const [ respuesta, setRespuesta ] = useState({})
 
   useEffect(() => {
-    fetchMensajesContacto()
+    fetchMensajes()
       .then(data => {
         if (Array.isArray(data)) {
           setMensaje(data);
@@ -64,7 +64,7 @@ const GestionMensajes = () => {
       confirmButtonText: "Sí, borrar",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteMensaje(id)
+        removeMensaje(id)
           .then(() => {
             setMensaje(prevMensajes => prevMensajes.filter(m => m.docId !== id));
             toast.success("El mensaje ha sido eliminado.");

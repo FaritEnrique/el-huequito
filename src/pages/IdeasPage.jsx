@@ -1,16 +1,17 @@
 import React from 'react'
 import { useEffect, useState } from "react"
-import useElHuequito from '../hooks/useElHuequito'
+import { useIdeas } from '../hooks/useIdeas'
 
 const IdeasPage = () => {
 
-  const { fetchIdeas } = useElHuequito()
+  const { fetchIdeas } = useIdeas()
 
   const [ ideasPhoto, setIdeasPhoto ] = useState([])
 
   useEffect(() => {
     fetchIdeas()
         .then(data => setIdeasPhoto(data))
+        .catch(err => console.error('Error al obtener ideas:', err))
     }, [])
 
   return (

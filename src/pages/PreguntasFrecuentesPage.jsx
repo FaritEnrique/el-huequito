@@ -1,19 +1,20 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import useElHuequito from '../hooks/useElHuequito'
+import { usePreguntas } from '../hooks/usePreguntas';
 import { useNavigate } from 'react-router-dom'
 
 const PreguntasFrecuentesPage = () => {
 
   const navigate = useNavigate()
 
-  const { fetchPreguntas } = useElHuequito()
+  const { fetchPreguntas } = usePreguntas()
   
   const [ pregunta, setPregunta ] = useState([])
   
   useEffect(() => {
     fetchPreguntas()
       .then(data => setPregunta(data))
+      .catch(err => console.error('Error al obtener preguntas:', err));
     }, [])
 
   return (

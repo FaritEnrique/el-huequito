@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import useElHuequito from '../hooks/useElHuequito';
+import { usePromociones } from '../hooks/usePromociones';
+import Swal from 'sweetalert2';
 
 const PromocionPage = () => {
-  const { fetchPromotions } = useElHuequito();
+  const { fetchPromociones } = usePromociones();
   const [promotions, setPromotions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [errorOccurred, setErrorOccurred] = useState(false); // Bandera para controlar el error
 
   useEffect(() => {
     const loadPromotions = async () => {
+      if (errorOccurred) return; // Si ya ocurrió un error, no intentar de nuevo
       setLoading(true);
-      const data = await fetchPromotions();
-      setPromotions(data);
+      try {
+        const data = await fetchPromociones();
+        setPromotions(data);
+      } catch (error) {
+        console.error("Error fetching promotions:", error);
+        setErrorOccurred(true);  // Marcar que ocurrió un error
+        // Usar SweetAlert para mostrar el error
+        Swal.fire({
+          title: 'Error',
+          text: 'Hubo un error al cargar las promociones.',
+          icon: 'error',
+        });
+      }
       setLoading(false);
     };
     loadPromotions();
-  }, []);
+  }, [fetchPromociones, errorOccurred]); // Añadir `errorOccurred` a las dependencias para evitar reintentos
 
   return (
     <div className="container mx-auto p-4">
@@ -26,7 +40,7 @@ const PromocionPage = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           {promotions.map((promotion) => (
-            <div key={promotion.docId} className="border p-4 rounded shadow">
+            <div key={promotion.id} className="border p-4 rounded shadow">
               <h2 className="text-xl font-bold">{promotion.title}</h2>
               <p>{promotion.description}</p>
               <p className="text-sm text-gray-500">Fecha de inicio: {new Date(promotion.startDate).toLocaleDateString()}</p>
