@@ -13,12 +13,12 @@ export const apiFetch = async (endpoint, options = {}) => {
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || "Error en la solicitud");
+      throw new Error(errorData.message || "Error en la solicitud API");
     }
 
     return await response.json();
   } catch (error) {
-    console.error("Error en la solicitud API:", error);
+    console.error("Error en la solicitud API:", error.message);
     throw error;
   }
 };

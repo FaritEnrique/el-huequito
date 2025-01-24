@@ -1,27 +1,76 @@
 // hooks/useMensajes.js
 import { apiFetch } from '../api/apiFetch.js'
+import { useState, useEffect } from 'react';
 
 export const useMensajes = () => {
+
+  const [mensajes, setMensajes] = useState([]);
+  const [ cargando, setCargando ] = useState(false);
+  const [ error, setError ] = useState(null);
+
   const fetchMensajes = async () => {
-    return await apiFetch('/api/mensajes');
+    setCargando(true);
+    setError(null);
+    try {
+      const data = await apiFetch('/api/mensajes');
+      setMensajes(data);
+    } catch (err) {
+      setError("Error al obtener los mensajes");
+    } finally {
+      setCargando(false);
+    }
   };
 
   const crearMensaje = async (mensaje) => {
-    return await apiFetch('/api/mensajes', {
-      method: 'POST',
-      body: JSON.stringify(mensaje),
-    });
+    setCargando(true);
+    setError(null);
+    try {
+      const nuevoMensaje = await apiFetch('/api/mensajes', {
+        method: 'POST',
+        body: JSON.stringify(mensaje),
+      });
+      setMensajes((prev) => [...prev, nuevoMensaje]);
+    } catch (err) {
+      setError("Error al crear el mensaje");
+    } finally {
+      setCargando(false);
+    }
   };
 
   const obtenerMensaje = async (id) => {
-    return await apiFetch(`/api/mensajes/${id}`);
+    setCargando(true);
+    setError(null);
+    try {
+      const mensaje = await apiFetch(`/api/mensajes/${id}`);
+      return {mensaje, cargando: false, error: null};
+    } catch (err) {
+      setError("Error al obtener el mensaje");
+      return {mensaje: null, cargando: false, error: "Error al obtener el mensaje"};
+    } finally {
+      setCargando(false);
+    }
   };
 
   const removeMensaje = async (id) => {
-    return await apiFetch(`/api/mensajes/${id}`, { method: 'DELETE' });
+    setCargando(true);
+    try {
+      await apiFetch(`/api/mensajes/${id}`, { method: 'DELETE' });
+      setMensajes((prev) => prev.filter((mensaje) => mensaje.id !== id));
+    } catch (err) {
+      setError("Error al eliminar el mensaje");
+    } finally {
+      setCargando(false);
+    }
   };
 
+  useEffect(() => {
+    fetchMensajes();
+  }, []);
+
   return {
+    mensajes,
+    cargando,
+    error,
     fetchMensajes,
     crearMensaje,
     obtenerMensaje,

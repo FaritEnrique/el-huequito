@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { BiMailSend } from 'react-icons/bi';
 import { FaWhatsapp } from 'react-icons/fa';
-import useElHuequito from '../hooks/pruebaUseElHuequito';
+import { useMensajes } from '../hooks/useMensajes'
 import Swal from 'sweetalert2';
 
 const MensajeItem = ({ mensaje, onDelete, onSendWhatsApp, onSendEmail, onResponseChange }) => {
@@ -53,20 +53,20 @@ const MensajeItem = ({ mensaje, onDelete, onSendWhatsApp, onSendEmail, onRespons
 };
 
 const Mensajes = () => {
-    const { fetchMensajesContacto, removeMensaje } = useElHuequito();
+    const { fetchMensajes, removeMensaje } = useMensajes()
     const [mensajes, setMensajes] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const loadMensajes = async () => {
             setIsLoading(true);
-            const fetchedMensajes = await fetchMensajesContacto();
+            const fetchedMensajes = await fetchMensajes();
             setMensajes(fetchedMensajes);
             setIsLoading(false);
         };
 
         loadMensajes();
-    }, [fetchMensajesContacto]);
+    }, [fetchMensajes]);
 
     const handleDelete = async (id) => {
         try {
@@ -77,7 +77,7 @@ const Mensajes = () => {
                 icon: 'success',
                 confirmButtonText: 'Aceptar',
             });
-            setMensajes((prev) => prev.filter((mensaje) => mensaje.docId !== id));
+            setMensajes((prev) => prev.filter((mensaje) => mensaje.id !== id));
         } catch (error) {
             Swal.fire({
                 title: 'Error',
@@ -95,7 +95,7 @@ const Mensajes = () => {
             ) : (
                 mensajes.map((mensaje) => (
                     <MensajeItem
-                        key={mensaje.docId}
+                        key={mensaje.id}
                         mensaje={{
                             ...mensaje,
                             fecha: mensaje.fecha.toLocaleString('es-ES'),

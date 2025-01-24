@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import useElHuequito from '../hooks/useElHuequito';
+import { useClientes } from '../hooks/useClientes';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -8,7 +8,7 @@ const RegistroCliente = () => {
 
   const navigate = useNavigate()
 
-  const { crearCliente } = useElHuequito()
+  const { crearCliente } = useClientes();
 
   const { register, formState: { errors } , handleSubmit, reset } = useForm();
 
