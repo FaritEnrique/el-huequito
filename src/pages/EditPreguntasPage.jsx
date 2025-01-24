@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import useElHuequito from '../hooks/useElHuequito'
+import { usePreguntas } from '../hooks/usePreguntas';
 import { useNavigate } from 'react-router-dom'
 import { TbEdit } from "react-icons/tb";
 import { TfiTrash } from "react-icons/tfi";
@@ -11,13 +11,14 @@ const PreguntasFrecuentesPage = () => {
 
     const navigate = useNavigate()
 
-    const { fetchPreguntas, removePregunta } = useElHuequito()
+    const { fetchPreguntas, removePregunta } = usePreguntas();
 
     const [ pregunta, setPregunta ] = useState([])
 
     useEffect(() => {
         fetchPreguntas()
             .then(data => setPregunta(data))
+            .catch(err => console.error('Error al cargar preguntas:', err));
     }, [])
 
     const handleEditPregunta = (id) => {
@@ -51,8 +52,13 @@ const PreguntasFrecuentesPage = () => {
                     .then(() => {
                         fetchPreguntas()
                             .then(data => setPregunta(data))
+                            .catch(err => console.error('Error al actualizar preguntas:', err))
                         toast.success('La pregunta ha sido eliminada')
-                })
+                    })
+                    .catch(err => {
+                        console.error('Error al eliminar pregunta:', err)
+                        toast.error('No se pudo eliminar la pregunta')
+                    });
             }
         });
     }
@@ -96,13 +102,13 @@ const PreguntasFrecuentesPage = () => {
                                     <button
                                         className='p-4 cursor-pointer bg-white border-2 border-black rounded-xl'
                                         title='Editar'
-                                        onClick={() => handleEditPregunta(pregunta.docId)}>
+                                        onClick={() => handleEditPregunta(pregunta.id)}>
                                         <TbEdit size={30} />
                                     </button>
                                     <button
                                         className='p-4 cursor-pointer bg-white border-2 border-black rounded-xl'
                                         title='Borrar'
-                                        onClick={() => handleRemovePregunta(pregunta.docId)}>
+                                        onClick={() => handleRemovePregunta(pregunta.id)}>
                                         <TfiTrash size={30} />
                                     </button>
                                 </div>
