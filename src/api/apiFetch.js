@@ -1,4 +1,4 @@
-const backendURL = "https://backend-huequito-env.eba-t2vzk34c.us-east-1.elasticbeanstalk.com/api/";
+const backendURL = "http://backendhuequito-env.eba-wd3p7nmb.us-east-1.elasticbeanstalk.com/api/";
 
 // Función genérica para realizar solicitudes a la API
 export const apiFetch = async (endpoint, options = {}) => {
