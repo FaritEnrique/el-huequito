@@ -1,4 +1,4 @@
-const backendURL = "https://api.backendhuequito.com/api";
+const backendURL = "https://api.backendhuequito.com/api/";
 
 // Función genérica para realizar solicitudes a la API
 export const apiFetch = async (endpoint, options = {}) => {
