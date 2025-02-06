@@ -71,7 +71,7 @@ const ContactoPage = () => {
               <p className='w-20'>Teléfono:</p><span>(065) 234258</span>
             </div>
             <div className='w-full flex gap-10 my-2'>
-              <p className='w-20'>Celular:</p><spam>+51 954 855 550</spam>
+              <p className='w-20'>Celular:</p><span>+51 954 855 550</span>
             </div>
             <div className='w-full flex gap-10 my-2'>
               <p className='w-20'>Correo:</p><span>elhuequito@gmail.com</span>
