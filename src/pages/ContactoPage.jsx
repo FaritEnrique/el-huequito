@@ -22,7 +22,7 @@ const ContactoPage = () => {
           title: 'Buen Trabajo',
           text: 'El registro de su Mensaje se realizó con éxito',
           icon: 'success',
-          buttons: 'Aceptar',
+          confirmButtonText: 'Aceptar',
           timer: 5000
         }).then(() => navigate('/')); // Navega tras mostrar el mensaje
       } else {
@@ -33,7 +33,7 @@ const ContactoPage = () => {
           title: 'Error',
           text: 'Ocurrió un problema al guardar el Mensaje',
           icon: 'error',
-          buttons: 'Aceptar',
+          confirmButtonText: 'Aceptar',
         })
     }
   };
