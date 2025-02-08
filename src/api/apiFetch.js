@@ -1,8 +1,8 @@
-const backendURL = "https://api.backendhuequito.com/api";
+const backendURL = "https://api.backendhuequito.com";
 
 export const apiFetch = async (endpoint, options = {}) => {
   try {
-    const response = await fetch(`${backendURL}/${endpoint}`, {
+    const response = await fetch(`${backendURL}/api/${endpoint}`, {
       headers: {
         "Content-Type": "application/json",
         ...options.headers,
