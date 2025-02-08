@@ -1,3 +1,5 @@
+// pages/PromocionPage.jsx
+
 import React, { useEffect, useState } from 'react';
 import usePromociones from '../hooks/usePromociones';
 import Swal from 'sweetalert2';

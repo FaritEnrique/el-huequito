@@ -1,3 +1,5 @@
+// pages/PromocionAdminPage.jsx
+
 import React, { useState, useEffect } from "react";
 import usePromociones from "../hooks/usePromociones";
 import PromotionForm from "./PromotionForm";
@@ -9,13 +11,10 @@ const PromocionAdminPage = () => {
 
   useEffect(() => {
     const cargaPromociones = async () => {
-      setCargando(true);
       try {
         await fetchPromociones();
       } catch (error) {
         Swal.fire("Error", "No se pudieron cargar las promociones.", "error");
-      } finally {
-        setCargando(false);
       }
     };
     cargaPromociones();
@@ -26,7 +25,6 @@ const PromocionAdminPage = () => {
       const result = await crearPromocion(newPromocion);
       if (result) {
         Swal.fire("Guardado", "Promoción creada correctamente.", "success");
-        // No es necesario actualizar el estado aquí, usePromociones se encarga de ello.
       }
     } catch (error) {
       Swal.fire("Error", "Hubo un problema al crear la promoción.", "error");
@@ -39,7 +37,6 @@ const PromocionAdminPage = () => {
       if (result) {
         Swal.fire("Actualizado", "Promoción actualizada correctamente.", "success");
         setEditarPromocion(null);
-        // No es necesario actualizar el estado aquí, usePromociones se encarga de ello.
       }
     } catch (error) {
       Swal.fire("Error", "Hubo un problema al actualizar la promoción.", "error");
@@ -60,7 +57,6 @@ const PromocionAdminPage = () => {
         const success = await eliminarPromocion(id);
         if (success) {
           Swal.fire("Eliminado", "Promoción eliminada correctamente.", "success");
-          // No es necesario actualizar el estado aquí, usePromociones se encarga de ello.
         }
       } catch (error) {
         Swal.fire("Error", "Hubo un problema al eliminar la promoción.", "error");
@@ -72,7 +68,6 @@ const PromocionAdminPage = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Administrar Promociones</h1>
 
-      {/* Formulario de creación o edición */}
       {editarPromocion ? (
         <PromotionForm
           onSave={handleUpdatePromotion}
@@ -84,7 +79,6 @@ const PromocionAdminPage = () => {
         <PromotionForm onSave={handleCreatePromotion} />
       )}
 
-      {/* Lista de promociones */}
       {cargando ? (
         <p>Cargando promociones...</p>
       ) : error ? (

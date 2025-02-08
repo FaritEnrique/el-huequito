@@ -1,3 +1,5 @@
+// pages/PromotionForm.jsx
+
 import React, { useState, useEffect } from "react";
 
 const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
@@ -8,6 +10,8 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
     endDate: "",
     isActive: false,
     image: "",
+    discount: "",
+    terms: ""
   });
 
   useEffect(() => {
@@ -19,9 +23,10 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
         endDate: initialData.endDate || "",
         isActive: initialData.isActive || false,
         image: initialData.image || "",
+        discount: initialData.discount || "",
+        terms: initialData.terms || ""
       });
     } else {
-      // Restablecer el formulario solo al crear una nueva promoción
       setFormData({
         title: "",
         description: "",
@@ -29,6 +34,8 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
         endDate: "",
         isActive: false,
         image: "",
+        discount: "",
+        terms: ""
       });
     }
   }, [initialData, isEditing]);
@@ -97,6 +104,27 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
           className="border p-2 w-full"
           required
         />
+      </div>
+
+      <div className="mb-2">
+        <label className="block">Descuento (%)</label>
+        <input
+          type="number"
+          name="discount"
+          value={formData.discount}
+          onChange={handleChange}
+          className="border p-2 w-full"
+        />
+      </div>
+
+      <div className="mb-2">
+        <label className="block">Términos y Condiciones</label>
+        <textarea
+          name="terms"
+          value={formData.terms}
+          onChange={handleChange}
+          className="border p-2 w-full"
+        ></textarea>
       </div>
 
       <div className="mb-2">

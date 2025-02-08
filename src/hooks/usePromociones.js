@@ -21,67 +21,50 @@ const usePromociones = () => {
   };
 
   const obtenerPromocion = async (id) => {
-    setCargando(true);
-    setError(null);
     try {
-      const data = await apiFetch(`/promociones/${id}`);
-      return data;
+      return await apiFetch(`/promociones/${id}`);
     } catch (err) {
       setError(err.message || "Error al obtener la promoción");
       return null;
-    } finally {
-      setCargando(false);
     }
   };
 
   const crearPromocion = async (nuevaPromocion) => {
-    setCargando(true);
-    setError(null);
     try {
       const data = await apiFetch("/promociones", {
         method: "POST",
         body: JSON.stringify(nuevaPromocion),
       });
-      setPromociones([...promociones, data]);
+      setPromociones((prev) => [...prev, data]);
       return data;
     } catch (err) {
       setError(err.message || "Error al crear la promoción");
       return null;
-    } finally {
-      setCargando(false);
     }
   };
 
   const actualizarPromocion = async (id, datosActualizados) => {
-    setCargando(true);
-    setError(null);
     try {
       const data = await apiFetch(`/promociones/${id}`, {
         method: "PUT",
         body: JSON.stringify(datosActualizados),
       });
-      setPromociones(promociones.map((promo) => (promo.id === id ? data : promo)));
+      setPromociones((prev) => prev.map((promo) => (promo.id === id ? data : promo)));
       return data;
     } catch (err) {
       setError(err.message || "Error al actualizar la promoción");
       return null;
-    } finally {
-      setCargando(false);
     }
   };
 
   const eliminarPromocion = async (id) => {
-    setCargando(true);
-    setError(null);
     try {
       await apiFetch(`/promociones/${id}`, { method: "DELETE" });
-      setPromociones(promociones.filter((promo) => promo.id !== id));
+      setPromociones((prev) => prev.filter((promo) => promo.id !== id));
       return true;
     } catch (err) {
       setError(err.message || "Error al eliminar la promoción");
       return false;
-    } finally {
-      setCargando(false);
     }
   };
 

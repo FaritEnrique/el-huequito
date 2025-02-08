@@ -10,12 +10,19 @@ export const apiFetch = async (endpoint, options = {}) => {
       ...options,
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || `Error en la solicitud API a ${endpoint}`);
+    const text = await response.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error(`Error al parsear la respuesta JSON de ${endpoint}`);
     }
 
-    return await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || `Error en la solicitud API a ${endpoint}`);
+    }
+
+    return data;
   } catch (error) {
     console.error(`Error en la solicitud API a ${endpoint}:`, error.message);
     throw error;
