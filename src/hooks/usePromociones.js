@@ -1,8 +1,8 @@
 // hooks/usePromociones.js
-import { apiFetch } from '../api/apiFetch.js'
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { apiFetch } from "../api/apiFetch";
 
-export const usePromociones = () => {
+const usePromociones = () => {
   const [promociones, setPromociones] = useState([]);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState(null);
@@ -11,26 +11,10 @@ export const usePromociones = () => {
     setCargando(true);
     setError(null);
     try {
-      const data = await apiFetch('/promociones');
+      const data = await apiFetch("/promociones");
       setPromociones(data);
     } catch (err) {
-      setError("Error al obtener las promociones");
-    } finally {
-      setCargando(false);
-    }
-  };
-
-  const crearPromocion = async (promocion) => {
-    setCargando(true);
-    setError(null);
-    try {
-      const nuevaPromocion = await apiFetch('/promociones', {
-        method: 'POST',
-        body: JSON.stringify(promocion),
-      });
-      setPromociones((prev) => [...prev, nuevaPromocion]);
-    } catch (err) {
-      setError("Error al crear la promoción");
+      setError(err.message || "Error al cargar promociones");
     } finally {
       setCargando(false);
     }
@@ -40,23 +24,62 @@ export const usePromociones = () => {
     setCargando(true);
     setError(null);
     try {
-      const promocion = await apiFetch(`/promociones/${id}`);
-      return { promocion, cargando: false, error: null };
+      const data = await apiFetch(`/promociones/${id}`);
+      return data;
     } catch (err) {
-      setError("Error al obtener la promoción");
-      return { promocion: null, cargando: false, error: "Error al obtener la promoción" };
+      setError(err.message || "Error al obtener la promoción");
+      return null;
     } finally {
       setCargando(false);
     }
   };
 
-  const removePromocion = async (id) => {
+  const crearPromocion = async (nuevaPromocion) => {
     setCargando(true);
+    setError(null);
     try {
-      await apiFetch(`/promociones/${id}`, { method: 'DELETE' });
-      setPromociones((prev) => prev.filter((promocion) => promocion.id !== id));
+      const data = await apiFetch("/promociones", {
+        method: "POST",
+        body: JSON.stringify(nuevaPromocion),
+      });
+      setPromociones([...promociones, data]);
+      return data;
     } catch (err) {
-      setError("Error al eliminar la promoción");
+      setError(err.message || "Error al crear la promoción");
+      return null;
+    } finally {
+      setCargando(false);
+    }
+  };
+
+  const actualizarPromocion = async (id, datosActualizados) => {
+    setCargando(true);
+    setError(null);
+    try {
+      const data = await apiFetch(`/promociones/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(datosActualizados),
+      });
+      setPromociones(promociones.map((promo) => (promo.id === id ? data : promo)));
+      return data;
+    } catch (err) {
+      setError(err.message || "Error al actualizar la promoción");
+      return null;
+    } finally {
+      setCargando(false);
+    }
+  };
+
+  const eliminarPromocion = async (id) => {
+    setCargando(true);
+    setError(null);
+    try {
+      await apiFetch(`/promociones/${id}`, { method: "DELETE" });
+      setPromociones(promociones.filter((promo) => promo.id !== id));
+      return true;
+    } catch (err) {
+      setError(err.message || "Error al eliminar la promoción");
+      return false;
     } finally {
       setCargando(false);
     }
@@ -71,8 +94,11 @@ export const usePromociones = () => {
     cargando,
     error,
     fetchPromociones,
-    crearPromocion,
     obtenerPromocion,
-    removePromocion
+    crearPromocion,
+    actualizarPromocion,
+    eliminarPromocion,
   };
 };
+
+export default usePromociones;

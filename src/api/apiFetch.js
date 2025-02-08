@@ -1,6 +1,5 @@
 const backendURL = "https://api.backendhuequito.com/api";
 
-// Función genérica para realizar solicitudes a la API
 export const apiFetch = async (endpoint, options = {}) => {
   try {
     const response = await fetch(`${backendURL}${endpoint}`, {
@@ -13,12 +12,12 @@ export const apiFetch = async (endpoint, options = {}) => {
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || "Error en la solicitud API");
+      throw new Error(errorData.message || `Error en la solicitud API a ${endpoint}`);
     }
 
     return await response.json();
   } catch (error) {
-    console.error("Error en la solicitud API:", error.message);
+    console.error(`Error en la solicitud API a ${endpoint}:`, error.message);
     throw error;
   }
 };

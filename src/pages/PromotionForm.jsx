@@ -10,7 +10,6 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
     image: "",
   });
 
-  // Cargar los datos iniciales si estamos editando
   useEffect(() => {
     if (isEditing && initialData) {
       setFormData({
@@ -20,6 +19,16 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
         endDate: initialData.endDate || "",
         isActive: initialData.isActive || false,
         image: initialData.image || "",
+      });
+    } else {
+      // Restablecer el formulario solo al crear una nueva promoción
+      setFormData({
+        title: "",
+        description: "",
+        startDate: "",
+        endDate: "",
+        isActive: false,
+        image: "",
       });
     }
   }, [initialData, isEditing]);
@@ -34,16 +43,7 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Formulario enviado con datos:", formData);
     onSave(formData);
-    setFormData({
-      title: "",
-      description: "",
-      startDate: "",
-      endDate: "",
-      isActive: false,
-      image: "",
-    });
   };
 
   return (

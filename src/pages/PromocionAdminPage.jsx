@@ -1,36 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { usePromociones } from "../hooks/usePromociones";
+import usePromociones from "../hooks/usePromociones";
 import PromotionForm from "./PromotionForm";
 import Swal from "sweetalert2";
 
 const PromocionAdminPage = () => {
-  const { fetchPromociones, crearPromocion, editarPromocion, removePromocion } = usePromociones();
-  const [promotions, setPromotions] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [editPromotion, setEditPromotion] = useState(null);
+  const { promociones, cargando, error, fetchPromociones, crearPromocion, actualizarPromocion, eliminarPromocion } = usePromociones();
+  const [editarPromocion, setEditarPromocion] = useState(null);
 
   useEffect(() => {
-    loadPromotions();
-  }, []);
+    const cargaPromociones = async () => {
+      setCargando(true);
+      try {
+        await fetchPromociones();
+      } catch (error) {
+        Swal.fire("Error", "No se pudieron cargar las promociones.", "error");
+      } finally {
+        setCargando(false);
+      }
+    };
+    cargaPromociones();
+  }, [fetchPromociones]);
 
-  const loadPromotions = async () => {
-    setLoading(true);
+  const handleCreatePromotion = async (newPromocion) => {
     try {
-      const data = await fetchPromociones();
-      setPromotions(data);
-    } catch (error) {
-      Swal.fire("Error", "No se pudieron cargar las promociones.", "error");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleCreatePromotion = async (newPromotion) => {
-    try {
-      const result = await crearPromocion(newPromotion);
+      const result = await crearPromocion(newPromocion);
       if (result) {
         Swal.fire("Guardado", "Promoción creada correctamente.", "success");
-        setPromotions([...promotions, result]); // Añadir nueva promoción directamente al estado
+        // No es necesario actualizar el estado aquí, usePromociones se encarga de ello.
       }
     } catch (error) {
       Swal.fire("Error", "Hubo un problema al crear la promoción.", "error");
@@ -39,14 +35,11 @@ const PromocionAdminPage = () => {
 
   const handleUpdatePromotion = async (updatedFields) => {
     try {
-      const success = await editarPromocion(editPromotion.id, updatedFields); // Cambiado docId a id
-      if (success) {
+      const result = await actualizarPromocion(editarPromocion.id, updatedFields);
+      if (result) {
         Swal.fire("Actualizado", "Promoción actualizada correctamente.", "success");
-        setEditPromotion(null);
-        // Actualizar la promoción directamente en el estado
-        setPromotions(promotions.map(promotion => 
-          promotion.id === editPromotion.id ? { ...promotion, ...updatedFields } : promotion
-        ));
+        setEditarPromocion(null);
+        // No es necesario actualizar el estado aquí, usePromociones se encarga de ello.
       }
     } catch (error) {
       Swal.fire("Error", "Hubo un problema al actualizar la promoción.", "error");
@@ -64,11 +57,10 @@ const PromocionAdminPage = () => {
 
     if (result.isConfirmed) {
       try {
-        const success = await removePromocion(id);
+        const success = await eliminarPromocion(id);
         if (success) {
           Swal.fire("Eliminado", "Promoción eliminada correctamente.", "success");
-          // Eliminar la promoción directamente del estado
-          setPromotions(promotions.filter(promotion => promotion.id !== id));
+          // No es necesario actualizar el estado aquí, usePromociones se encarga de ello.
         }
       } catch (error) {
         Swal.fire("Error", "Hubo un problema al eliminar la promoción.", "error");
@@ -81,42 +73,43 @@ const PromocionAdminPage = () => {
       <h1 className="text-2xl font-bold mb-4">Administrar Promociones</h1>
 
       {/* Formulario de creación o edición */}
-      {editPromotion ? (
+      {editarPromocion ? (
         <PromotionForm
           onSave={handleUpdatePromotion}
-          initialData={editPromotion}
+          initialData={editarPromocion}
           isEditing
-          onCancel={() => setEditPromotion(null)}
+          onCancel={() => setEditarPromocion(null)}
         />
       ) : (
         <PromotionForm onSave={handleCreatePromotion} />
       )}
 
       {/* Lista de promociones */}
-      {loading ? (
+      {cargando ? (
         <p>Cargando promociones...</p>
+      ) : error ? (
+        <p>Error al cargar las promociones.</p>
+      ) : promociones.length === 0 ? (
+        <p>No hay promociones disponibles.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          {promotions.map((promotion) => (
-            <div key={promotion.id} className="border p-4 rounded shadow"> {/* Cambiado docId a id */}
-              <h2 className="text-xl font-bold">{promotion.title}</h2>
-              <p>{promotion.description}</p>
-              <p>Inicio: {new Date(promotion.startDate).toLocaleString()}</p>
-              <p>Fin: {new Date(promotion.endDate).toLocaleString()}</p>
-              <p>Estado: {promotion.isActive ? "Activa" : "Inactiva"}</p>
-              <img src={promotion.image} alt="Promoción" className="w-full h-auto mt-2" />
+          {promociones.map((promocion) => (
+            <div key={promocion.id} className="border p-4 rounded shadow">
+              <h2 className="text-xl font-bold">{promocion.title}</h2>
+              <p>{promocion.description}</p>
+              <p>Inicio: {new Date(promocion.startDate).toLocaleString()}</p>
+              <p>Fin: {new Date(promocion.endDate).toLocaleString()}</p>
+              <p>Estado: {promocion.isActive ? "Activa" : "Inactiva"}</p>
+              <img src={promocion.image} alt="Promoción" className="w-full h-auto mt-2" />
               <div className="flex justify-between mt-2">
                 <button
-                  onClick={() => {
-                    console.log("Editando promoción:", promotion); // Validación
-                    setEditPromotion(promotion);
-                  }}
+                  onClick={() => setEditarPromocion(promocion)}
                   className="bg-blue-500 text-white px-3 py-1 rounded"
                 >
                   Editar
                 </button>
                 <button
-                  onClick={() => handleDeletePromotion(promotion.id)} // Cambiado docId a id
+                  onClick={() => handleDeletePromotion(promocion.id)}
                   className="bg-red-500 text-white px-3 py-1 rounded"
                 >
                   Eliminar
