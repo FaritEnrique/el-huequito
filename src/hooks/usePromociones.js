@@ -11,7 +11,7 @@ const usePromociones = () => {
     setCargando(true);
     setError(null);
     try {
-      const data = await apiFetch("/promociones");
+      const data = await apiFetch("promociones");
       setPromociones(data);
     } catch (err) {
       setError(err.message || "Error al cargar promociones");
@@ -22,7 +22,7 @@ const usePromociones = () => {
 
   const obtenerPromocion = async (id) => {
     try {
-      return await apiFetch(`/promociones/${id}`);
+      return await apiFetch(`promociones/${id}`);
     } catch (err) {
       setError(err.message || "Error al obtener la promoción");
       return null;
@@ -31,7 +31,7 @@ const usePromociones = () => {
 
   const crearPromocion = async (nuevaPromocion) => {
     try {
-      const data = await apiFetch("/promociones", {
+      const data = await apiFetch("promociones", {
         method: "POST",
         body: JSON.stringify(nuevaPromocion),
       });
@@ -45,7 +45,7 @@ const usePromociones = () => {
 
   const actualizarPromocion = async (id, datosActualizados) => {
     try {
-      const data = await apiFetch(`/promociones/${id}`, {
+      const data = await apiFetch(`promociones/${id}`, {
         method: "PUT",
         body: JSON.stringify(datosActualizados),
       });
@@ -59,7 +59,7 @@ const usePromociones = () => {
 
   const eliminarPromocion = async (id) => {
     try {
-      await apiFetch(`/promociones/${id}`, { method: "DELETE" });
+      await apiFetch(`promociones/${id}`, { method: "DELETE" });
       setPromociones((prev) => prev.filter((promo) => promo.id !== id));
       return true;
     } catch (err) {

@@ -6,39 +6,49 @@ import PromotionForm from "./PromotionForm";
 import Swal from "sweetalert2";
 
 const PromocionAdminPage = () => {
-  const { promociones, cargando, error, fetchPromociones, crearPromocion, actualizarPromocion, eliminarPromocion } = usePromociones();
+  const {
+    promociones,
+    cargando,
+    error,
+    fetchPromociones,
+    crearPromocion,
+    actualizarPromocion,
+    eliminarPromocion,
+  } = usePromociones();
+
   const [editarPromocion, setEditarPromocion] = useState(null);
 
   useEffect(() => {
-    const cargaPromociones = async () => {
-      try {
-        await fetchPromociones();
-      } catch (error) {
-        Swal.fire("Error", "No se pudieron cargar las promociones.", "error");
-      }
-    };
-    cargaPromociones();
-  }, [fetchPromociones]);
+    if (promociones.length === 0 && !cargando && !error) {
+      fetchPromociones();
+    }
+  }, [promociones.length, cargando, error, fetchPromociones]);
 
   const handleCreatePromotion = async (newPromocion) => {
+    if (!newPromocion.title || !newPromocion.startDate || !newPromocion.endDate) {
+      return Swal.fire("Error", "Todos los campos son obligatorios.", "error");
+    }
     try {
       const result = await crearPromocion(newPromocion);
       if (result) {
         Swal.fire("Guardado", "Promoción creada correctamente.", "success");
       }
-    } catch (error) {
+    } catch {
       Swal.fire("Error", "Hubo un problema al crear la promoción.", "error");
     }
   };
 
   const handleUpdatePromotion = async (updatedFields) => {
+    if (!updatedFields.title || !updatedFields.startDate || !updatedFields.endDate) {
+      return Swal.fire("Error", "Todos los campos son obligatorios.", "error");
+    }
     try {
       const result = await actualizarPromocion(editarPromocion.id, updatedFields);
       if (result) {
         Swal.fire("Actualizado", "Promoción actualizada correctamente.", "success");
         setEditarPromocion(null);
       }
-    } catch (error) {
+    } catch {
       Swal.fire("Error", "Hubo un problema al actualizar la promoción.", "error");
     }
   };
@@ -58,7 +68,7 @@ const PromocionAdminPage = () => {
         if (success) {
           Swal.fire("Eliminado", "Promoción eliminada correctamente.", "success");
         }
-      } catch (error) {
+      } catch {
         Swal.fire("Error", "Hubo un problema al eliminar la promoción.", "error");
       }
     }
@@ -79,13 +89,11 @@ const PromocionAdminPage = () => {
         <PromotionForm onSave={handleCreatePromotion} />
       )}
 
-      {cargando ? (
-        <p>Cargando promociones...</p>
-      ) : error ? (
-        <p>Error al cargar las promociones.</p>
-      ) : promociones.length === 0 ? (
-        <p>No hay promociones disponibles.</p>
-      ) : (
+      {cargando && <p>Cargando promociones...</p>}
+      {error && <p className="text-red-500">Error al cargar las promociones.</p>}
+      {!cargando && !error && promociones.length === 0 && <p>No hay promociones disponibles.</p>}
+
+      {!cargando && !error && promociones.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           {promociones.map((promocion) => (
             <div key={promocion.id} className="border p-4 rounded shadow">

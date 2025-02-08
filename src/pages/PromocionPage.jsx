@@ -6,30 +6,27 @@ import Swal from 'sweetalert2';
 
 const PromocionPage = () => {
   const { promociones, cargando, error, fetchPromociones } = usePromociones();
-  const [errorOccurred, setErrorOccurred] = useState(false);
+  const [alertShown, setAlertShown] = useState(false); // Para evitar múltiples alertas
 
   useEffect(() => {
-    const cargaPromociones = async () => {
-      if (error && !errorOccurred) {
-        setErrorOccurred(true);
-        Swal.fire({
-          title: 'Error',
-          text: error,
-          icon: 'error',
-        });
-      } else if (!cargando && promociones.length === 0 && !error) {
-        await fetchPromociones();
-      }
-    };
-    cargaPromociones();
-  }, [promociones, cargando, error, fetchPromociones, errorOccurred]);
+    if (error && !alertShown) {
+      Swal.fire({
+        title: 'Error',
+        text: error,
+        icon: 'error',
+      });
+      setAlertShown(true);
+    }
+  }, [error, alertShown]);
+
+  useEffect(() => {
+    if (!cargando && promociones.length === 0 && !error) {
+      fetchPromociones();
+    }
+  }, [promociones.length, cargando, error, fetchPromociones]);
 
   if (cargando) {
     return <p>Cargando promociones...</p>;
-  }
-
-  if (error) {
-    return <p>Error al cargar las promociones.</p>;
   }
 
   if (promociones.length === 0) {
@@ -44,10 +41,20 @@ const PromocionPage = () => {
           <div key={promocion.id} className="border p-4 rounded shadow">
             <h2 className="text-xl font-bold">{promocion.title}</h2>
             <p>{promocion.description}</p>
-            <p className="text-sm text-gray-500">Fecha de inicio: {new Date(promocion.startDate).toLocaleDateString()}</p>
-            <p className="text-sm text-gray-500">Fecha de fin: {new Date(promocion.endDate).toLocaleDateString()}</p>
-            <img src={promocion.image} alt={promocion.title} className="w-full h-auto mt-2" />
-            <p className="text-sm text-gray-500">{promocion.isActive ? 'Activa' : 'Inactiva'}</p>
+            <p className="text-sm text-gray-500">
+              Fecha de inicio: {new Date(promocion.startDate).toLocaleDateString()}
+            </p>
+            <p className="text-sm text-gray-500">
+              Fecha de fin: {new Date(promocion.endDate).toLocaleDateString()}
+            </p>
+            <img
+              src={promocion.image}
+              alt={promocion.title}
+              className="w-full h-auto mt-2"
+            />
+            <p className="text-sm text-gray-500">
+              {promocion.isActive ? 'Activa' : 'Inactiva'}
+            </p>
           </div>
         ))}
       </div>
