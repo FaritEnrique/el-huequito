@@ -1,5 +1,3 @@
-// pages/PromocionAdminPage.jsx
-
 import React, { useState, useEffect } from "react";
 import usePromociones from "../hooks/usePromociones";
 import PromotionForm from "./PromotionForm";
@@ -25,7 +23,7 @@ const PromocionAdminPage = () => {
   }, [promociones.length, cargando, error, fetchPromociones]);
 
   const handleCreatePromotion = async (newPromocion) => {
-    if (!newPromocion.title || !newPromocion.startDate || !newPromocion.endDate) {
+    if (!newPromocion.titulo || !newPromocion.fecha_inicio || !newPromocion.fecha_termino) {
       return Swal.fire("Error", "Todos los campos son obligatorios.", "error");
     }
     try {
@@ -39,7 +37,7 @@ const PromocionAdminPage = () => {
   };
 
   const handleUpdatePromotion = async (updatedFields) => {
-    if (!updatedFields.title || !updatedFields.startDate || !updatedFields.endDate) {
+    if (!updatedFields.titulo || !updatedFields.fecha_inicio || !updatedFields.fecha_termino) {
       return Swal.fire("Error", "Todos los campos son obligatorios.", "error");
     }
     try {
@@ -97,12 +95,12 @@ const PromocionAdminPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           {promociones.map((promocion) => (
             <div key={promocion.id} className="border p-4 rounded shadow">
-              <h2 className="text-xl font-bold">{promocion.title}</h2>
-              <p>{promocion.description}</p>
-              <p>Inicio: {new Date(promocion.startDate).toLocaleString()}</p>
-              <p>Fin: {new Date(promocion.endDate).toLocaleString()}</p>
-              <p>Estado: {promocion.isActive ? "Activa" : "Inactiva"}</p>
-              <img src={promocion.image} alt="Promoción" className="w-full h-auto mt-2" />
+              <h2 className="text-xl font-bold">{promocion.titulo}</h2>
+              <p>{promocion.descripcion}</p>
+              <p>Inicio: {new Date(promocion.fecha_inicio).toLocaleString()}</p>
+              <p>Fin: {new Date(promocion.fecha_termino).toLocaleString()}</p>
+              <p>Estado: {promocion.is_active ? "Activa" : "Inactiva"}</p>
+              <img src={promocion.imagen_url} alt="Promoción" className="w-full h-auto mt-2" />
               <div className="flex justify-between mt-2">
                 <button
                   onClick={() => setEditarPromocion(promocion)}
