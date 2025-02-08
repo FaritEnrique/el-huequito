@@ -30,6 +30,7 @@ const PromocionAdminPage = () => {
       const result = await crearPromocion(newPromocion);
       if (result) {
         Swal.fire("Guardado", "Promoción creada correctamente.", "success");
+        fetchPromociones(); // Recargar promociones después de crear
       }
     } catch {
       Swal.fire("Error", "Hubo un problema al crear la promoción.", "error");
@@ -44,7 +45,8 @@ const PromocionAdminPage = () => {
       const result = await actualizarPromocion(editarPromocion.id, updatedFields);
       if (result) {
         Swal.fire("Actualizado", "Promoción actualizada correctamente.", "success");
-        setEditarPromocion(null);
+        setEditarPromocion(null); // Salir del modo edición
+        fetchPromociones(); // Recargar promociones después de actualizar
       }
     } catch {
       Swal.fire("Error", "Hubo un problema al actualizar la promoción.", "error");
@@ -65,6 +67,7 @@ const PromocionAdminPage = () => {
         const success = await eliminarPromocion(id);
         if (success) {
           Swal.fire("Eliminado", "Promoción eliminada correctamente.", "success");
+          fetchPromociones();
         }
       } catch {
         Swal.fire("Error", "Hubo un problema al eliminar la promoción.", "error");
@@ -93,15 +96,21 @@ const PromocionAdminPage = () => {
             <div key={promocion.id} className="border p-4 rounded shadow">
               <h2 className="text-xl font-bold">{promocion.titulo}</h2>
               <p>{promocion.descripcion}</p>
-              <p>Inicio: {new Date(promocion.fecha_inicio).toLocaleString()}</p>
-              <p>Fin: {new Date(promocion.fecha_termino).toLocaleString()}</p>
-              <p>Estado: {promocion.is_active ? "Activa" : "Inactiva"}</p>
               <img src={promocion.imagen_url} alt="Promoción" className="w-full h-auto mt-2" />
+              <p>Inicio: {new Date(promocion.fecha_inicio).toLocaleDateString()}</p>
+              <p>Fin: {new Date(promocion.fecha_termino).toLocaleDateString()}</p>
+              <p>Estado: {promocion.is_active ? "Activa" : "Inactiva"}</p>
               <div className="flex justify-between mt-2">
-                <button onClick={() => setEditarPromocion(promocion)} className="bg-blue-500 text-white px-3 py-1 rounded">
+                <button
+                  onClick={() => setEditarPromocion(promocion)}
+                  className="bg-blue-500 text-white px-3 py-1 rounded"
+                >
                   Editar
                 </button>
-                <button onClick={() => handleDeletePromotion(promocion.id)} className="bg-red-500 text-white px-3 py-1 rounded">
+                <button
+                  onClick={() => handleDeletePromotion(promocion.id)}
+                  className="bg-red-500 text-white px-3 py-1 rounded"
+                >
                   Eliminar
                 </button>
               </div>

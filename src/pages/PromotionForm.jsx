@@ -7,23 +7,23 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
     imagen_url: "",
     fecha_inicio: "",
     fecha_termino: "",
-    creado_por: "",
     is_active: false,
   });
 
   useEffect(() => {
-    if (initialData) {
+    if (isEditing && initialData) {
+      setFormData(initialData); // Carga datos si se está editando
+    } else {
       setFormData({
-        titulo: initialData.titulo || "",
-        descripcion: initialData.descripcion || "",
-        imagen_url: initialData.imagen_url || "",
-        fecha_inicio: initialData.fecha_inicio ? new Date(initialData.fecha_inicio).toISOString().split("T")[0] : "",
-        fecha_termino: initialData.fecha_termino ? new Date(initialData.fecha_termino).toISOString().split("T")[0] : "",
-        creado_por: initialData.creado_por || "",
-        is_active: initialData.is_active || false,
-      });
+        titulo: "",
+        descripcion: "",
+        imagen_url: "",
+        fecha_inicio: "",
+        fecha_termino: "",
+        is_active: false,
+      }); // Resetea si no se está editando
     }
-  }, [initialData]);
+  }, [initialData, isEditing]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -39,39 +39,67 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow-md">
-      <div className="mb-2">
-        <label className="block font-bold">Título</label>
-        <input type="text" name="titulo" value={formData.titulo} onChange={handleChange} className="border w-full p-2" />
-      </div>
+    <form onSubmit={handleSubmit} className="bg-white p-4 shadow rounded mb-4">
+      <h2 className="text-xl font-bold mb-2">{isEditing ? "Editar Promoción" : "Crear Promoción"}</h2>
 
-      <div className="mb-2">
-        <label className="block font-bold">Descripción</label>
-        <textarea name="descripcion" value={formData.descripcion} onChange={handleChange} className="border w-full p-2"></textarea>
-      </div>
+      <input
+        type="text"
+        name="titulo"
+        value={formData.titulo}
+        onChange={handleChange}
+        placeholder="Título"
+        className="w-full p-2 border rounded mb-2"
+        required
+      />
 
-      <div className="mb-2">
-        <label className="block font-bold">Imagen URL</label>
-        <input type="text" name="imagen_url" value={formData.imagen_url} onChange={handleChange} className="border w-full p-2" />
-      </div>
+      <textarea
+        name="descripcion"
+        value={formData.descripcion}
+        onChange={handleChange}
+        placeholder="Descripción"
+        className="w-full p-2 border rounded mb-2"
+        required
+      />
 
-      <div className="mb-2">
-        <label className="block font-bold">Fecha de inicio</label>
-        <input type="date" name="fecha_inicio" value={formData.fecha_inicio} onChange={handleChange} className="border w-full p-2" />
-      </div>
+      <input
+        type="text"
+        name="imagen_url"
+        value={formData.imagen_url}
+        onChange={handleChange}
+        placeholder="URL de la imagen"
+        className="w-full p-2 border rounded mb-2"
+        required
+      />
 
-      <div className="mb-2">
-        <label className="block font-bold">Fecha de término</label>
-        <input type="date" name="fecha_termino" value={formData.fecha_termino} onChange={handleChange} className="border w-full p-2" />
-      </div>
+      <input
+        type="date"
+        name="fecha_inicio"
+        value={formData.fecha_inicio}
+        onChange={handleChange}
+        className="w-full p-2 border rounded mb-2"
+        required
+      />
 
-      <div className="mb-2">
-        <label className="block font-bold">Activo</label>
+      <input
+        type="date"
+        name="fecha_termino"
+        value={formData.fecha_termino}
+        onChange={handleChange}
+        className="w-full p-2 border rounded mb-2"
+        required
+      />
+
+      <label className="flex items-center">
         <input type="checkbox" name="is_active" checked={formData.is_active} onChange={handleChange} />
-      </div>
+        <span className="ml-2">Activa</span>
+      </label>
 
-      <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">{isEditing ? "Actualizar" : "Crear"}</button>
-      {isEditing && <button type="button" onClick={onCancel} className="ml-2 bg-gray-500 text-white px-4 py-2 rounded">Cancelar</button>}
+      <div className="flex gap-2 mt-4">
+        <button type="submit" className="bg-green-500 text-white px-3 py-1 rounded">
+          {isEditing ? "Actualizar" : "Crear"}
+        </button>
+        {isEditing && <button onClick={onCancel} className="bg-gray-500 text-white px-3 py-1 rounded">Cancelar</button>}
+      </div>
     </form>
   );
 };
