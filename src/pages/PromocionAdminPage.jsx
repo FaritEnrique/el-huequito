@@ -26,7 +26,7 @@ const PromocionAdminPage = () => {
 
   const handleCreatePromotion = async (newPromocion) => {
     if (!newPromocion.titulo || !newPromocion.fecha_inicio || !newPromocion.fecha_termino || !newPromocion.creado_por) {
-      return Swal.fire("Error", "Todos los campos son obligatorios, incluido 'Creado por'.", "error");
+      return Swal.fire("Error", "Todos los campos son obligatorios.", "error");
     }
     try {
       const result = await crearPromocion(newPromocion);
@@ -41,7 +41,7 @@ const PromocionAdminPage = () => {
 
   const handleUpdatePromotion = async (updatedFields) => {
     if (!updatedFields.titulo || !updatedFields.fecha_inicio || !updatedFields.fecha_termino || !updatedFields.creado_por) {
-      return Swal.fire("Error", "Todos los campos son obligatorios, incluido 'Creado por'.", "error");
+      return Swal.fire("Error", "Todos los campos son obligatorios.", "error");
     }
     try {
       const result = await actualizarPromocion(editarPromocion.id, updatedFields);
