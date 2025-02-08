@@ -1,8 +1,8 @@
 // pages/PromocionPage.jsx
 
-import React, { useEffect, useState } from 'react';
-import usePromociones from '../hooks/usePromociones';
-import Swal from 'sweetalert2';
+import React, { useEffect, useState } from "react";
+import usePromociones from "../hooks/usePromociones";
+import Swal from "sweetalert2";
 
 const PromocionPage = () => {
   const { promociones, cargando, error, fetchPromociones } = usePromociones();
@@ -11,9 +11,9 @@ const PromocionPage = () => {
   useEffect(() => {
     if (error && !alertShown) {
       Swal.fire({
-        title: 'Error',
+        title: "Error",
         text: error,
-        icon: 'error',
+        icon: "error",
       });
       setAlertShown(true);
     }
@@ -39,21 +39,21 @@ const PromocionPage = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         {promociones.map((promocion) => (
           <div key={promocion.id} className="border p-4 rounded shadow">
-            <h2 className="text-xl font-bold">{promocion.title}</h2>
-            <p>{promocion.description}</p>
-            <p className="text-sm text-gray-500">
-              Fecha de inicio: {new Date(promocion.startDate).toLocaleDateString()}
-            </p>
-            <p className="text-sm text-gray-500">
-              Fecha de fin: {new Date(promocion.endDate).toLocaleDateString()}
-            </p>
+            <h2 className="text-xl font-bold">{promocion.titulo}</h2>
+            <p>{promocion.descripcion}</p>
             <img
-              src={promocion.image}
-              alt={promocion.title}
+              src={promocion.imagen_url}
+              alt={promocion.titulo}
               className="w-full h-auto mt-2"
             />
             <p className="text-sm text-gray-500">
-              {promocion.isActive ? 'Activa' : 'Inactiva'}
+              Fecha de inicio: {new Date(promocion.fecha_inicio).toLocaleDateString()}
+            </p>
+            <p className="text-sm text-gray-500">
+              Fecha de fin: {new Date(promocion.fecha_termino).toLocaleDateString()}
+            </p>
+            <p className="text-sm text-gray-500">
+              Estado: {promocion.is_active ? "Activa" : "Inactiva"}
             </p>
           </div>
         ))}

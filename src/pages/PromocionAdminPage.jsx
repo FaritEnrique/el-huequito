@@ -76,16 +76,12 @@ const PromocionAdminPage = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Administrar Promociones</h1>
 
-      {editarPromocion ? (
-        <PromotionForm
-          onSave={handleUpdatePromotion}
-          initialData={editarPromocion}
-          isEditing
-          onCancel={() => setEditarPromocion(null)}
-        />
-      ) : (
-        <PromotionForm onSave={handleCreatePromotion} />
-      )}
+      <PromotionForm
+        onSave={editarPromocion ? handleUpdatePromotion : handleCreatePromotion}
+        initialData={editarPromocion}
+        isEditing={!!editarPromocion}
+        onCancel={() => setEditarPromocion(null)}
+      />
 
       {cargando && <p>Cargando promociones...</p>}
       {error && <p className="text-red-500">Error al cargar las promociones.</p>}
@@ -102,16 +98,10 @@ const PromocionAdminPage = () => {
               <p>Estado: {promocion.is_active ? "Activa" : "Inactiva"}</p>
               <img src={promocion.imagen_url} alt="Promoción" className="w-full h-auto mt-2" />
               <div className="flex justify-between mt-2">
-                <button
-                  onClick={() => setEditarPromocion(promocion)}
-                  className="bg-blue-500 text-white px-3 py-1 rounded"
-                >
+                <button onClick={() => setEditarPromocion(promocion)} className="bg-blue-500 text-white px-3 py-1 rounded">
                   Editar
                 </button>
-                <button
-                  onClick={() => handleDeletePromotion(promocion.id)}
-                  className="bg-red-500 text-white px-3 py-1 rounded"
-                >
+                <button onClick={() => handleDeletePromotion(promocion.id)} className="bg-red-500 text-white px-3 py-1 rounded">
                   Eliminar
                 </button>
               </div>

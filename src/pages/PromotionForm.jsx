@@ -1,44 +1,29 @@
-// pages/PromotionForm.jsx
-
 import React, { useState, useEffect } from "react";
 
 const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    startDate: "",
-    endDate: "",
-    isActive: false,
-    image: "",
-    discount: "",
-    terms: ""
+    titulo: "",
+    descripcion: "",
+    imagen_url: "",
+    fecha_inicio: "",
+    fecha_termino: "",
+    creado_por: "",
+    is_active: false,
   });
 
   useEffect(() => {
-    if (isEditing && initialData) {
+    if (initialData) {
       setFormData({
-        title: initialData.title || "",
-        description: initialData.description || "",
-        startDate: initialData.startDate || "",
-        endDate: initialData.endDate || "",
-        isActive: initialData.isActive || false,
-        image: initialData.image || "",
-        discount: initialData.discount || "",
-        terms: initialData.terms || ""
-      });
-    } else {
-      setFormData({
-        title: "",
-        description: "",
-        startDate: "",
-        endDate: "",
-        isActive: false,
-        image: "",
-        discount: "",
-        terms: ""
+        titulo: initialData.titulo || "",
+        descripcion: initialData.descripcion || "",
+        imagen_url: initialData.imagen_url || "",
+        fecha_inicio: initialData.fecha_inicio ? new Date(initialData.fecha_inicio).toISOString().split("T")[0] : "",
+        fecha_termino: initialData.fecha_termino ? new Date(initialData.fecha_termino).toISOString().split("T")[0] : "",
+        creado_por: initialData.creado_por || "",
+        is_active: initialData.is_active || false,
       });
     }
-  }, [initialData, isEditing]);
+  }, [initialData]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -54,120 +39,39 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="border p-4 rounded shadow">
-      <h2 className="text-xl font-bold mb-4">
-        {isEditing ? "Editar Promoción" : "Crear Promoción"}
-      </h2>
-
+    <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow-md">
       <div className="mb-2">
-        <label className="block">Título</label>
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          className="border p-2 w-full"
-          required
-        />
+        <label className="block font-bold">Título</label>
+        <input type="text" name="titulo" value={formData.titulo} onChange={handleChange} className="border w-full p-2" />
       </div>
 
       <div className="mb-2">
-        <label className="block">Descripción</label>
-        <textarea
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          className="border p-2 w-full"
-          required
-        ></textarea>
+        <label className="block font-bold">Descripción</label>
+        <textarea name="descripcion" value={formData.descripcion} onChange={handleChange} className="border w-full p-2"></textarea>
       </div>
 
       <div className="mb-2">
-        <label className="block">Fecha de Inicio</label>
-        <input
-          type="datetime-local"
-          name="startDate"
-          value={formData.startDate}
-          onChange={handleChange}
-          className="border p-2 w-full"
-          required
-        />
+        <label className="block font-bold">Imagen URL</label>
+        <input type="text" name="imagen_url" value={formData.imagen_url} onChange={handleChange} className="border w-full p-2" />
       </div>
 
       <div className="mb-2">
-        <label className="block">Fecha de Fin</label>
-        <input
-          type="datetime-local"
-          name="endDate"
-          value={formData.endDate}
-          onChange={handleChange}
-          className="border p-2 w-full"
-          required
-        />
+        <label className="block font-bold">Fecha de inicio</label>
+        <input type="date" name="fecha_inicio" value={formData.fecha_inicio} onChange={handleChange} className="border w-full p-2" />
       </div>
 
       <div className="mb-2">
-        <label className="block">Descuento (%)</label>
-        <input
-          type="number"
-          name="discount"
-          value={formData.discount}
-          onChange={handleChange}
-          className="border p-2 w-full"
-        />
+        <label className="block font-bold">Fecha de término</label>
+        <input type="date" name="fecha_termino" value={formData.fecha_termino} onChange={handleChange} className="border w-full p-2" />
       </div>
 
       <div className="mb-2">
-        <label className="block">Términos y Condiciones</label>
-        <textarea
-          name="terms"
-          value={formData.terms}
-          onChange={handleChange}
-          className="border p-2 w-full"
-        ></textarea>
+        <label className="block font-bold">Activo</label>
+        <input type="checkbox" name="is_active" checked={formData.is_active} onChange={handleChange} />
       </div>
 
-      <div className="mb-2">
-        <label className="block">Imagen (URL)</label>
-        <input
-          type="text"
-          name="image"
-          value={formData.image}
-          onChange={handleChange}
-          className="border p-2 w-full"
-        />
-      </div>
-
-      <div className="mb-2">
-        <label className="flex items-center">
-          <input
-            type="checkbox"
-            name="isActive"
-            checked={formData.isActive}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          Promoción Activa
-        </label>
-      </div>
-
-      <div className="flex space-x-2">
-        <button
-          type="submit"
-          className="bg-green-500 text-white px-4 py-2 rounded"
-        >
-          {isEditing ? "Actualizar" : "Crear"}
-        </button>
-        {isEditing && (
-          <button
-            type="button"
-            onClick={onCancel}
-            className="bg-gray-500 text-white px-4 py-2 rounded"
-          >
-            Cancelar
-          </button>
-        )}
-      </div>
+      <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">{isEditing ? "Actualizar" : "Crear"}</button>
+      {isEditing && <button type="button" onClick={onCancel} className="ml-2 bg-gray-500 text-white px-4 py-2 rounded">Cancelar</button>}
     </form>
   );
 };
