@@ -1,3 +1,5 @@
+// src/pages/PromocionAdminPage.jsx
+
 import React, { useState, useEffect } from "react";
 import usePromociones from "../hooks/usePromociones";
 import PromotionForm from "./PromotionForm";
@@ -23,14 +25,14 @@ const PromocionAdminPage = () => {
   }, [promociones.length, cargando, error, fetchPromociones]);
 
   const handleCreatePromotion = async (newPromocion) => {
-    if (!newPromocion.titulo || !newPromocion.fecha_inicio || !newPromocion.fecha_termino) {
-      return Swal.fire("Error", "Todos los campos son obligatorios.", "error");
+    if (!newPromocion.titulo || !newPromocion.fecha_inicio || !newPromocion.fecha_termino || !newPromocion.creado_por) {
+      return Swal.fire("Error", "Todos los campos son obligatorios, incluido 'Creado por'.", "error");
     }
     try {
       const result = await crearPromocion(newPromocion);
       if (result) {
         Swal.fire("Guardado", "Promoción creada correctamente.", "success");
-        fetchPromociones(); // Recargar promociones después de crear
+        fetchPromociones();
       }
     } catch {
       Swal.fire("Error", "Hubo un problema al crear la promoción.", "error");
@@ -38,15 +40,15 @@ const PromocionAdminPage = () => {
   };
 
   const handleUpdatePromotion = async (updatedFields) => {
-    if (!updatedFields.titulo || !updatedFields.fecha_inicio || !updatedFields.fecha_termino) {
-      return Swal.fire("Error", "Todos los campos son obligatorios.", "error");
+    if (!updatedFields.titulo || !updatedFields.fecha_inicio || !updatedFields.fecha_termino || !updatedFields.creado_por) {
+      return Swal.fire("Error", "Todos los campos son obligatorios, incluido 'Creado por'.", "error");
     }
     try {
       const result = await actualizarPromocion(editarPromocion.id, updatedFields);
       if (result) {
         Swal.fire("Actualizado", "Promoción actualizada correctamente.", "success");
-        setEditarPromocion(null); // Salir del modo edición
-        fetchPromociones(); // Recargar promociones después de actualizar
+        setEditarPromocion(null);
+        fetchPromociones();
       }
     } catch {
       Swal.fire("Error", "Hubo un problema al actualizar la promoción.", "error");
@@ -99,6 +101,7 @@ const PromocionAdminPage = () => {
               <img src={promocion.imagen_url} alt="Promoción" className="w-full h-auto mt-2" />
               <p>Inicio: {new Date(promocion.fecha_inicio).toLocaleDateString()}</p>
               <p>Fin: {new Date(promocion.fecha_termino).toLocaleDateString()}</p>
+              <p>Creado por: {promocion.creado_por}</p>
               <p>Estado: {promocion.is_active ? "Activa" : "Inactiva"}</p>
               <div className="flex justify-between mt-2">
                 <button
