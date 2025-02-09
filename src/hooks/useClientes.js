@@ -11,10 +11,10 @@ export const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
-      const data = await apiFetch("/clientes");
+      const data = await apiFetch("clientes");
       setClientes(data);
     } catch (err) {
-      setError("Error al obtener los clientes");
+      setError(`Error al obtener los clientes: ${err.message}`);
     } finally {
       setCargando(false);
     }
@@ -24,13 +24,15 @@ export const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
-      const nuevoCliente = await apiFetch("/clientes", {
+      const nuevoCliente = await apiFetch("clientes", {
         method: "POST",
         body: JSON.stringify(cliente),
       });
       setClientes((prev) => [...prev, nuevoCliente]);
+      return nuevoCliente;
     } catch (err) {
-      setError("Error al crear el cliente");
+      setError(`Error al crear el cliente: ${err.message}`);
+      return null;
     } finally {
       setCargando(false);
     }
@@ -40,11 +42,11 @@ export const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
-      const cliente = await apiFetch(`/clientes/${id}`);
-      return { cliente, cargando: false, error: null };
+      const cliente = await apiFetch(`clientes/${id}`);
+      return cliente;
     } catch (err) {
-      setError("Error al obtener el cliente");
-      return { cliente: null, cargando: false, error: "Error al obtener el cliente" };
+      setError(`Error al obtener el cliente: ${err.message}`);
+      return null;
     } finally {
       setCargando(false);
     }
@@ -54,13 +56,13 @@ export const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
-      const clienteActualizado = await apiFetch(`/clientes/${id}`, {
+      const clienteActualizado = await apiFetch(`clientes/${id}`, {
         method: "PUT",
         body: JSON.stringify(form),
       });
       setClientes((prev) => prev.map((cli) => (cli.id === id ? clienteActualizado : cli)));
     } catch (err) {
-      setError("Error al editar el cliente");
+      setError(`Error al editar el cliente: ${err.message}`);
     } finally {
       setCargando(false);
     }
@@ -68,11 +70,12 @@ export const useClientes = () => {
 
   const removeCliente = async (id) => {
     setCargando(true);
+    setError(null);
     try {
-      await apiFetch(`/clientes/${id}`, { method: "DELETE" });
+      await apiFetch(`clientes/${id}`, { method: "DELETE" });
       setClientes((prev) => prev.filter((cliente) => cliente.id !== id));
     } catch (err) {
-      setError("Error al eliminar el cliente");
+      setError(`Error al eliminar el cliente: ${err.message}`);
     } finally {
       setCargando(false);
     }
