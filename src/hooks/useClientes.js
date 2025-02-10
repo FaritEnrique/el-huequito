@@ -11,12 +11,13 @@ export const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
-      const data = await apiFetch("clientes");
+      const data = (await apiFetch("clientes")) || [];
       setClientes(data);
       return data;
     } catch (err) {
       setError(`Error al obtener los clientes: ${err.message}`);
-      return [];
+      setClientes([]);  
+      return [];  
     } finally {
       setCargando(false);
     }
@@ -41,15 +42,20 @@ export const useClientes = () => {
     }
   };
 
-  const obtenerCliente = async (id) => {
+  const obtenerCliente = async (id, actualizarEstado = false) => {
     setCargando(true);
     setError(null);
     try {
       const cliente = await apiFetch(`clientes/${id}`);
+      if (actualizarEstado) {
+        setClientes((prev) =>
+          prev.map((cli) => (cli.id === id ? cliente : cli))
+        );
+      }
       return cliente;
     } catch (err) {
       setError(`Error al obtener el cliente: ${err.message}`);
-      return null;
+      return {};
     } finally {
       setCargando(false);
     }
@@ -61,11 +67,16 @@ export const useClientes = () => {
     try {
       const clienteActualizado = await apiFetch(`clientes/${id}`, {
         method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      setClientes((prev) => prev.map((cli) => (cli.id === id ? clienteActualizado : cli)));
+      setClientes((prev) =>
+        prev.map((cli) => (cli.id === id ? clienteActualizado : cli))
+      );
+      return clienteActualizado;
     } catch (err) {
       setError(`Error al editar el cliente: ${err.message}`);
+      return null;
     } finally {
       setCargando(false);
     }
