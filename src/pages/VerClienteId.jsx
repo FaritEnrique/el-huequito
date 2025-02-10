@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useClientes } from '../hooks/useClientes';
+import useClientes from '../hooks/useClientes';
 import Swal from 'sweetalert2';
 
 const VerClienteId = () => {
