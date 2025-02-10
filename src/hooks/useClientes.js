@@ -13,8 +13,10 @@ export const useClientes = () => {
     try {
       const data = await apiFetch("clientes");
       setClientes(data);
+      return data;
     } catch (err) {
       setError(`Error al obtener los clientes: ${err.message}`);
+      return [];
     } finally {
       setCargando(false);
     }
@@ -26,6 +28,7 @@ export const useClientes = () => {
     try {
       const nuevoCliente = await apiFetch("clientes", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cliente),
       });
       setClientes((prev) => [...prev, nuevoCliente]);

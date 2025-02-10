@@ -44,17 +44,17 @@ const RegistroCliente = () => {
         <InputField label="DNI N°" name="dni" register={register} errors={errors}
           validation={{ required: true, pattern: /^[0-9]{8}$/ }} placeholder="Ejem: 05245...."
         />
-        <InputField label="Nombre Completo" name="name" register={register} errors={errors}
+        <InputField label="Nombre Completo" name="nombre" register={register} errors={errors}
           validation={{ required: true, pattern: /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s'-]+$/ }} placeholder="Juan Perez"
         />
         <InputField label="Dirección" name="direccion" register={register} errors={errors}
-          validation={{ required: true, maxLength: 30 }} placeholder="Calle Morona N° 728"
+          validation={{ required: true, maxLength: 100 }} placeholder="Calle Morona N° 728"
         />
         <InputField label="Correo" name="correo" register={register} errors={errors}
           validation={{ required: true, pattern: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/ }} placeholder="ejemplo@dominio.com"
         />
         <InputField label="Número de Celular" name="celular" register={register} errors={errors}
-          validation={{ required: true, pattern: /^[0-9]{9,12}$/ }} placeholder="900569803"
+          validation={{ required: true, pattern: /^[0-9]{13}$/ }} placeholder="900569803"
         />
         <div className='w-full mb-4'>
           <label className='p-2'>Condición:</label>

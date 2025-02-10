@@ -29,7 +29,7 @@ const UserList = () => {
     if (confirm.isConfirmed) {
       try {
         await removeCliente(id);
-        setListaClientes(prev => prev.filter(cliente => cliente.docId !== id));
+        setListaClientes(prev => prev.filter(cliente => cliente.id !== id));
         toast.success('Cliente eliminado con éxito');
       } catch {
         toast.error('Error al eliminar el cliente');
@@ -52,13 +52,13 @@ const UserList = () => {
             </tr>
           </thead>
           <tbody>
-            {listaClientes.map(({ docId, dni, name, celular }) => (
-              <tr key={docId}>
+            {listaClientes.map(({ id, dni, name, celular }) => (
+              <tr key={id}>
                 <td>{dni}</td>
-                <td>{name}</td>
+                <td>{nombre}</td>
                 <td>{celular}</td>
-                <td><Link to={`/ver/cliente/${docId}`}><FaEye size={20} /></Link></td>
-                <td><TfiTrash size={20} className='text-red-600 cursor-pointer' onClick={() => handleRemoveCliente(docId)} /></td>
+                <td><Link to={`/ver/cliente/${id}`}><FaEye size={20} /></Link></td>
+                <td><TfiTrash size={20} className='text-red-600 cursor-pointer' onClick={() => handleRemoveCliente(id)} /></td>
               </tr>
             ))}
           </tbody>
