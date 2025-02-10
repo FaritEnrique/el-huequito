@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useClientes } from '../hooks/useClientes';
+import useClientes from '../hooks/useClientes';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
