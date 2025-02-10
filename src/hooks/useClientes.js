@@ -2,7 +2,7 @@
 import { apiFetch } from "../api/apiFetch";
 import { useState, useEffect } from "react";
 
-export const useClientes = () => {
+const useClientes = () => {
   const [clientes, setClientes] = useState([]);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState(null);
@@ -110,3 +110,5 @@ export const useClientes = () => {
     removeCliente,
   };
 };
+
+export default useClientes;
