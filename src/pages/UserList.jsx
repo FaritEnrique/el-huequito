@@ -6,7 +6,7 @@ import { FaEye } from 'react-icons/fa';
 import { TfiTrash } from 'react-icons/tfi';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { useClientes } from '../hooks/useClientes';
+import useClientes from '../hooks/useClientes';
 import { toast } from 'sonner';
 
 const UserList = () => {

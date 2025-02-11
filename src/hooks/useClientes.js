@@ -1,4 +1,3 @@
-// hooks/useClientes.js
 import { apiFetch } from "../api/apiFetch";
 import { useState, useEffect } from "react";
 
@@ -16,8 +15,8 @@ const useClientes = () => {
       return data;
     } catch (err) {
       setError(`Error al obtener los clientes: ${err.message}`);
-      setClientes([]);  
-      return [];  
+      setClientes([]);
+      return [];
     } finally {
       setCargando(false);
     }
@@ -27,6 +26,7 @@ const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
+      console.log("Creando cliente con datos:", cliente);
       const nuevoCliente = await apiFetch("clientes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -47,6 +47,7 @@ const useClientes = () => {
     setError(null);
     try {
       const cliente = await apiFetch(`clientes/${id}`);
+      console.log("Cliente obtenido:", cliente);
       if (actualizarEstado) {
         setClientes((prev) =>
           prev.map((cli) => (cli.id === id ? cliente : cli))
@@ -65,17 +66,20 @@ const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
+      console.log("Editando cliente con datos:", form);
       const clienteActualizado = await apiFetch(`clientes/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
+      console.log("Cliente actualizado recibido del servidor:", clienteActualizado);
       setClientes((prev) =>
         prev.map((cli) => (cli.id === id ? clienteActualizado : cli))
       );
       return clienteActualizado;
     } catch (err) {
       setError(`Error al editar el cliente: ${err.message}`);
+      console.error("Error en editarCliente:", err);
       return null;
     } finally {
       setCargando(false);
@@ -87,6 +91,7 @@ const useClientes = () => {
     setError(null);
     try {
       await apiFetch(`clientes/${id}`, { method: "DELETE" });
+      console.log("Cliente eliminado con ID:", id);
       setClientes((prev) => prev.filter((cliente) => cliente.id !== id));
     } catch (err) {
       setError(`Error al eliminar el cliente: ${err.message}`);
