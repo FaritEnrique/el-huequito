@@ -54,15 +54,16 @@ const RegistroCliente = () => {
           validation={{ required: true, pattern: /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/ }} placeholder="ejemplo@dominio.com"
         />
         <InputField label="Número de Celular" name="celular" register={register} errors={errors}
-          validation={{ required: true, pattern: /^[0-9]{9}$/ }} placeholder="900569803"
+          validation={{ required: true, pattern: /^[0-9]{9}$/ }} placeholder="930569803"
         />
         <div className='w-full mb-4'>
           <label className='p-2'>Condición:</label>
           <select {...register('condicion', { required: true })} className='border-2 border-black'>
             <option value="">Seleccione...</option>
-            <option value="Propietario">Dueño de Obra</option>
+            <option value="Dueño de Obra">Dueño de Obra</option>
             <option value="Pintor">Pintor</option>
-            <option value="Maestro">Maestro de Obra</option>
+            <option value="Maestro de Obra">Maestro de Obra</option>
+            <option value="Otro">Otro</option>
           </select>
           {errors.condicion && <p className='text-red-500'>Este campo es obligatorio</p>}
         </div>
