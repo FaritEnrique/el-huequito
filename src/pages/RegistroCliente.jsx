@@ -42,10 +42,10 @@ const RegistroCliente = () => {
       <h1 className='font-extrabold text-center p-4'>REGISTRO DE CLIENTES</h1>
       <form onSubmit={handleSubmit(onSubmit)} className='border-2 border-black rounded-lg p-6'>
         <InputField label="DNI N°" name="dni" register={register} errors={errors}
-          validation={{ required: true, pattern: /^[0-9]{8}$/ }} placeholder="Ejem: 05245...."
+          validation={{ required: true, pattern: /^[0-9]{8}$/ }} placeholder="Ejem: 12345678"
         />
         <InputField label="Nombre Completo" name="nombre" register={register} errors={errors}
-          validation={{ required: true, pattern: /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s'-]+$/ }} placeholder="Juan Perez"
+          validation={{ required: true, pattern: /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s'-]+$/ }} placeholder="Juan Pérez"
         />
         <InputField label="Dirección" name="direccion" register={register} errors={errors}
           validation={{ required: true, maxLength: 100 }} placeholder="Calle Morona N° 728"
@@ -65,7 +65,7 @@ const RegistroCliente = () => {
             <option value="Maestro de Obra">Maestro de Obra</option>
             <option value="Otro">Otro</option>
           </select>
-          {errors.condicion && <p className='text-red-500'>Este campo es obligatorio</p>}
+          {errors.condicion && <p className='text-red-500'>Seleccione una opción válida</p>}
         </div>
         <div className='w-full text-center'>
           <button type="submit" className='bg-slate-600 text-white py-2 px-4 rounded-lg hover:bg-blue-400'>
@@ -86,7 +86,7 @@ const InputField = ({ label, name, register, errors, validation, placeholder }) 
       type="text"
       {...register(name, validation)}
     />
-    {errors[name] && <p className='text-red-500'>{`El campo ${label} es inválido`}</p>}
+    {errors[name] && <p className='text-red-500'>{errors[name].message || `El campo ${label} es inválido`}</p>}
   </div>
 );
 

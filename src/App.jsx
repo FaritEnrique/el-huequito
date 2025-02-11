@@ -23,6 +23,7 @@ import GestionMensajes from './pages/GestionMensajes'
 import RegistroCliente from './pages/RegistroCliente';
 import UserList from './pages/UserList';
 import VerClienteId from './pages/VerClienteId';
+import RegistrarProducto from './pages/RegistrarProducto';
 
 const App = () => {
   return (
@@ -61,6 +62,7 @@ const App = () => {
           <Route path='/registro/cliente' element={<RegistroCliente />} />
           <Route path='/admin/user-list' element={<UserList />} />
           <Route path='/ver/cliente/:id' element={<VerClienteId />} />
+          <Route path='/registro/producto' element={<RegistrarProducto />} />
         </Route>
       </Routes>
 
