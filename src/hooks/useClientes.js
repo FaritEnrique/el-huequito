@@ -71,17 +71,12 @@ const useClientes = () => {
     }
   };
 
-  const editarCliente = async (id, form) => {
+  const editarCliente = async (id, form, clienteOriginal) => {
     setCargando(true);
     setError(null);
     try {
       
-      console.log("Editando cliente con datos originales:", form);
-
-      if (!id || isNaN(Number(id))) {
-        console.error("Error: ID inválido al intetar editar cliente");
-        return;
-      }
+      console.log("Editando cliente con datos originales:", clienteOriginal);
 
       // Remover +51 si ya está presente
       let celularLimpio = form.celular.replace(/\D/g, "");
@@ -103,20 +98,34 @@ const useClientes = () => {
         direccion: form.direccion.trim(),
         celular: celularLimpio, // Solo los 9 dígitos
         correo: form.correo.trim().toLowerCase(),
-        condicion: form.condicion.trim(),
+        condicion: form.condicion,
       };
 
-      if (Object.values(clienteEditado).every((v) => v === "" || v === undefined)) {
+      /*if (Object.values(clienteEditado).every((v) => v === "" || v === undefined)) {
         console.error("Error: No se están enviando datos válidos para actualizar.");
+        return;
+      }*/
+
+      //console.log("Datos limpios para enviar:", clienteEditado);
+      
+      const datosActualizados = {};
+      Object.keys(clienteEditado).forEach((key) => {
+        if (clienteEditado[key] !== clienteOriginal[key]) {
+          datosActualizados[key] = clienteEditado[key];
+        }
+      });
+
+      if (Object.keys(datosActualizados).length === 0) {
+        console.warn("No se han realizado cambios. No se enviará la solicitud.");
         return;
       }
 
-      console.log("Datos limpios para enviar:", clienteEditado);
+      console.log("Datos limpios para enviar:", datosActualizados);
 
       const clienteActualizado = await apiFetch(`clientes/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(clienteEditado),
+        body: JSON.stringify(datosActualizados),
       });
 
       console.log("Cliente actualizado con éxito:", clienteActualizado);
@@ -126,6 +135,9 @@ const useClientes = () => {
       return clienteActualizado;
     } catch (err) {
       console.log("Error en editarCliente:", err);
+      if (err.response) {
+        console.error("Respuesta del backend:", await err.response.json());
+      }
       setError(`Error al editar el cliente: ${err.message || "Error desconocido"}`);
       return null;
     } finally {
