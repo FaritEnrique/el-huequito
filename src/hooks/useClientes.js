@@ -71,17 +71,20 @@ const useClientes = () => {
     }
   };
 
-  const editarCliente = async (id, form, clienteOriginal) => {
+  const editarCliente = async (id, form) => {
+    if (!form || typeof form !== "object") {
+      console.error("Error: El formulario está indefinido o no es un objeto válido.");
+      return;
+    }
     setCargando(true);
     setError(null);
     try {
-      
-      console.log("Editando cliente con datos originales:", clienteOriginal);
+      console.log("Editando cliente con datos originales:", form);
 
       // Remover +51 si ya está presente
-      let celularLimpio = form.celular.replace(/\D/g, "");
+      let celularLimpio = form.celular ? form.celular.replace(/\D/g, "") : "";
 
-      if (!/^(\+51)?\d{9}$/.test(celularLimpio)) {
+      if (celularLimpio && !/^(\+51)?\d{9}$/.test(celularLimpio)) {
         console.error("Error: Número de celular inválido");
         return;
       }
@@ -90,54 +93,39 @@ const useClientes = () => {
         celularLimpio = celularLimpio.substring(2);
       }
 
-      const dniLimpio = String(form.dni).padStart(8, "0");
+      const dniLimpio = form.dni ? String(form.dni).padStart(8, "0") : "";
 
       const clienteEditado = {
-        nombre: form.nombre.trim(),
-        dni: dniLimpio,
-        direccion: form.direccion.trim(),
-        celular: celularLimpio, // Solo los 9 dígitos
-        correo: form.correo.trim().toLowerCase(),
-        condicion: form.condicion,
+        ...(form.nombre && { nombre: form.nombre.trim() }),
+        ...(form.dni && { dni: dniLimpio }),
+        ...(form.direccion && { direccion: form.direccion.trim() }),
+        ...(form.celular && { celular: celularLimpio}),
+        ...(form.correo && { correo: form.correo.trim().toLowerCase() }),
+        ...(form.condicion && { condicion: form.condicion }),
       };
 
-      /*if (Object.values(clienteEditado).every((v) => v === "" || v === undefined)) {
-        console.error("Error: No se están enviando datos válidos para actualizar.");
-        return;
-      }*/
-
-      //console.log("Datos limpios para enviar:", clienteEditado);
-      
-      const datosActualizados = {};
-      Object.keys(clienteEditado).forEach((key) => {
-        if (clienteEditado[key] !== clienteOriginal[key]) {
-          datosActualizados[key] = clienteEditado[key];
-        }
-      });
-
-      if (Object.keys(datosActualizados).length === 0) {
-        console.warn("No se han realizado cambios. No se enviará la solicitud.");
+      if (Object.keys(clienteEditado).length ===0) {
+        console.error("Error: No hay datos válidos para actualizar.");
         return;
       }
 
-      console.log("Datos limpios para enviar:", datosActualizados);
+      console.log("Datos limpios para enviar:", clienteEditado);
 
       const clienteActualizado = await apiFetch(`clientes/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(datosActualizados),
+        body: JSON.stringify(clienteEditado),
       });
 
       console.log("Cliente actualizado con éxito:", clienteActualizado);
+
       setClientes((prev) =>
         prev.map((cli) => (cli.id === id ? clienteActualizado : cli))
       );
+
       return clienteActualizado;
     } catch (err) {
       console.log("Error en editarCliente:", err);
-      if (err.response) {
-        console.error("Respuesta del backend:", await err.response.json());
-      }
       setError(`Error al editar el cliente: ${err.message || "Error desconocido"}`);
       return null;
     } finally {
