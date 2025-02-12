@@ -26,6 +26,7 @@ const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
+      cliente.dni = cliente.dni.toString().padStart(8, "0");
       console.log("Creando cliente con datos:", cliente);
       console.log("Enviando datos:", JSON.stringify(cliente, null, 2));
       const nuevoCliente = await apiFetch("clientes", {
