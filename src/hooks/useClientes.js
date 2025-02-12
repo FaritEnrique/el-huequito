@@ -75,13 +75,25 @@ const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
+      
       console.log("Editando cliente con datos originales:", form);
+
+      if (!id || isNaN(Number(id))) {
+        console.error("Error: ID inválido al intetar editar cliente");
+        return;
+      }
 
       // Remover +51 si ya está presente
       let celularLimpio = form.celular.replace(/\D/g, "");
-        if (celularLimpio.startsWith("51")) {
-          celularLimpio = celularLimpio.substring(2);
-        }
+
+      if (!/^(\+51)?\d{9}$/.test(celularLimpio)) {
+        console.error("Error: Número de celular inválido");
+        return;
+      }
+
+      if (celularLimpio.startsWith("51")) {
+        celularLimpio = celularLimpio.substring(2);
+      }
 
       const dniLimpio = String(form.dni).padStart(8, "0");
 
@@ -91,8 +103,13 @@ const useClientes = () => {
         direccion: form.direccion.trim(),
         celular: celularLimpio, // Solo los 9 dígitos
         correo: form.correo.trim().toLowerCase(),
-        condicion: form.condicion,
+        condicion: form.condicion.trim(),
       };
+
+      if (Object.values(clienteEditado).every((v) => v === "" || v === undefined)) {
+        console.error("Error: No se están enviando datos válidos para actualizar.");
+        return;
+      }
 
       console.log("Datos limpios para enviar:", clienteEditado);
 
