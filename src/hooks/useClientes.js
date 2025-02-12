@@ -27,6 +27,7 @@ const useClientes = () => {
     setError(null);
     try {
       console.log("Creando cliente con datos:", cliente);
+      console.log("Enviando datos:", JSON.stringify(cliente, null, 2));
       const nuevoCliente = await apiFetch("clientes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
