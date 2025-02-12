@@ -75,7 +75,7 @@ const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
-      console.log("Editando cliente con datos:", form);
+      console.log("Editando cliente con datos originales:", form);
 
       // Remover +51 si ya está presente
       let celularLimpio = form.celular.replace(/\D/g, "");
