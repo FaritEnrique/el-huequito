@@ -1,5 +1,6 @@
-import { apiFetch } from "../api/apiFetch";
+// src/hooks/useClientes.js
 import { useState, useEffect } from "react";
+import { apiFetch } from "../api/apiFetch";
 
 const useClientes = () => {
   const [clientes, setClientes] = useState([]);
@@ -10,8 +11,8 @@ const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
-      const data = (await apiFetch("clientes")) || [];
-      setClientes(data);
+      const data = await apiFetch("clientes");
+      setClientes(data || []);
       return data;
     } catch (err) {
       setError(`Error al obtener los clientes: ${err.message}`);
@@ -22,28 +23,35 @@ const useClientes = () => {
     }
   };
 
-  
-
   const crearCliente = async (cliente) => {
     setCargando(true);
     setError(null);
     try {
-      cliente.dni = cliente.dni.toString().padStart(8, "0");
-      // Asegurar que el celular tiene el prefijo +51
-      if (!cliente.celular.startsWith("+51")) {
-        cliente.celular = `+51${cliente.celular}`;
-      }
-      
-      console.log("Enviando cliente con datos:", JSON.stringify(cliente, null, 2));
+      const dniLimpio = cliente.dni ? cliente.dni.toString().padStart(8, "0") : null;
+
+      const celularLimpio =
+        cliente.celular && !cliente.celular.startsWith("+51")
+          ? `+51${cliente.celular}`
+          : cliente.celular;
+
+      const clienteData = {
+        nombre: cliente.nombre,
+        dni: dniLimpio,
+        direccion: cliente.direccion,
+        celular: celularLimpio,
+        correo: cliente.correo,
+        condicion: cliente.condicion,
+      };
+
+      console.log("Enviando cliente con datos:", JSON.stringify(clienteData, null, 2));
       const nuevoCliente = await apiFetch("clientes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cliente),
+        body: JSON.stringify(clienteData),
       });
 
       setClientes((prev) => [...prev, nuevoCliente]);
       return nuevoCliente;
-
     } catch (err) {
       setError(`Error al crear el cliente: ${err.message}`);
       return null;
@@ -59,9 +67,7 @@ const useClientes = () => {
       const cliente = await apiFetch(`clientes/${id}`);
       console.log("Cliente obtenido:", cliente);
       if (actualizarEstado) {
-        setClientes((prev) =>
-          prev.map((cli) => (cli.id === id ? cliente : cli))
-        );
+        setClientes((prev) => prev.map((cli) => (cli.id === id ? cliente : cli)));
       }
       return cliente;
     } catch (err) {
@@ -77,19 +83,37 @@ const useClientes = () => {
     setError(null);
     try {
       console.log("Editando cliente con datos:", form);
+
+      const celularLimpio =
+        form.celular && !form.celular.startsWith("+51")
+          ? `+51${form.celular.replace("+51", "")}`
+          : form.celular;
+
+      const dniLimpio = form.dni ? String(form.dni).padStart(8, "0") : null;
+
+      const clienteEditado = {
+        nombre: form.nombre,
+        dni: dniLimpio,
+        direccion: form.direccion,
+        celular: celularLimpio,
+        correo: form.correo,
+        condicion: form.condicion,
+      };
+
       const clienteActualizado = await apiFetch(`clientes/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(clienteEditado),
       });
-      console.log("Cliente actualizado recibido del servidor:", clienteActualizado);
-      setClientes((prev) =>
-        prev.map((cli) => (cli.id === id ? clienteActualizado : cli))
-      );
+
+      console.log("Cliente actualizado con éxito:", clienteActualizado);
+      setClientes((prev) => prev.map((cli) => (cli.id === id ? clienteActualizado : cli)));
+
       return clienteActualizado;
     } catch (err) {
-      setError(`Error al editar el cliente: ${err.message}`);
-      console.error("Error en editarCliente:", err);
+      console.log("Error en editarCliente:", err);
+      const mensajeError = err?.message || "Error desconocido al editar el cliente";
+      setError(`Error al editar el cliente: ${mensajeError}`);
       return null;
     } finally {
       setCargando(false);
