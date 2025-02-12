@@ -1,6 +1,6 @@
 // src/hooks/useClientes.js
-import { useState, useEffect } from "react";
 import { apiFetch } from "../api/apiFetch";
+import { useState, useEffect } from "react";
 
 const useClientes = () => {
   const [clientes, setClientes] = useState([]);
@@ -11,8 +11,8 @@ const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
-      const data = await apiFetch("clientes");
-      setClientes(data || []);
+      const data = (await apiFetch("clientes")) || [];
+      setClientes(data);
       return data;
     } catch (err) {
       setError(`Error al obtener los clientes: ${err.message}`);
@@ -27,27 +27,18 @@ const useClientes = () => {
     setCargando(true);
     setError(null);
     try {
-      const dniLimpio = cliente.dni ? cliente.dni.toString().padStart(8, "0") : null;
+      cliente.dni = cliente.dni.toString().padStart(8, "0");
 
-      const celularLimpio =
-        cliente.celular && !cliente.celular.startsWith("+51")
-          ? `+51${cliente.celular}`
-          : cliente.celular;
+      // Asegurar que el celular no tiene el prefijo +51 antes de enviarlo
+      let celularLimpio = cliente.celular.startsWith("+51")
+        ? cliente.celular.replace("+51", "")
+        : cliente.celular;
 
-      const clienteData = {
-        nombre: cliente.nombre,
-        dni: dniLimpio,
-        direccion: cliente.direccion,
-        celular: celularLimpio,
-        correo: cliente.correo,
-        condicion: cliente.condicion,
-      };
-
-      console.log("Enviando cliente con datos:", JSON.stringify(clienteData, null, 2));
+      console.log("Enviando cliente con datos:", JSON.stringify(cliente, null, 2));
       const nuevoCliente = await apiFetch("clientes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(clienteData),
+        body: JSON.stringify({ ...cliente, celular: celularLimpio }),
       });
 
       setClientes((prev) => [...prev, nuevoCliente]);
@@ -67,7 +58,9 @@ const useClientes = () => {
       const cliente = await apiFetch(`clientes/${id}`);
       console.log("Cliente obtenido:", cliente);
       if (actualizarEstado) {
-        setClientes((prev) => prev.map((cli) => (cli.id === id ? cliente : cli)));
+        setClientes((prev) =>
+          prev.map((cli) => (cli.id === id ? cliente : cli))
+        );
       }
       return cliente;
     } catch (err) {
@@ -84,18 +77,18 @@ const useClientes = () => {
     try {
       console.log("Editando cliente con datos:", form);
 
-      const celularLimpio =
-        form.celular && !form.celular.startsWith("+51")
-          ? `+51${form.celular.replace("+51", "")}`
-          : form.celular;
+      // Remover +51 si ya está presente
+      let celularLimpio = form.celular.startsWith("+51")
+        ? form.celular.replace("+51", "")
+        : form.celular;
 
-      const dniLimpio = form.dni ? String(form.dni).padStart(8, "0") : null;
+      const dniLimpio = String(form.dni).padStart(8, "0");
 
       const clienteEditado = {
         nombre: form.nombre,
         dni: dniLimpio,
         direccion: form.direccion,
-        celular: celularLimpio,
+        celular: celularLimpio, // Solo los 9 dígitos
         correo: form.correo,
         condicion: form.condicion,
       };
@@ -107,13 +100,13 @@ const useClientes = () => {
       });
 
       console.log("Cliente actualizado con éxito:", clienteActualizado);
-      setClientes((prev) => prev.map((cli) => (cli.id === id ? clienteActualizado : cli)));
-
+      setClientes((prev) =>
+        prev.map((cli) => (cli.id === id ? clienteActualizado : cli))
+      );
       return clienteActualizado;
     } catch (err) {
       console.log("Error en editarCliente:", err);
-      const mensajeError = err?.message || "Error desconocido al editar el cliente";
-      setError(`Error al editar el cliente: ${mensajeError}`);
+      setError(`Error al editar el cliente: ${err.message || "Error desconocido"}`);
       return null;
     } finally {
       setCargando(false);
