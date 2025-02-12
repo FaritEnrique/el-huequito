@@ -8,8 +8,7 @@ import Swal from 'sweetalert2';
 const VerClienteId = () => {
   const { id } = useParams();
   const { obtenerCliente, editarCliente } = useClientes();
-  
-  // Estado inicial con los campos del modelo clientes
+
   const [cliente, setCliente] = useState({
     dni: '',
     nombre: '',
@@ -26,7 +25,16 @@ const VerClienteId = () => {
     obtenerCliente(id)
       .then((data) => {
         if (data) {
-          setCliente(data);
+          // Asegurar que los datos estén limpios antes de mostrar
+          setCliente({
+            ...data,
+            nombre: data.nombre.trim(),
+            direccion: data.direccion.trim(),
+            correo: data.correo.trim().toLowerCase(),
+            celular: data.celular.replace(/\D/g, '').startsWith('51')
+              ? data.celular.replace(/\D/g, '').substring(2)
+              : data.celular.replace(/\D/g, ''),
+          });
         } else {
           Swal.fire({
             title: 'Error',
@@ -38,7 +46,7 @@ const VerClienteId = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error al obtener el cliente", error);
+        console.error('Error al obtener el cliente', error);
         Swal.fire({
           title: 'Error',
           text: 'No se pudo cargar la información del cliente.',
@@ -68,7 +76,7 @@ const VerClienteId = () => {
       });
       setIsEditing(false);
     } catch (error) {
-      console.error("Error al actualizar cliente", error);
+      console.error('Error al actualizar cliente', error);
       Swal.fire({
         title: 'Error',
         text: 'Hubo un error al actualizar el cliente.',
@@ -97,7 +105,6 @@ const VerClienteId = () => {
           <InputField label="Celular" name="celular" value={cliente.celular} onChange={handleChange} editable={isEditing} />
           <InputField label="Correo" name="correo" value={cliente.correo} onChange={handleChange} editable={isEditing} />
 
-          {/* Selector de condición */}
           <div>
             <label className="block text-sm font-semibold text-gray-700">Condición</label>
             {isEditing ? (
@@ -145,7 +152,6 @@ const VerClienteId = () => {
   );
 };
 
-// Componente reutilizable para inputs
 const InputField = ({ label, name, value, onChange, editable = false, disabled = false }) => (
   <div>
     <label className="block text-sm font-semibold text-gray-700">{label}</label>

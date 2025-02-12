@@ -78,20 +78,23 @@ const useClientes = () => {
       console.log("Editando cliente con datos:", form);
 
       // Remover +51 si ya está presente
-      let celularLimpio = form.celular.startsWith("+51")
-        ? form.celular.replace("+51", "")
-        : form.celular;
+      let celularLimpio = form.celular.replace(/\D/g, "");
+        if (celularLimpio.startsWith("51")) {
+          celularLimpio = celularLimpio.substring(2);
+        }
 
       const dniLimpio = String(form.dni).padStart(8, "0");
 
       const clienteEditado = {
-        nombre: form.nombre,
+        nombre: form.nombre.trim(),
         dni: dniLimpio,
-        direccion: form.direccion,
+        direccion: form.direccion.trim(),
         celular: celularLimpio, // Solo los 9 dígitos
-        correo: form.correo,
+        correo: form.correo.trim().toLowerCase(),
         condicion: form.condicion,
       };
+
+      console.log("Datos limpios para enviar:", clienteEditado);
 
       const clienteActualizado = await apiFetch(`clientes/${id}`, {
         method: "PUT",
