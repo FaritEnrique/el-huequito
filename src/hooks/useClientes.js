@@ -22,20 +22,28 @@ const useClientes = () => {
     }
   };
 
+  
+
   const crearCliente = async (cliente) => {
     setCargando(true);
     setError(null);
     try {
       cliente.dni = cliente.dni.toString().padStart(8, "0");
-      console.log("Creando cliente con datos:", cliente);
-      console.log("Enviando datos:", JSON.stringify(cliente, null, 2));
+      // Asegurar que el celular tiene el prefijo +51
+      if (!cliente.celular.startsWith("+51")) {
+        cliente.celular = `+51${cliente.celular}`;
+      }
+      
+      console.log("Enviando cliente con datos:", JSON.stringify(cliente, null, 2));
       const nuevoCliente = await apiFetch("clientes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cliente),
       });
+
       setClientes((prev) => [...prev, nuevoCliente]);
       return nuevoCliente;
+
     } catch (err) {
       setError(`Error al crear el cliente: ${err.message}`);
       return null;
