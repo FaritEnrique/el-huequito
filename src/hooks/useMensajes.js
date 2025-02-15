@@ -57,7 +57,7 @@ export const useMensajes = () => {
 
   // Nueva función para editar un mensaje
   const editarMensaje = async (id, form) => {
-    // Verificar que 'form' sea un objeto válido
+    // verificar que 'form' sea un objeto válido
     if (!form || typeof form !== "object") {
       console.error("Error: El formulario está indefinido o no es un objeto válido.");
       return;
@@ -69,22 +69,20 @@ export const useMensajes = () => {
       
       // Preparar los datos limpios para enviar
       const mensajeEditado = {
-        nombre: form.nombre ? form.nombre.trim() : undefined,
-        celular: form.celular ? form.celular.trim() : undefined,
-        correo: form.correo ? form.correo.trim().toLowerCase() : undefined,
-        comunicacion: form.comunicacion,  // Asumimos que este campo ya viene en un valor válido
-        mensaje: form.mensaje ? form.mensaje.trim() : undefined,
+        nombre: form.nombre.trim(),
+        celular: form.celular.trim(),
+        correo: form.correo.trim().toLowerCase(),
+        comunicacion: form.comunicacion,  // Se asume que viene en un valor válido
+        mensaje: form.mensaje.trim(),
       };
 
-      // Envolver los datos en la propiedad "response", ya que el backend espera req.body.response
-      const bodyToSend = { response: mensajeEditado };
+      console.log("Datos limpios para enviar:", mensajeEditado);
 
-      console.log("Datos limpios para enviar:", bodyToSend);
-
+      // Enviar directamente el objeto con los datos (sin envolverlo en "response")
       const mensajeActualizado = await apiFetch(`mensajes/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bodyToSend),
+        body: JSON.stringify(mensajeEditado),
       });
 
       console.log("Mensaje actualizado con éxito:", mensajeActualizado);
