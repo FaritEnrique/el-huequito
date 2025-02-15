@@ -25,12 +25,13 @@ const VerClienteId = () => {
     obtenerCliente(id)
       .then((data) => {
         if (data) {
-          // Asegurar que los datos estén limpios antes de mostrar
+          // Limpiar y formatear datos antes de mostrarlos
           setCliente({
             ...data,
             nombre: data.nombre.trim(),
             direccion: data.direccion.trim(),
             correo: data.correo.trim().toLowerCase(),
+            // Se remueven caracteres no numéricos y se quita el código país si está presente
             celular: data.celular.replace(/\D/g, '').startsWith('51')
               ? data.celular.replace(/\D/g, '').substring(2)
               : data.celular.replace(/\D/g, ''),
@@ -115,9 +116,11 @@ const VerClienteId = () => {
                 className="w-full p-2 border rounded"
               >
                 <option value="">Seleccione una opción</option>
-                <option value="Propietario">Dueño de Obra</option>
+                {/* Actualizamos los valores para que coincidan con el esquema: */}
+                <option value="Dueño de Obra">Dueño de Obra</option>
                 <option value="Pintor">Pintor</option>
-                <option value="Maestro">Maestro de Obra</option>
+                <option value="Maestro de Obra">Maestro de Obra</option>
+                <option value="Otro">Otro</option>
               </select>
             ) : (
               <p className="p-2 border rounded bg-gray-100">{cliente.condicion || 'No especificado'}</p>
