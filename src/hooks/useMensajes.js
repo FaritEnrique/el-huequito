@@ -12,7 +12,7 @@ export const useMensajes = () => {
     setCargando(true);
     setError(null);
     try {
-      const data = await apiFetch('/mensajes');
+      const data = await apiFetch('mensajes');
       setMensajes(data);
     } catch (err) {
       setError("Error al obtener los mensajes");
@@ -25,7 +25,7 @@ export const useMensajes = () => {
     setCargando(true);
     setError(null);
     try {
-      const nuevoMensaje = await apiFetch('/mensajes', {
+      const nuevoMensaje = await apiFetch('mensajes', {
         method: 'POST',
         body: JSON.stringify(mensaje),
       });
@@ -41,7 +41,7 @@ export const useMensajes = () => {
     setCargando(true);
     setError(null);
     try {
-      const mensaje = await apiFetch(`/mensajes/${id}`);
+      const mensaje = await apiFetch(`mensajes/${id}`);
       return {mensaje, cargando: false, error: null};
     } catch (err) {
       setError("Error al obtener el mensaje");
@@ -54,7 +54,7 @@ export const useMensajes = () => {
   const removeMensaje = async (id) => {
     setCargando(true);
     try {
-      await apiFetch(`/mensajes/${id}`, { method: 'DELETE' });
+      await apiFetch(`mensajes/${id}`, { method: 'DELETE' });
       setMensajes((prev) => prev.filter((mensaje) => mensaje.id !== id));
     } catch (err) {
       setError("Error al eliminar el mensaje");
