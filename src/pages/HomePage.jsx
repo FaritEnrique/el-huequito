@@ -25,7 +25,7 @@ const HomePage = () => {
         {/* Contenedor principal */}
         <div className="max-w-[1300px] w-full bg-white rounded-xl flex flex-col p-4 md:flex-row items-center">
           <div className="flex-col w-full text-center justify-items-center md:w-1/2">
-            <h2 className="font-extrabold text-blue-900 font-pacifico text-2xl md:text-3xl lg:text-4xl mx-4">
+            <h2 className="font-extrabold text-blue-900 text-2xl md:text-3xl lg:text-4xl mx-4">
               Los Especialistas en Pinturas te Ayudamos
             </h2>
             <img
@@ -33,7 +33,7 @@ const HomePage = () => {
               alt="Logo El Huequito"
               className="w-1/2"
             />
-            <h2 className="font-extrabold text-blue-900 font-pacifico text-2xl md:text-3xl lg:text-4xl my-2">
+            <h2 className="font-extrabold text-blue-900 text-2xl md:text-3xl lg:text-4xl my-2">
               Tenemos Muy Buenos Precios
             </h2>  
           </div>
@@ -46,7 +46,7 @@ const HomePage = () => {
         {/* Contenedor principal */}
         <div className="max-w-[1300px] w-full bg-gradient-to-br from-orange-500 via-yellow-300 to-yellow-100 rounded-xl flex flex-col md:flex-row items-center">
           <div className="flex-col w-full text-center md:text-center justify-items-center md:w-1/2">
-            <h2 className="font-extrabold text-blue-900 font-pacifico text-xl md:text-2xl lg:text-3xl mt-4 mx-4">
+            <h2 className="font-extrabold text-blue-900 text-xl md:text-2xl lg:text-3xl mt-4 mx-4">
               Pintar es Transformar tu Hogar en un Reflejo de tus Sueños
             </h2>
             <img
@@ -63,7 +63,7 @@ const HomePage = () => {
       <section className="max-w-[1300px] w-full mx-auto my-4 pt-4 px-2 md:px-4 flex flex-wrap rounded-xl border-2 border-black bg-white">
         <VisibilityWrapper>
           <div className='w-full rounded-xl md:px-4'>
-            <p className="w-full font-lobster sm:text-xl md:text-2xl lg:text-4xl text-center text-blue-500 transform rotate-[-2deg] origin-top-center py-2">
+            <p className="w-full sm:text-xl md:text-2xl lg:text-4xl text-center text-blue-500 transform rotate-[-2deg] origin-top-center py-2">
               Los Colores son Emociones; Elige Pintar Felicidad
             </p>
           </div>
