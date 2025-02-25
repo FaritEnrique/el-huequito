@@ -11,7 +11,7 @@ export const usePreguntas = () => {
     setCargando(true);
     setError(null);
     try {
-      const data = await apiFetch('/preguntas');
+      const data = await apiFetch('preguntas');
       setPreguntas(data);
     } catch (err) {
       setError("Error al obtener las preguntas");
@@ -24,7 +24,7 @@ export const usePreguntas = () => {
     setCargando(true);
     setError(null);
     try {
-      const nuevaPregunta = await apiFetch('/preguntas', {
+      const nuevaPregunta = await apiFetch('preguntas', {
         method: 'POST',
         body: JSON.stringify(pregunta),
       });
@@ -40,7 +40,7 @@ export const usePreguntas = () => {
     setCargando(true);
     setError(null);
     try {
-      const pregunta = await apiFetch(`/preguntas/${id}`);
+      const pregunta = await apiFetch(`preguntas/${id}`);
       return { pregunta, cargando: false, error: null };
     } catch (err) {
       setError("Error al obtener la pregunta");
@@ -53,7 +53,7 @@ export const usePreguntas = () => {
   const removePregunta = async (id) => {
     setCargando(true);
     try {
-      await apiFetch(`/preguntas/${id}`, { method: 'DELETE' });
+      await apiFetch(`preguntas/${id}`, { method: 'DELETE' });
       setPreguntas((prev) => prev.filter((pregunta) => pregunta.id !== id));
     } catch (err) {
       setError("Error al eliminar la pregunta");
