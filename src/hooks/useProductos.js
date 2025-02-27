@@ -1,3 +1,5 @@
+//scr/hooks/useProductos.js
+
 import { useState, useEffect } from "react";
 import { apiFetch } from "../api/apiFetch";
 
