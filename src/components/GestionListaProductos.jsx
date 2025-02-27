@@ -6,10 +6,29 @@ const GestionListaProductos = () => {
     const [form, setForm] = useState({ nombre: "", marcaId: "", tipoProductoId: "", precio: "" });
     const [modoEdicion, setModoEdicion] = useState(false);
     const [productoEditado, setProductoEditado] = useState(null);
+    const [marcas, setMarcas] = useState([]);
+    const [tiposProducto, setTiposProducto] = useState([]);
 
     useEffect(() => {
         obtenerProductos();
+        // Llama a las funciones para obtener marcas y tipos de productos
+        obtenerMarcas();
+        obtenerTiposProducto();
     }, []);
+
+    const obtenerMarcas = async () => {
+        // Aquí obtienes las marcas (supongo que tienes un servicio para eso)
+        const response = await fetch("/api/marcas");
+        const data = await response.json();
+        setMarcas(data);
+    };
+
+    const obtenerTiposProducto = async () => {
+        // Aquí obtienes los tipos de productos (supongo que tienes un servicio para eso)
+        const response = await fetch("/api/tiposProducto");
+        const data = await response.json();
+        setTiposProducto(data);
+    };
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -55,24 +74,39 @@ const GestionListaProductos = () => {
                     required 
                     className="border p-2 w-full" 
                 />
-                <input 
-                    type="text" 
+                
+                {/* Select para Marca */}
+                <select 
                     name="marcaId" 
                     value={form.marcaId} 
                     onChange={handleChange} 
-                    placeholder="ID Marca" 
                     required 
-                    className="border p-2 w-full" 
-                />
-                <input 
-                    type="text" 
+                    className="border p-2 w-full"
+                >
+                    <option value="">Selecciona una marca</option>
+                    {marcas.map((marca) => (
+                        <option key={marca.id} value={marca.id}>
+                            {marca.nombre}
+                        </option>
+                    ))}
+                </select>
+
+                {/* Select para Tipo de Producto */}
+                <select 
                     name="tipoProductoId" 
                     value={form.tipoProductoId} 
                     onChange={handleChange} 
-                    placeholder="ID Tipo Producto" 
                     required 
-                    className="border p-2 w-full" 
-                />
+                    className="border p-2 w-full"
+                >
+                    <option value="">Selecciona un tipo de producto</option>
+                    {tiposProducto.map((tipo) => (
+                        <option key={tipo.id} value={tipo.id}>
+                            {tipo.nombre}
+                        </option>
+                    ))}
+                </select>
+
                 <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
                     {modoEdicion ? "Actualizar" : "Crear"}
                 </button>
