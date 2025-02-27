@@ -1,6 +1,11 @@
 // src/api/apiFetch.js
 
-const backendURL = "https://api.backendhuequito.com";
+//const backendURL = "https://api.backendhuequito.com";
+
+const backendURL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:8080"
+    : "https://api.backendhuequito.com";
 
 export const apiFetch = async (endpoint, options = {}) => {
   try {

@@ -1,49 +1,43 @@
 import { useState } from "react";
-import useProductos from "../hooks/useProductos";
+import GestionListaProductos from "../components/GestionListaProductos";
+import GestionMarcas from "../components/GestionMarcas";
+import GestionTiposProducto from "../components/GestionTiposProducto";
 
 const GestionProductos = () => {
-    const { productos, agregarProducto, actualizarProducto, eliminarProducto } = useProductos();
-    const [form, setForm] = useState({ nombre: "", precio: "", descripcion: "" });
-    const [editando, setEditando] = useState(null);
+  const [seccionActiva, setSeccionActiva] = useState("productos");
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
+  return (
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow rounded-lg">
+      <h1 className="text-2xl font-bold mb-4">Gestión de Productos</h1>
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (editando) {
-            actualizarProducto(editando, form);
-        } else {
-            agregarProducto(form);
-        }
-        setForm({ nombre: "", precio: "", descripcion: "" });
-        setEditando(null);
-    };
+      <div className="flex gap-4 mb-4">
+        <button
+          className={`px-4 py-2 rounded ${seccionActiva === "productos" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+          onClick={() => setSeccionActiva("productos")}
+        >
+          Productos
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${seccionActiva === "marcas" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+          onClick={() => setSeccionActiva("marcas")}
+        >
+          Marcas
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${seccionActiva === "tiposProducto" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+          onClick={() => setSeccionActiva("tiposProducto")}
+        >
+          Tipos de Producto
+        </button>
+      </div>
 
-    return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Gestión de Productos</h1>
-            <form onSubmit={handleSubmit} className="mb-4 space-y-2">
-                <input type="text" name="nombre" value={form.nombre} onChange={handleChange} placeholder="Nombre" className="border p-2 w-full" required />
-                <input type="number" name="precio" value={form.precio} onChange={handleChange} placeholder="Precio" className="border p-2 w-full" required />
-                <input type="text" name="descripcion" value={form.descripcion} onChange={handleChange} placeholder="Descripción" className="border p-2 w-full" required />
-                <button type="submit" className="bg-blue-500 text-white p-2 rounded">{editando ? "Actualizar" : "Agregar"}</button>
-            </form>
-
-            <ul>
-                {productos.map((producto) => (
-                    <li key={producto.id} className="border p-2 flex justify-between items-center">
-                        <span>{producto.nombre} - ${producto.precio}</span>
-                        <div>
-                            <button onClick={() => { setForm(producto); setEditando(producto.id); }} className="bg-yellow-500 text-white px-2 py-1 mr-2">Editar</button>
-                            <button onClick={() => eliminarProducto(producto.id)} className="bg-red-500 text-white px-2 py-1">Eliminar</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+      <div className="border p-4 rounded-lg">
+        {seccionActiva === "productos" && <GestionListaProductos />}
+        {seccionActiva === "marcas" && <GestionMarcas />}
+        {seccionActiva === "tiposProducto" && <GestionTiposProducto />}
+      </div>
+    </div>
+  );
 };
 
 export default GestionProductos;

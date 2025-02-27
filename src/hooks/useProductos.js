@@ -3,51 +3,63 @@ import { apiFetch } from "../api/apiFetch";
 
 const useProductos = () => {
     const [productos, setProductos] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [marcas, setMarcas] = useState([]);
+    const [tiposProducto, setTiposProducto] = useState([]);
 
     useEffect(() => {
-        const fetchProductos = async () => {
-            setLoading(true);
-            try {
-                const data = await apiFetch("productos");
-                console.log("Productos cargados:", data); // ✅ Debug
-                setProductos(data);
-            } catch (err) {
-                console.error("Error al cargar productos:", err); // ✅ Debug
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchProductos();
+        obtenerProductos();
+        obtenerMarcas();
+        obtenerTiposProducto();
     }, []);
 
-    const agregarProducto = async (nuevoProducto) => {
+    const obtenerProductos = async () => {
         try {
-            const data = await apiFetch("productos", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(nuevoProducto),
-            });
-            setProductos([...productos, data]);
-        } catch (err) {
-            console.error("Error al agregar producto:", err); // ✅ Debug
-            setError(err.message);
+            const data = await apiFetch("productos");
+            setProductos(data);
+        } catch (error) {
+            console.error("Error al obtener productos:", error);
         }
     };
 
-    const actualizarProducto = async (id, productoActualizado) => {
+    const obtenerMarcas = async () => {
         try {
-            const data = await apiFetch(`productos/${id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(productoActualizado),
+            const data = await apiFetch("marcas");
+            setMarcas(data);
+        } catch (error) {
+            console.error("Error al obtener marcas:", error);
+        }
+    };
+
+    const obtenerTiposProducto = async () => {
+        try {
+            const data = await apiFetch("tipo-productos");
+            setTiposProducto(data);
+        } catch (error) {
+            console.error("Error al obtener tipos de producto:", error);
+        }
+    };
+
+    const agregarProducto = async (producto) => {
+        try {
+            const nuevoProducto = await apiFetch("productos", {
+                method: "POST",
+                body: JSON.stringify(producto),
             });
-            setProductos(productos.map((p) => (p.id === id ? data : p)));
-        } catch (err) {
-            console.error("Error al actualizar producto:", err); // ✅ Debug
-            setError(err.message);
+            setProductos([...productos, nuevoProducto]);
+        } catch (error) {
+            console.error("Error al agregar producto:", error);
+        }
+    };
+
+    const actualizarProducto = async (id, producto) => {
+        try {
+            const productoActualizado = await apiFetch(`productos/${id}`, {
+                method: "PUT",
+                body: JSON.stringify(producto),
+            });
+            setProductos(productos.map((p) => (p.id === id ? productoActualizado : p)));
+        } catch (error) {
+            console.error("Error al actualizar producto:", error);
         }
     };
 
@@ -55,19 +67,19 @@ const useProductos = () => {
         try {
             await apiFetch(`productos/${id}`, { method: "DELETE" });
             setProductos(productos.filter((p) => p.id !== id));
-        } catch (err) {
-            console.error("Error al eliminar producto:", err); // ✅ Debug
-            setError(err.message);
+        } catch (error) {
+            console.error("Error al eliminar producto:", error);
         }
     };
 
-    return {
-        productos,
-        loading,
-        error,
-        agregarProducto,
-        actualizarProducto,
-        eliminarProducto,
+    return { 
+        productos, 
+        marcas, 
+        tiposProducto, 
+        obtenerProductos, 
+        agregarProducto, 
+        actualizarProducto, 
+        eliminarProducto 
     };
 };
 
