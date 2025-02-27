@@ -18,18 +18,21 @@ export const apiFetch = async (endpoint, options = {}) => {
     });
 
     const text = await response.text();
-    let data;
-    try {
-      data = JSON.parse(text);
-    } catch (parseError) {
-      throw new Error(`Error al parsear la respuesta JSON de ${endpoint}: ${parseError.message}`);
+    let data = null;
+
+    if (text) {
+      try {
+        data = JSON.parse(text);
+      } catch (parseError) {
+        throw new Error(`Error al parsear la respuesta JSON de ${endpoint}: ${parseError.message}`);
+      }
     }
 
     if (!response.ok) {
       throw new Error(data?.message || `Error en la solicitud API a ${endpoint}: ${response.status} ${response.statusText}`);
     }
 
-    return data;
+    return data; // Puede ser `null` en respuestas vacías como DELETE 204
   } catch (error) {
     console.error(`Error en la solicitud API a ${endpoint}:`, error.message);
     throw error;
