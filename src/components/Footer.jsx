@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import React, { useState, memo } from "react"
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { BsInstagram } from "react-icons/bs";
@@ -173,4 +173,4 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default memo(Footer);

@@ -1,6 +1,6 @@
 // src/hooks/useProductos.js
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { apiFetch } from "../api/apiFetch";
 import Swal from "sweetalert2";
 
@@ -8,17 +8,25 @@ const useProductos = () => {
     const [productos, setProductos] = useState([]);
     const [marcas, setMarcas] = useState([]);
     const [tiposProducto, setTiposProducto] = useState([]);
+    const [cargando, setCargando] = useState(true); // Nuevo estado para controlar la carga
 
     useEffect(() => {
-        obtenerProductos();
-        obtenerMarcas();
-        obtenerTiposProducto();
+        const fetchData = async () => {
+            try {
+                await Promise.all([obtenerProductos(), obtenerMarcas(), obtenerTiposProducto()]);
+                setCargando(false); // Datos cargados
+            } catch (error) {
+                console.error("Error al cargar datos iniciales:", error);
+                setCargando(false); // Error al cargar datos
+            }
+        };
+
+        fetchData();
     }, []);
 
     const obtenerProductos = async () => {
         try {
             const data = await apiFetch("productos");
-            // Formatear precio con "S/" y eliminar cualquier otro símbolo previo
             const productosFormateados = data.map(producto => ({
                 ...producto,
                 precio: parseFloat(producto.precio).toFixed(2)
@@ -61,9 +69,9 @@ const useProductos = () => {
                 }),
             });
 
-            setProductos([...productos, {
+            setProductos(prevProductos => [...prevProductos, {
                 ...nuevoProducto,
-                precio: `S/ ${parseFloat(nuevoProducto.precio).toFixed(2)}`
+                precio: parseFloat(nuevoProducto.precio).toFixed(2)
             }]);
 
             Swal.fire({
@@ -94,8 +102,8 @@ const useProductos = () => {
                 }),
             });
 
-            setProductos(productos.map((p) =>
-                p.id === id ? { ...productoActualizado, precio: `S/ ${parseFloat(productoActualizado.precio).toFixed(2)}` } : p
+            setProductos(prevProductos => prevProductos.map((p) =>
+                p.id === id ? { ...productoActualizado, precio: parseFloat(productoActualizado.precio).toFixed(2) } : p
             ));
 
             Swal.fire({
@@ -117,7 +125,7 @@ const useProductos = () => {
     const eliminarProducto = async (id) => {
         try {
             await apiFetch(`productos/${id}`, { method: "DELETE" });
-            setProductos(productos.filter((p) => p.id !== id));
+            setProductos(prevProductos => prevProductos.filter((p) => p.id !== id));
 
             Swal.fire({
                 icon: "success",
@@ -135,14 +143,18 @@ const useProductos = () => {
         }
     };
 
+    const marcasMemorizadas = useMemo(() => marcas, [marcas]);
+    const tiposProductoMemorizados = useMemo(() => tiposProducto, [tiposProducto]);
+
     return {
         productos,
-        marcas,
-        tiposProducto,
+        marcas: marcasMemorizadas,
+        tiposProducto: tiposProductoMemorizados,
         obtenerProductos,
         agregarProducto,
         actualizarProducto,
-        eliminarProducto
+        eliminarProducto,
+        cargando, // Exponemos el estado de carga
     };
 };
 

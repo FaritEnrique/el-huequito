@@ -108,7 +108,7 @@ const Header = () => {
 
 export default Header;*/
 
-import { useState } from "react";
+import React, { useState, memo } from "react";
 import { Link } from "react-router-dom";
 import { LiaWindowClose } from "react-icons/lia";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -117,18 +117,16 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import { Navigation, Autoplay } from "swiper/modules";
 
-export default function Header() {
+const Header = () => {
     const [abrir, setAbrir] = useState(false);
     const classMenu = abrir ? "fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-end z-50" : "hidden";
     const classShowMenu = abrir ? "w-[300px] h-full bg-white p-4 shadow-lg" : "";
 
     return (
         <>
-            {/* Sección de Navegación */}
             <section className="w-full">
                 <nav className="dark:bg-gray-900 w-full">
                     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 gap-6">
-                        {/* Logo */}
                         <Link to="/" className="flex items-center space-x-3">
                             <img
                                 src="/images/logos/logo_huequito.png"
@@ -137,7 +135,6 @@ export default function Header() {
                             />
                         </Link>
 
-                        {/* Botón para abrir/cerrar el menú en móviles */}
                         <div>
                             <button
                                 type="button"
@@ -152,7 +149,6 @@ export default function Header() {
                                 </svg>
                             </button>
 
-                            {/* Menú lateral desplegable */}
                             <div className={`${classMenu} ${classShowMenu}`}>
                                 <button onClick={() => setAbrir(false)}>
                                     <LiaWindowClose size={40} className="text-red-500" />
@@ -174,27 +170,25 @@ export default function Header() {
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        {/* Menú para pantallas grandes */}
-                        <div className="hidden w-full md:block md:w-auto px-4 bg-gray-50 rounded-lg ring-2 ring-slate-700">
-                            <ul className="font-medium flex flex-col p-4 md:p-0 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8">
-                                {["Inicio", "Nosotros", "Productos", "Promociones", "Ideas", "Contacto"].map((item) => (
-                                    <li key={item}>
-                                        <Link
-                                            to={item.toLowerCase() === "inicio" ? "/" : `/${item.toLowerCase()}`}
-                                            className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100"
-                                        >
-                                            {item}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                    <div className="hidden w-full md:block md:w-auto px-4 bg-gray-50 rounded-lg ring-2 ring-slate-700">
+                        <ul className="font-medium flex flex-col p-4 md:p-0 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8">
+                            {["Inicio", "Nosotros", "Productos", "Promociones", "Ideas", "Contacto"].map((item) => (
+                                <li key={item}>
+                                    <Link
+                                        to={item.toLowerCase() === "inicio" ? "/" : `/${item.toLowerCase()}`}
+                                        className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100"
+                                    >
+                                        {item}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </nav>
             </section>
 
-            {/* Header con el Carrusel */}
             <header className="w-full flex justify-center bg-gray-200">
                 <div className="max-w-[1300px] w-full h-auto">
                     <Swiper
@@ -217,4 +211,6 @@ export default function Header() {
             </header>
         </>
     );
-}
+};
+
+export default memo(Header);

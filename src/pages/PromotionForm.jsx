@@ -25,9 +25,16 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    let formattedValue = value;
+
+    if (type === "date") {
+      const date = new Date(value);
+      formattedValue = date.toISOString().split("T")[0]; // Obtiene solo la parte de la fecha (YYYY-MM-DD)
+    }
+
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? checked : formattedValue,
     });
   };
 
@@ -37,6 +44,9 @@ const PromotionForm = ({ onSave, initialData, isEditing, onCancel }) => {
       alert("El campo 'Creado por' es obligatorio.");
       return;
     }
+
+    console.log(formData);
+
     onSave(formData);
     setFormData(initialState);
   };
