@@ -5,7 +5,13 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 
 const GestionListaProductos = () => {
     const { productos, obtenerProductos, agregarProducto, actualizarProducto, eliminarProducto } = useProductos();
-    const [form, setForm] = useState({ nombre: "", marcaId: "", tipoProductoId: "", precio: "" });
+    const [form, setForm] = useState({
+        nombre: "",
+        imagenUrl: "",
+        descripcion: "",
+        marcaId: "",
+        tipoProductoId: "",
+        precio: "" });
     const [modoEdicion, setModoEdicion] = useState(false);
     const [productoEditado, setProductoEditado] = useState(null);
     const [marcas, setMarcas] = useState([]);
@@ -66,6 +72,8 @@ const GestionListaProductos = () => {
     const handleEditar = (producto) => {
         setForm({
             nombre: producto.nombre,
+            imagenUrl: producto.imagenUrl || "",
+            descripcion: producto.descripcion || "",
             marcaId: producto.marcaId.toString(),
             tipoProductoId: producto.tipoProductoId.toString(),
             precio: producto.precio.toString(),
@@ -88,6 +96,21 @@ const GestionListaProductos = () => {
                     onChange={handleChange} 
                     placeholder="Nombre del producto" 
                     required 
+                    className="w-full p-2 border rounded"
+                />
+                <input 
+                    type="text" 
+                    name="imagenUrl" 
+                    value={form.imagenUrl} 
+                    onChange={handleChange} 
+                    placeholder="URL de la imagen (opcional)" 
+                    className="w-full p-2 border rounded"
+                />
+                <textarea 
+                    name="descripcion" 
+                    value={form.descripcion} 
+                    onChange={handleChange} 
+                    placeholder="Descripción del producto (opcional)" 
                     className="w-full p-2 border rounded"
                 />
                 <input 
@@ -143,7 +166,7 @@ const GestionListaProductos = () => {
                         className="flex justify-between items-center py-2 bg-gray-100 p-2 rounded-md shadow-sm"
                     >
                         <span className="font-medium">
-                            {producto.nombre} - S/ {Number(producto.precio).toFixed(2)}
+                            {producto.nombre} - {producto.marca?.nombre || ""} - S/ {Number(producto.precio).toFixed(2)}
                         </span>
                         <div className="flex space-x-3">
                             <button 

@@ -53,6 +53,8 @@ const useProductos = () => {
                 method: "POST",
                 body: JSON.stringify({
                     ...producto,
+                    imagenUrl: producto.imagenUrl || null,
+                    descripcion: producto.descripcion || null,
                     marcaId: Number(producto.marcaId),
                     tipoProductoId: Number(producto.tipoProductoId),
                     precio: Number(producto.precio),
