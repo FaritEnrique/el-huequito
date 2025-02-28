@@ -1,3 +1,5 @@
+// pages/GestionProductos.jsx
+
 import { useState } from "react";
 import GestionListaProductos from "../components/GestionListaProductos";
 import GestionMarcas from "../components/GestionMarcas";

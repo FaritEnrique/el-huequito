@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import useProductos from "../hooks/useProductos";
+import { apiFetch } from "../api/apiFetch";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 
 const GestionListaProductos = () => {
     const { productos, obtenerProductos, agregarProducto, actualizarProducto, eliminarProducto } = useProductos();
@@ -8,53 +10,76 @@ const GestionListaProductos = () => {
     const [productoEditado, setProductoEditado] = useState(null);
     const [marcas, setMarcas] = useState([]);
     const [tiposProducto, setTiposProducto] = useState([]);
+    const [modalProducto, setModalProducto] = useState(null); // Estado para el modal
 
     useEffect(() => {
         obtenerProductos();
-        // Llama a las funciones para obtener marcas y tipos de productos
-        obtenerMarcas();
-        obtenerTiposProducto();
+        cargarMarcas();
+        cargarTiposProducto();
     }, []);
 
-    const obtenerMarcas = async () => {
-        // Aquí obtienes las marcas (supongo que tienes un servicio para eso)
-        const response = await fetch("/api/marcas");
-        const data = await response.json();
-        setMarcas(data);
+    const cargarMarcas = async () => {
+        try {
+            const data = await apiFetch("marcas");
+            setMarcas(data);
+        } catch (error) {
+            console.error("Error al obtener marcas:", error);
+        }
     };
 
-    const obtenerTiposProducto = async () => {
-        // Aquí obtienes los tipos de productos (supongo que tienes un servicio para eso)
-        const response = await fetch("/api/tiposProducto");
-        const data = await response.json();
-        setTiposProducto(data);
+    const cargarTiposProducto = async () => {
+        try {
+            const data = await apiFetch("tipos-producto");
+            setTiposProducto(data);
+        } catch (error) {
+            console.error("Error al obtener tipos de productos:", error);
+        }
     };
 
-    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (modoEdicion) {
-            await actualizarProducto(productoEditado, form);
-        } else {
-            await agregarProducto(form);
+        if (!form.nombre || !form.marcaId || !form.tipoProductoId || !form.precio) {
+            alert("Todos los campos son obligatorios.");
+            return;
         }
-        setForm({ nombre: "", marcaId: "", tipoProductoId: "", precio: "" });
-        setModoEdicion(false);
-        obtenerProductos();
+
+        try {
+            if (modoEdicion) {
+                await actualizarProducto(productoEditado, form);
+            } else {
+                await agregarProducto(form);
+            }
+
+            setForm({ nombre: "", marcaId: "", tipoProductoId: "", precio: "" });
+            setModoEdicion(false);
+            setProductoEditado(null);
+            obtenerProductos();
+        } catch (error) {
+            console.error("Error al guardar el producto:", error);
+        }
     };
 
     const handleEditar = (producto) => {
-        setForm(producto);
+        setForm({
+            nombre: producto.nombre,
+            marcaId: producto.marcaId.toString(),
+            tipoProductoId: producto.tipoProductoId.toString(),
+            precio: producto.precio.toString(),
+        });
         setModoEdicion(true);
         setProductoEditado(producto.id);
     };
 
     return (
-        <div>
-            <h2 className="text-xl font-bold mb-2">Gestión de Productos</h2>
+        <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-bold mb-4">
+                {modoEdicion ? "Editar Producto" : "Agregar Producto"}
+            </h2>
 
-            {/* Formulario */}
             <form onSubmit={handleSubmit} className="mb-4 space-y-2">
                 <input 
                     type="text" 
@@ -63,7 +88,7 @@ const GestionListaProductos = () => {
                     onChange={handleChange} 
                     placeholder="Nombre del producto" 
                     required 
-                    className="border p-2 w-full" 
+                    className="w-full p-2 border rounded"
                 />
                 <input 
                     type="number" 
@@ -72,16 +97,15 @@ const GestionListaProductos = () => {
                     onChange={handleChange} 
                     placeholder="Precio" 
                     required 
-                    className="border p-2 w-full" 
+                    className="w-full p-2 border rounded"
                 />
                 
-                {/* Select para Marca */}
                 <select 
                     name="marcaId" 
                     value={form.marcaId} 
                     onChange={handleChange} 
                     required 
-                    className="border p-2 w-full"
+                    className="w-full p-2 border rounded"
                 >
                     <option value="">Selecciona una marca</option>
                     {marcas.map((marca) => (
@@ -91,13 +115,12 @@ const GestionListaProductos = () => {
                     ))}
                 </select>
 
-                {/* Select para Tipo de Producto */}
                 <select 
                     name="tipoProductoId" 
                     value={form.tipoProductoId} 
                     onChange={handleChange} 
                     required 
-                    className="border p-2 w-full"
+                    className="w-full p-2 border rounded"
                 >
                     <option value="">Selecciona un tipo de producto</option>
                     {tiposProducto.map((tipo) => (
@@ -107,27 +130,90 @@ const GestionListaProductos = () => {
                     ))}
                 </select>
 
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+                <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
                     {modoEdicion ? "Actualizar" : "Crear"}
                 </button>
             </form>
 
-            {/* Lista de productos */}
-            <ul>
+            <h2 className="text-lg font-semibold mb-2">Lista de Productos</h2>
+            <ul className="divide-y">
                 {productos.map((producto) => (
-                    <li key={producto.id} className="border p-2 mb-2 flex justify-between">
-                        {producto.nombre} - ${producto.precio}
-                        <div>
-                            <button onClick={() => handleEditar(producto)} className="text-yellow-500 mr-2">
+                    <li
+                        key={producto.id}
+                        className="flex justify-between items-center py-2 bg-gray-100 p-2 rounded-md shadow-sm"
+                    >
+                        <span className="font-medium">
+                            {producto.nombre} - S/ {Number(producto.precio).toFixed(2)}
+                        </span>
+                        <div className="flex space-x-3">
+                            <button 
+                                onClick={() => setModalProducto(producto)} 
+                                className="text-blue-500 hover:underline"
+                            >
+                                Ver
+                            </button>
+                            <button 
+                                onClick={() => handleEditar(producto)} 
+                                className="text-yellow-500 hover:underline"
+                            >
                                 Editar
                             </button>
-                            <button onClick={() => eliminarProducto(producto.id)} className="text-red-500">
-                                Eliminar
+                            <button 
+                                onClick={() => eliminarProducto(producto.id)} 
+                                className="text-red-500 hover:underline"
+                            >
+                                Borrar
                             </button>
                         </div>
                     </li>
                 ))}
             </ul>
+
+            {modalProducto && (
+                <Dialog open={true} onClose={() => setModalProducto(null)} className="relative z-50">
+                    <div className="fixed inset-0 bg-black/30 flex items-center justify-center p-4">
+                        <DialogPanel className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl sm:min-w-[600px]">
+                            <DialogTitle className="text-lg font-bold">
+                                {modalProducto.nombre}
+                            </DialogTitle>
+                            <img
+                                src={(modalProducto.imagenUrl && modalProducto.imagenUrl.trim() !== "")
+                                    ? modalProducto.imagenUrl
+                                    : "https://dummyimage.com/600x400/ccc/fff.png&text=Sin+Imagen"}
+                                alt={modalProducto.nombre}
+                                className="w-full h-60 object-cover rounded-md mt-2"
+                            />
+                            <p className="mt-2 text-gray-600">
+                                {modalProducto.descripcion || "Sin descripción disponible"}
+                            </p>
+                            <p className="text-gray-700 font-semibold mt-2">
+                                Precio: S/ {Number(modalProducto.precio).toFixed(2)}
+                            </p>
+                            <p className="text-gray-700 font-semibold mt-2">
+                                Marca: {modalProducto.marca?.nombre || "Desconocido"}
+                            </p>
+                            <p className="text-gray-700 font-semibold mt-2">
+                                Tipo: {modalProducto.tipoProducto?.nombre || "Desconocido"}
+                            </p>
+                            <p className="text-gray-700 font-semibold mt-2">
+                                Activo: {modalProducto.activo ? "Sí" : "No"}
+                            </p>
+                            <p className="text-gray-500 text-sm mt-2">
+                                Creado: {new Date(modalProducto.createdAt).toLocaleDateString()}
+                            </p>
+                            <p className="text-gray-500 text-sm">
+                                Actualizado: {new Date(modalProducto.updatedAt).toLocaleDateString()}
+                            </p>
+                            <button
+                                onClick={() => setModalProducto(null)}
+                                className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md w-full"
+                            >
+                                Cerrar
+                            </button>
+                        </DialogPanel>
+                    </div>
+                </Dialog>
+            )}
         </div>
     );
 };
