@@ -11,7 +11,7 @@ export const useIdeas = () => {
     setCargando(true);
     setError(null);
     try {
-      const data = await apiFetch('/ideas');
+      const data = await apiFetch('ideas');
       setIdeas(data);
     } catch (err) {
       setError('Error al obtener las ideas');
@@ -24,7 +24,7 @@ export const useIdeas = () => {
     setCargando(true);
     setError(null);
     try {
-      const nuevaIdea = await apiFetch('/ideas', {
+      const nuevaIdea = await apiFetch('ideas', {
         method: 'POST',
         body: JSON.stringify(idea),
       });
@@ -40,7 +40,7 @@ export const useIdeas = () => {
     setCargando(true);
     setError(null);
     try {
-      const idea = await apiFetch(`/ideas/${id}`);
+      const idea = await apiFetch(`ideas/${id}`);
       return { idea, cargando: false, error: null };
     } catch (err) {
       setError('Error al obtener la idea');
@@ -53,7 +53,7 @@ export const useIdeas = () => {
   const removeIdea = async (id) => {
     setCargando(true);
     try {
-      await apiFetch(`/ideas/${id}`, { method: 'DELETE' });
+      await apiFetch(`ideas/${id}`, { method: 'DELETE' });
       setIdeas((prev) => prev.filter((idea) => idea.id !== id));
     } catch (err) {
       setError('Error al eliminar la idea');

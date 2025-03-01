@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import usePromociones from "../hooks/usePromociones";
 import PromotionForm from "./PromotionForm";
 import Swal from "sweetalert2";
+import placeholderImage from "../assets/placeholder.png";
 
 const PromocionAdminPage = () => {
   const {
@@ -98,7 +99,14 @@ const PromocionAdminPage = () => {
             <div key={promocion.id} className="border p-4 rounded shadow">
               <h2 className="text-xl font-bold">{promocion.titulo}</h2>
               <p>{promocion.descripcion}</p>
-              <img src={promocion.imagen_url} alt="Promoción" className="w-full h-auto mt-2" />
+              <img
+                src={promocion.imagen_url || placeholderImage}
+                alt={promocion.titulo}
+                className="w-full h-auto mt-2"
+                onError={(e) => {
+                    e.target.src = placeholderImage;
+                }}
+              />
               <p>Inicio: {new Date(promocion.fecha_inicio).toLocaleDateString()}</p>
               <p>Fin: {new Date(promocion.fecha_termino).toLocaleDateString()}</p>
               <p>Creado por: {promocion.creado_por}</p>

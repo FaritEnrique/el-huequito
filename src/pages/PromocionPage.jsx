@@ -42,9 +42,12 @@ const PromocionPage = () => {
             <h2 className="text-xl font-bold">{promocion.titulo}</h2>
             <p>{promocion.descripcion}</p>
             <img
-              src={promocion.imagen_url}
+              src={promocion.imagen_url || placeholderImage}
               alt={promocion.titulo}
               className="w-full h-auto mt-2"
+              onError={(e) => {
+                  e.target.src = placeholderImage;
+              }}
             />
             <p className="text-sm text-gray-500">
               Fecha de inicio: {new Date(promocion.fecha_inicio).toLocaleDateString()}
