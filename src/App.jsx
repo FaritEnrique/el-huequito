@@ -17,7 +17,7 @@ import PreguntasFecuentesPage from './pages/PreguntasFrecuentesPage'
 import Login from './components/Login'
 import AdminPage from './pages/AdminPage'
 import EditPreguntasPage from './pages/EditPreguntasPage'
-import NewQuestionPage from './pagesHelp/NewQuestionPage'
+import NewQuestionPage from './pages/NewQuestionPage'
 import EditarPreguntaPage from './pagesHelp/EditarPreguntaPage'
 import GestionMensajes from './pages/GestionMensajes'
 import RegistroCliente from './pages/RegistroCliente';

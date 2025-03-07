@@ -5,12 +5,12 @@ const PrivacidadPage = () => {
     <div className="bg-gray-100 text-gray-800 py-12">
       <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
         <h1 className="text-3xl font-semibold text-center mb-8">Política de Privacidad</h1>
-        <p className="text-gray-600 mb-4">Última actualización: <strong>[Fecha]</strong></p>
+        <p className="text-gray-600 mb-4">Última actualización: <strong>07/03/2025</strong></p>
 
         <p className="mb-6">
           En <strong>Tu Tienda de Pinturas</strong> nos comprometemos a proteger tu privacidad. Esta política de privacidad
           explica cómo recopilamos, utilizamos y protegemos tu información personal cuando usas nuestro sitio web
-          <strong> [nombre-del-sitio.com]</strong>.
+          <strong> https://el-huequito.netlify.app</strong>.
         </p>
 
         <h2 className="text-2xl font-semibold mt-6 mb-4">1. Información que Recogemos</h2>
@@ -73,9 +73,9 @@ const PrivacidadPage = () => {
           Si tienes alguna pregunta o inquietud sobre nuestra política de privacidad, por favor contáctanos a:
         </p>
         <ul className="text-gray-600">
-          <li><strong>Correo electrónico:</strong> <a href="mailto:email@tutienda.com" className="text-orange-600 hover:text-orange-800">email@tutienda.com</a></li>
-          <li><strong>Dirección:</strong> [Dirección de la tienda]</li>
-          <li><strong>Teléfono:</strong> [Número de contacto]</li>
+          <li><strong>Correo electrónico:</strong> <a href="mailto:elhuequito@gmail.com" className="text-orange-600 hover:text-orange-800">elhuequito@gmail.com</a></li>
+          <li><strong>Dirección:</strong> Jirón Arica N° 851 / </li>
+          <li><strong>Teléfono:</strong> (065) 234258</li>
         </ul>
       </div>
     </div>

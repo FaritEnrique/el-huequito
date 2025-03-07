@@ -1,12 +1,13 @@
-// src/pages/PromocionAdminPage.jsx
-
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import usePromociones from "../hooks/usePromociones";
 import PromotionForm from "./PromotionForm";
 import Swal from "sweetalert2";
 import placeholderImage from "../assets/placeholder.png";
 
 const PromocionAdminPage = () => {
+  const navigate = useNavigate();
+
   const {
     promociones,
     cargando,
@@ -80,7 +81,15 @@ const PromocionAdminPage = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Administrar Promociones</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Administrar Promociones</h1>
+        <button
+          onClick={() => navigate("/admin")}
+          className="bg-gray-500 text-white px-4 py-2 rounded"
+        >
+          Regresar
+        </button>
+      </div>
 
       <PromotionForm
         onSave={editarPromocion ? handleUpdatePromotion : handleCreatePromotion}
@@ -104,7 +113,7 @@ const PromocionAdminPage = () => {
                 alt={promocion.titulo}
                 className="w-full h-auto mt-2"
                 onError={(e) => {
-                    e.target.src = placeholderImage;
+                  e.target.src = placeholderImage;
                 }}
               />
               <p>Inicio: {new Date(promocion.fecha_inicio).toLocaleDateString()}</p>

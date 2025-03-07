@@ -123,6 +123,165 @@ const HomePage = () => {
             <img src="/images/fotosProductos/foto_pintura_automotriz2.png" alt="Foto Pintura Automotriz" className='object-contain rounded-lg' />
           </div>
         </div>
+        <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
+          <div className='w-full md:w-3/4 md:pr-2'>
+            <p className='w-full m-auto flex flex-wrap'>
+              <Link to='/productos' className='font-semibold'>
+                Pintura Industrial:
+              </Link>
+              <span className='text-justify lg:pl-2'>
+                La pintura industrial se utiliza para proteger y embellecer superficies que están expuestas a 
+                condiciones adversas. Se utiliza como recubrimiento protector para maquinaria, equipos industriales y 
+                vehículos. Estos recubrimientos proporcionan una capa adicional de protección contra el desgaste, y 
+                la abrasión.
+              </span>
+            </p>
+            <ul className='pt-1 space-y-1'>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Esmalte Epóxico
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Esmalte Sintético
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Zincromato
+              </li>
+            </ul>
+          </div>
+          <div className='w-full md:w-1/4'>
+            <img src="/images/fotosProductos/foto_pintura_industrial.png" alt="Foto Pintura Industrial" className='object-contain rounded-lg' />
+          </div>
+        </div>
+        <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
+          <div className='w-full md:w-3/4 md:pr-2'>
+            <p className='w-full m-auto flex flex-wrap'>
+              <Link to='/productos' className='font-semibold'>
+                Productos para Madera:
+              </Link>
+              <span className='text-justify lg:pl-2'>
+                Los productos para madera se utilizan para tratar, proteger, conservar y decorar la madera.
+              </span>
+            </p>
+            <ul className='pt-1 space-y-1'>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Barniz
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Laca Piroxilina
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Tinte para Madera
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Laca Selladora
+              </li>
+            </ul>
+          </div>
+          <div className='w-full md:w-1/4'>
+            <img src="/images/fotosProductos/productos_madera.png" alt="Foto Pintura Industrial" className='object-contain rounded-lg' />
+          </div>
+        </div>
+        <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
+          <div className='w-full md:w-3/4 md:pr-2'>
+            <p className='w-full m-auto flex flex-wrap'>
+              <Link to='/productos' className='font-semibold'>
+                Selladores:
+              </Link>
+              <span className='text-justify lg:pl-2'>
+                Prepara y protege tus superficies con nuestros selladores de alta calidad. Ideal para muros de 
+                concreto, yeso y drywall, mejora la adherencia de la pintura y evita la absorción desigual.
+                Su fórmula resistente al agua y de secado rápido garantiza un acabado uniforme y duradero.
+                Los selladores para madera sella los poros, realza la belleza natural de la madera y la protege 
+                contra la humedad y el desgaste.
+                Perfecto para muebles, puertas y pisos de madera, garantiza un acabado liso y uniforme, 
+                facilitando la aplicación de barnices o pinturas. ¡Logra un acabado impecable con la mejor protección!
+              </span>
+            </p>
+            <ul className='pt-1 space-y-1'>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Base Decorativa
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Sellador para Pared e Imprimantes
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Base al Aceite
+              </li>
+            </ul>
+          </div>
+          <div className='w-full md:w-1/4'>
+            <img src="/images/fotosProductos/foto_selladores.png" alt="Foto Pintura Industrial" className='object-contain rounded-lg' />
+          </div>
+        </div>
+        <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
+          <div className='w-full md:w-3/4 md:pr-2'>
+            <p className='w-full m-auto flex flex-wrap'>
+              <Link to='/productos' className='font-semibold'>
+                Disolventes:
+              </Link>
+              <span className='text-justify lg:pl-2'>
+                Los disolventes para pinturas se utilizan para diluir y mezclar pinturas, y para limpiar herramientas 
+                y superficies.
+              </span>
+            </p>
+            <ul className='pt-1 space-y-1'>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Thiner Acrílico
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Disolvente Epóxico
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Disolvente para Tráfico
+              </li>
+            </ul>
+          </div>
+          <div className='w-full md:w-1/4'>
+            <img src="/images/fotosProductos/disolventes.png" alt="Foto Pintura Industrial" className='object-contain rounded-lg' />
+          </div>
+        </div>
+        <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
+          <div className='w-full md:w-3/4 md:pr-2'>
+            <p className='w-full m-auto flex flex-wrap'>
+              <Link to='/productos' className='font-semibold'>
+                Otros Productos
+              </Link>
+              <span className='text-justify lg:pl-2'>
+                Tenemos productos de todo tipo para pintura y mantenimiento de los hogares.
+              </span>
+            </p>
+            <ul className='pt-1 space-y-1'>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Cola sintética
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Brochas y rodillos
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
+                Bandejas entre otros
+              </li>
+            </ul>
+          </div>
+          <div className='w-full md:w-1/4'>
+            <img src="/images/fotosProductos/brochas.png" alt="Foto Pintura Industrial" className='object-contain rounded-lg' />
+          </div>
+        </div>
       </section>
     </>
   );
