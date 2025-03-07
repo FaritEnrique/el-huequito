@@ -25,6 +25,7 @@ import UserList from './pages/UserList';
 import VerClienteId from './pages/VerClienteId';
 import RegistrarProducto from './pages/RegistrarProducto';
 import GestionProductos from './pages/GestionProductos';
+import GestionIdeasPage from './pages/GestionIdeasPage';
 
 const App = () => {
   return (
@@ -65,6 +66,7 @@ const App = () => {
           <Route path='/ver/cliente/:id' element={<VerClienteId />} />
           <Route path='/registro/producto' element={<RegistrarProducto />} />
           <Route path='/gestionProductos' element={<GestionProductos />} />
+          <Route path="/gestion-ideas" element={<GestionIdeasPage />} />
         </Route>
       </Routes>
 

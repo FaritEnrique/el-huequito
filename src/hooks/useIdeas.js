@@ -1,13 +1,12 @@
-// hooks/useIdeas.js
 import { apiFetch } from '../api/apiFetch.js';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export const useIdeas = () => {
   const [ideas, setIdeas] = useState([]);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchIdeas = async () => {
+  const fetchIdeas = useCallback(async () => {
     setCargando(true);
     setError(null);
     try {
@@ -18,7 +17,7 @@ export const useIdeas = () => {
     } finally {
       setCargando(false);
     }
-  };
+  }, []);
 
   const crearIdea = async (idea) => {
     setCargando(true);
@@ -28,6 +27,12 @@ export const useIdeas = () => {
         method: 'POST',
         body: JSON.stringify(idea),
       });
+
+      // Asegurar que la idea tenga una URL válida en "foto"
+      if (!nuevaIdea.foto || nuevaIdea.foto.trim() === '') {
+        nuevaIdea.foto = 'https://via.placeholder.com/150'; // Imagen por defecto
+      }
+
       setIdeas((prev) => [...prev, nuevaIdea]);
     } catch (err) {
       setError('Error al crear la idea');
@@ -50,6 +55,22 @@ export const useIdeas = () => {
     }
   };
 
+  const actualizarIdea = async (id, ideaActualizada) => {
+    setCargando(true);
+    setError(null);
+    try {
+      const updatedIdea = await apiFetch(`ideas/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(ideaActualizada),
+      });
+      setIdeas((prev) => prev.map((idea) => (idea.id === id ? updatedIdea : idea)));
+    } catch (err) {
+      setError('Error al actualizar la idea');
+    } finally {
+      setCargando(false);
+    }
+  };
+
   const removeIdea = async (id) => {
     setCargando(true);
     try {
@@ -64,7 +85,7 @@ export const useIdeas = () => {
 
   useEffect(() => {
     fetchIdeas();
-  }, []);
+  }, [fetchIdeas]);
 
   return {
     ideas,
@@ -73,6 +94,7 @@ export const useIdeas = () => {
     fetchIdeas,
     crearIdea,
     obtenerIdea,
+    actualizarIdea,
     removeIdea,
   };
 };

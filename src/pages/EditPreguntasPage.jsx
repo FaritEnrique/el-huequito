@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { usePreguntas } from '../hooks/usePreguntas';
+import usePreguntas from "../hooks/usePreguntas";
 import { useNavigate } from 'react-router-dom'
 import { TbEdit } from "react-icons/tb";
 import { TfiTrash } from "react-icons/tfi";

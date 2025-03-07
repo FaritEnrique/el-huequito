@@ -1,5 +1,4 @@
 // hooks/useMensajes.js
-
 import { apiFetch } from "../api/apiFetch";
 import { useState, useEffect } from "react";
 
@@ -13,6 +12,7 @@ export const useMensajes = () => {
     setError(null);
     try {
       const data = await apiFetch("mensajes");
+      console.log("📩 Mensajes cargados:", data);
       setMensajes(data);
       return data;
     } catch (err) {
@@ -42,6 +42,10 @@ export const useMensajes = () => {
   };
 
   const obtenerMensaje = async (id) => {
+    if (!id) {
+      console.error("❌ Error: ID del mensaje no definido.");
+      return null;
+    }
     setCargando(true);
     setError(null);
     try {
@@ -55,30 +59,30 @@ export const useMensajes = () => {
     }
   };
 
-  // Nueva función para editar un mensaje
   const editarMensaje = async (id, form) => {
-    // verificar que 'form' sea un objeto válido
+    if (!id) {
+      console.error("❌ Error: ID del mensaje no definido.");
+      return null;
+    }
     if (!form || typeof form !== "object") {
-      console.error("Error: El formulario está indefinido o no es un objeto válido.");
-      return;
+      console.error("❌ Error: El formulario está indefinido o no es un objeto válido.");
+      return null;
     }
     setCargando(true);
     setError(null);
     try {
       console.log("Editando mensaje con datos originales:", form);
-      
-      // Preparar los datos limpios para enviar
+
       const mensajeEditado = {
         nombre: form.nombre.trim(),
         celular: form.celular.trim(),
         correo: form.correo.trim().toLowerCase(),
-        comunicacion: form.comunicacion,  // Se asume que viene en un valor válido
+        comunicacion: form.comunicacion,
         mensaje: form.mensaje.trim(),
       };
 
       console.log("Datos limpios para enviar:", mensajeEditado);
 
-      // Enviar directamente el objeto con los datos (sin envolverlo en "response")
       const mensajeActualizado = await apiFetch(`mensajes/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -91,7 +95,7 @@ export const useMensajes = () => {
       );
       return mensajeActualizado;
     } catch (err) {
-      console.error("Error en editarMensaje:", err);
+      console.error("❌ Error en editarMensaje:", err);
       setError(`Error al editar el mensaje: ${err.message || "Error desconocido"}`);
       return null;
     } finally {
@@ -100,12 +104,21 @@ export const useMensajes = () => {
   };
 
   const removeMensaje = async (id) => {
+    if (!id) {
+      console.error("❌ Error: ID del mensaje no definido.");
+      return;
+    }
+
+    console.log(`🗑️ Eliminando mensaje con ID: ${id}`);
+
     setCargando(true);
     setError(null);
     try {
       await apiFetch(`mensajes/${id}`, { method: "DELETE" });
       setMensajes((prev) => prev.filter((mensaje) => mensaje.id !== id));
+      console.log(`✅ Mensaje con ID ${id} eliminado correctamente.`);
     } catch (err) {
+      console.error(`❌ Error al eliminar el mensaje con ID ${id}:`, err);
       setError(`Error al eliminar el mensaje: ${err.message}`);
     } finally {
       setCargando(false);
@@ -123,7 +136,7 @@ export const useMensajes = () => {
     fetchMensajes,
     crearMensaje,
     obtenerMensaje,
-    editarMensaje,  // Retornamos la función de edición
+    editarMensaje,
     removeMensaje,
   };
 };

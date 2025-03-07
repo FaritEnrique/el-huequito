@@ -31,6 +31,13 @@ const AdminPage = () => {
                         Gestión de Productos
                     </button>
                 </Link>
+
+                {/* Nuevo botón para Gestión de Ideas */}
+                <Link to="/gestion-ideas">
+                    <button className="w-full sm:w-auto px-6 py-3 text-white font-semibold bg-green-500 hover:bg-green-600 transition rounded-lg border-2 border-gray-700 shadow-md">
+                        Gestión de Ideas
+                    </button>
+                </Link>
             </section>
 
             {/* Sección de gestión de usuarios */}

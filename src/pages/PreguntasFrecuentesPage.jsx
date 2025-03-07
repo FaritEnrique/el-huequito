@@ -1,44 +1,40 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import { usePreguntas } from '../hooks/usePreguntas';
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import usePreguntas from "../hooks/usePreguntas";
 
 const PreguntasFrecuentesPage = () => {
+  const { preguntas, fetchPreguntas, removePregunta } = usePreguntas();
+  const [preguntaAbierta, setPreguntaAbierta] = useState(null);
 
-  const navigate = useNavigate()
-
-  const { fetchPreguntas } = usePreguntas()
-  
-  const [ pregunta, setPregunta ] = useState([])
-  
   useEffect(() => {
-    fetchPreguntas()
-      .then(data => setPregunta(data))
-      .catch(err => console.error('Error al obtener preguntas:', err));
-    }, [])
+    fetchPreguntas();
+  }, []);
+
+  const togglePregunta = (index) => {
+    setPreguntaAbierta(preguntaAbierta === index ? null : index);
+  };
 
   return (
-    <main className="max-w-[1300px] w-full mx-auto my-4 py-8 flex bg-slate-700 rounded-xl border-2
-    border-black">
-      <section className='w-full max-w-[1200px] mx-auto flex-wrap rounded-lg bg-slate-200 px-4 py-4'>
-        <div className='text-xl font-bold text-center mb-4'>
-          PREGUNTAS FRECUENTES
-        </div>
-          {pregunta.map(pregunta => {
-            return (
-              <div key={pregunta.docId} className='border-2 border-blue-300 p-6 rounded-xl mb-4'>
-                <p className='mb-2'>
-                  <strong className='text-justify'>{ pregunta.pregunta }</strong>
-                </p>
-                <p className='text-justify'>
-                  { pregunta.respuesta}
-                </p>    
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center mb-6">Preguntas Frecuentes</h1>
+      <div className="space-y-4">
+        {preguntas.map((pregunta, index) => (
+          <div key={pregunta.id} className="border rounded-lg">
+            <button
+              className="w-full text-left p-4 font-semibold bg-gray-100 hover:bg-gray-200"
+              onClick={() => togglePregunta(index)}
+            >
+              {pregunta.pregunta}
+            </button>
+            {preguntaAbierta === index && (
+              <div className="p-4 border-t bg-white">
+                <p>{pregunta.respuesta}</p>
               </div>
-            )
-          })}
-      </section>
-    </main>
-  )
-}
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-export default PreguntasFrecuentesPage
+export default PreguntasFrecuentesPage;
