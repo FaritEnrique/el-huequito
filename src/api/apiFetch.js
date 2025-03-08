@@ -2,10 +2,22 @@
 
 //const backendURL = "https://api.backendhuequito.com";
 
-const backendURL =
+/*const backendURL =
   window.location.hostname === "localhost"
     ? "http://localhost:8080"
-    : "https://api.backendhuequito.com";
+    : "https://api.backendhuequito.com";*/
+
+const backendURL = (() => {
+  if (window.location.hostname === "localhost") {
+    return "http://localhost:8080"; // Desarrollo local
+  }
+ 
+  if (window.location.hostname === "frontend-huequito.com") {
+    return "https://api.backendhuequito.com"; // Dominio principal
+  }
+    
+  return "http://backendhuequito-env.eba-fcqriunz.us-east-1.elasticbeanstalk.com"; // Por defecto, Elastic Beanstalk
+})();
 
 export const apiFetch = async (endpoint, options = {}) => {
   try {
