@@ -71,12 +71,12 @@ const GestionListaProductos = () => {
 
     const handleEditar = (producto) => {
         setForm({
-            nombre: producto.nombre,
+            nombre: producto.nombre || "",
             imagenUrl: producto.imagenUrl || "",
             descripcion: producto.descripcion || "",
-            marcaId: producto.marcaId.toString(),
-            tipoProductoId: producto.tipoProductoId.toString(),
-            precio: producto.precio.toString(),
+            marcaId: producto.marcaId ? producto.marcaId.toString() : "",
+            tipoProductoId: producto.tipoProductoId ? producto.tipoProductoId.toString() : "",
+            precio: producto.precio ? producto.precio.toString() : "",
         });
         setModoEdicion(true);
         setProductoEditado(producto.id);
