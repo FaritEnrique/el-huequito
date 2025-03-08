@@ -5,7 +5,7 @@
 const backendURL =
   window.location.hostname === "localhost"
     ? "http://localhost:8080"
-    : "https://api.backendhuequito.com";
+    : "https://ap.backendhuequito.com";
 
 /*const backendURL = (() => {
   if (window.location.hostname === "localhost") {
