@@ -5,7 +5,7 @@
 const backendURL =
   window.location.hostname === "localhost"
     ? "http://localhost:8080"
-    : "https://ap.backendhuequito.com";
+    : "https://huequito-backend.onrender.com";
 
 /*const backendURL = (() => {
   if (window.location.hostname === "localhost") {
