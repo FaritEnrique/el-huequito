@@ -6,11 +6,21 @@ import { TbPointFilled } from "react-icons/tb";
 import CarruselMarcas from '../components/CarruselMarcas';
 import VideoPlaceholder from '../pagesHelp/VideoPlaceholder';
 import { Link } from 'react-router';
+import { Helmet } from "react-helmet-async";
 
 const HomePage = () => {
 
   return (
     <>
+      <Helmet>
+      <title>Pinturas - El Huequito</title>
+        <meta name="description" content="Explora nuestra gran variedad de pinturas en El Huequito. Calidad garantizada para todos tus proyectos." />
+        <meta name="keywords" content="Pinturas El Huequito, Comprar Pinturas, Tienda de Pinturas, Huequito Pinturas" />
+        <meta property="og:title" content="Pinturas - El Huequito" />
+        <meta property="og:description" content="Compra pinturas de la mejor calidad en El Huequito." />
+        <meta property="og:url" content="https://el-huequito.netlify.app/pinturas" />
+        <meta property="og:type" content="website" />
+      </Helmet>
       <section className="max-w-[800px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black">
         <div className="max-w-[800px] w-full bg-white rounded-xl items-center">
           <Link to='/registro/cliente'>

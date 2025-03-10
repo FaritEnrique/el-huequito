@@ -1,10 +1,16 @@
 import React from 'react'
+import { Helmet } from "react-helmet-async";
 import { VscCheckAll } from "react-icons/vsc";
 import { Link } from 'react-router-dom';
 
 const NosotrosPage = () => {
   return (
     <main>
+      <Helmet>
+        <title>El Huequito | Pinturas y Almacenes en Iquitos - Conoce Nuestra Historia y Compromiso con la Calidad</title>
+        <meta name="description" content="Conoce nuestra historia, valores y compromiso con la calidad en Almacenes El Huequito." />
+        <meta name="keywords" content="pinturas, decoración, almacenes el huequito, historia, equipo, calidad" />
+      </Helmet>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black p-4">
         <div className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros1-background bg-contain bg-center bg-no-repeat
         ring-4 ring-slate-200 rounded-xl py-4 mb-4 justify-center">

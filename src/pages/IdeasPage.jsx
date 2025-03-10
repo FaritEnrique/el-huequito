@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from "react-helmet-async";
 import { useIdeas } from '../hooks/useIdeas';
 
 const IdeasPage = () => {
@@ -19,6 +20,23 @@ const IdeasPage = () => {
 
     return (
         <main>
+            <Helmet>
+                <title>Inspiración y Combinaciones de Colores - El Huequito</title>
+                <meta name="description" content="Explora nuestras ideas de combinación de colores y diseños para inspirar tus proyectos de pintura." />
+                <meta name="keywords" content="ideas de pintura, combinación de colores, inspiración, decoración" />
+                <meta name="robots" content="index, follow" />
+
+                <meta property="og:title" content="Inspiración y Combinaciones de Colores - El Huequito" />
+                <meta property="og:description" content="Explora nuestras ideas de combinación de colores y diseños para inspirar tus proyectos de pintura." />
+                <meta property="og:url" content="https://el-huequito.netlify.app/ideas" />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="https://el-huequito.netlify.app/images/ideas.png" />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Inspiración y Combinaciones de Colores - El Huequito" />
+                <meta name="twitter:description" content="Explora nuestras ideas de combinación de colores y diseños para inspirar tus proyectos de pintura." />
+                <meta name="twitter:image" content="https://el-huequito.netlify.app/images/ideas.png" />
+            </Helmet>
             {/* Grid de imágenes */}
             <div className='w-full p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ring-2 gap-4 ring-slate-800 rounded-xl'>
                 {ideas.map(idea => (
