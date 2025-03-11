@@ -13,13 +13,17 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-      <title>Pinturas - El Huequito</title>
-        <meta name="description" content="Explora nuestra gran variedad de pinturas en El Huequito. Calidad garantizada para todos tus proyectos." />
-        <meta name="keywords" content="Pinturas El Huequito, Comprar Pinturas, Tienda de Pinturas, Huequito Pinturas" />
-        <meta property="og:title" content="Pinturas - El Huequito" />
+      <title>El Huequito - Pinturas en Iquitos</title>
+        <meta name="description" content="Encuentra las mejores pinturas en El Huequito. Somos especialistas en pinturas decorativas, automotrices e industriales en Iquitos." />
+        <meta name="keywords" content="El Huequito, Pinturas El Huequito, Almacenes El Huequito, Corporación Huequito, Pinturas Iquitos, Huequito Pinturas, Tienda de Pinturas" />
+        <meta property="og:title" content="Pinturas - El Huequito - Pinturas en Iquitos" />
         <meta property="og:description" content="Compra pinturas de la mejor calidad en El Huequito." />
-        <meta property="og:url" content="https://el-huequito.netlify.app/pinturas" />
+        <meta property="og:url" content="https://el-huequito.netlify.app/productos" />
         <meta property="og:type" content="website" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:image" content="/imagen.png" />
+        {/* Favicon */}
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </Helmet>
       <section className="max-w-[800px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black">
         <div className="max-w-[800px] w-full bg-white rounded-xl items-center">
@@ -85,14 +89,14 @@ const HomePage = () => {
         </div>
         <div className='w-full p-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
           <div className='w-full md:w-3/4 md:pr-2'>
-            <p className='w-full m-auto flex flex-wrap'>
+            <h3 className='w-full m-auto flex flex-wrap'>
               <Link to='/productos' className='font-semibold'>
                 Pintura Decorativa:
               </Link>
               <span className='text-justify lg:pl-2'>
                 Estas pinturas son las que se utilizan para el pintado de viviendas, es decir interiores y exteriores. Nuestra empresa cuenta con una amplia variedad de colores en diferentes marcas.
               </span>
-            </p>
+            </h3>
             <ul className='pt-1 space-y-1'>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />
@@ -110,14 +114,14 @@ const HomePage = () => {
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
           <div className='w-full md:w-3/4 md:pr-2'>
-            <p className='w-full m-auto flex flex-wrap'>
+            <h3 className='w-full m-auto flex flex-wrap'>
               <Link to='/productos' className='font-semibold'>
                 Pintura Automotriz:
               </Link>
               <span className='text-justify lg:pl-2'>
                 Estas pinturas son las que se utilizan para el pintado de vehículos automotores, mototaxis o motos lineales. Nuestra empresa, cuenta con un variado stock de colores, también realizamos el matizado de los mismos.
               </span>
-            </p>
+            </h3>
             <ul className='pt-1 space-y-1'>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />
@@ -135,7 +139,7 @@ const HomePage = () => {
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
           <div className='w-full md:w-3/4 md:pr-2'>
-            <p className='w-full m-auto flex flex-wrap'>
+            <h3 className='w-full m-auto flex flex-wrap'>
               <Link to='/productos' className='font-semibold'>
                 Pintura Industrial:
               </Link>
@@ -145,7 +149,7 @@ const HomePage = () => {
                 vehículos. Estos recubrimientos proporcionan una capa adicional de protección contra el desgaste, y 
                 la abrasión.
               </span>
-            </p>
+            </h3>
             <ul className='pt-1 space-y-1'>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />
@@ -167,14 +171,14 @@ const HomePage = () => {
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
           <div className='w-full md:w-3/4 md:pr-2'>
-            <p className='w-full m-auto flex flex-wrap'>
+            <h3 className='w-full m-auto flex flex-wrap'>
               <Link to='/productos' className='font-semibold'>
                 Productos para Madera:
               </Link>
               <span className='text-justify lg:pl-2'>
                 Los productos para madera se utilizan para tratar, proteger, conservar y decorar la madera.
               </span>
-            </p>
+            </h3>
             <ul className='pt-1 space-y-1'>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />
@@ -200,7 +204,7 @@ const HomePage = () => {
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
           <div className='w-full md:w-3/4 md:pr-2'>
-            <p className='w-full m-auto flex flex-wrap'>
+            <h3 className='w-full m-auto flex flex-wrap'>
               <Link to='/productos' className='font-semibold'>
                 Selladores:
               </Link>
@@ -213,7 +217,7 @@ const HomePage = () => {
                 Perfecto para muebles, puertas y pisos de madera, garantiza un acabado liso y uniforme, 
                 facilitando la aplicación de barnices o pinturas. ¡Logra un acabado impecable con la mejor protección!
               </span>
-            </p>
+            </h3>
             <ul className='pt-1 space-y-1'>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />
@@ -235,7 +239,7 @@ const HomePage = () => {
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
           <div className='w-full md:w-3/4 md:pr-2'>
-            <p className='w-full m-auto flex flex-wrap'>
+            <h3 className='w-full m-auto flex flex-wrap'>
               <Link to='/productos' className='font-semibold'>
                 Disolventes:
               </Link>
@@ -243,7 +247,7 @@ const HomePage = () => {
                 Los disolventes para pinturas se utilizan para diluir y mezclar pinturas, y para limpiar herramientas 
                 y superficies.
               </span>
-            </p>
+            </h3>
             <ul className='pt-1 space-y-1'>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />
@@ -265,14 +269,14 @@ const HomePage = () => {
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
           <div className='w-full md:w-3/4 md:pr-2'>
-            <p className='w-full m-auto flex flex-wrap'>
+            <h3 className='w-full m-auto flex flex-wrap'>
               <Link to='/productos' className='font-semibold'>
                 Otros Productos
               </Link>
               <span className='text-justify lg:pl-2'>
                 Tenemos productos de todo tipo para pintura y mantenimiento de los hogares.
               </span>
-            </p>
+            </h3>
             <ul className='pt-1 space-y-1'>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />

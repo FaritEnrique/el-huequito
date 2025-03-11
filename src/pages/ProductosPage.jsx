@@ -45,12 +45,14 @@ const ProductosPage = () => {
                 <meta property="og:description" content="Explora nuestro catálogo de productos de alta calidad. Encuentra pinturas, barnices y más para tus proyectos." />
                 <meta property="og:url" content="https://el-huequito.netlify.app/productos" />
                 <meta property="og:type" content="website" />
-                <meta property="og:image" content="https://el-huequito.netlify.app/images/productos.png" />
+                <meta property="og:image" content="/imagen.png" />
 
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Catálogo de Productos - El Huequito" />
                 <meta name="twitter:description" content="Explora nuestro catálogo de productos de alta calidad. Encuentra pinturas, barnices y más para tus proyectos." />
-                <meta name="twitter:image" content="https://el-huequito.netlify.app/images/productos.png" />
+                <meta name="twitter:image" content="/imagen.png" />
+                {/* Favicon */}
+                <link rel="icon" type="image/png" href="/favicon.png" />
             </Helmet>
             <h1 className="text-2xl font-bold mb-4">Productos</h1>
 

@@ -7,13 +7,29 @@ const NosotrosPage = () => {
   return (
     <main>
       <Helmet>
-        <title>El Huequito | Pinturas y Almacenes en Iquitos - Conoce Nuestra Historia y Compromiso con la Calidad</title>
-        <meta name="description" content="Conoce nuestra historia, valores y compromiso con la calidad en Almacenes El Huequito." />
+        <title>El Huequito | Pinturas en Iquitos y Almacenes El Huequito - Calidad y Compromiso</title>
+        <meta name="description" content="Descubre la historia y compromiso de El Huequito, expertos en pinturas en Iquitos. Calidad y variedad en productos para tu hogar y negocio." />
         <meta name="keywords" content="pinturas, decoración, almacenes el huequito, historia, equipo, calidad" />
+        <meta name="robots" content="index, follow" />
+        {/* Open Graph */}
+        <meta property="og:title" content="El Huequito | Pinturas en Iquitos" />
+        <meta property="og:description" content="Conoce la historia y calidad de El Huequito, expertos en pinturas y decoración." />
+        <meta property="og:image" content="/imagen.png" />
+        <meta property="og:url" content="https://www.elhuequito.com/nosotros" />
+        <meta property="og:type" content="website" />
+        {/* Twitter */}
+        <meta name="twitter:title" content="El Huequito | Pinturas en Iquitos" />
+        <meta name="twitter:description" content="Conoce la historia y calidad de El Huequito, expertos en pinturas y decoración." />
+        <meta name="twitter:image" content="/imagen.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        {/* Favicon */}
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </Helmet>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black p-4">
-        <div className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros1-background bg-contain bg-center bg-no-repeat
-        ring-4 ring-slate-200 rounded-xl py-4 mb-4 justify-center">
+        <div
+          className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros1-background bg-contain bg-center bg-no-repeat
+          ring-4 ring-slate-200 rounded-xl py-4 mb-4 justify-center"
+          aria-label='El Huequito - Pinturas y Decoración en Iquitos, pasión por la creatividad y el color'>
           <div className='w-1/4 flex justify-center items-center p-2 '>
             <h1 className='font-lobster italic text-white text-center font-bold text-xl sm:text-xl md:text-2xl lg:text-4xl'
               style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)" }}>
@@ -34,12 +50,12 @@ const NosotrosPage = () => {
         <div className='w-full ring-4 ring-slate-200 rounded-xl p-4 bg-slate-500 flex flex-wrap lg:flex-nowrap gap-4'>
           <div className='w-full lg:w-1/4 bg-slate-300 p-4 flex items-center rounded-xl'>
             <h1 className='w-full rounded-xl text-3xl text-center bg-yellow-50 font-bold font-cormorant text-gray-800 my-2'>
-              Quienes Somos?
+              Quiénes somos en Corporación El Huequito - Pinturas y Decoración en Iquitos
             </h1>
           </div>
           <div className='w-full lg:w-3/4 bg-slate-300 p-4 text-justify rounded-xl'>
             <p>
-              Somos <strong>Almacenes El Huequito</strong>, un equipo apasionado por transformar cada rincón en una obra
+              Somos <strong>El Huequito</strong>, un equipo apasionado por transformar cada rincón en una obra
               de arte. Desde nuestros inicios, nos hemos dedicado a ofrecer los mejores productos de pintura y decoración, 
               ayudando a nuestros clientes a expresar su creatividad y estilo único en sus espacios.
             </p>
@@ -52,8 +68,10 @@ const NosotrosPage = () => {
         </div>
       </section>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black p-4">
-        <div className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros2-background bg-contain bg-center bg-no-repeat
-        ring-4 ring-slate-200 rounded-xl py-4 mb-4 justify-end">
+        <div
+          className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros2-background bg-contain bg-center bg-no-repeat
+          ring-4 ring-slate-200 rounded-xl py-4 mb-4 justify-end"
+          aria-label='El Huequito - Pinturas y Decoración en Iquitos, siempre pensando en su economía'>
           <div className='w-1/4 flex justify-center items-end p-2'>
             <h1 className='font-lobster italic text-white text-center font-bold text-xl sm:text-xl md:text-2xl lg:text-4xl'
               style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)" }}>
@@ -82,8 +100,10 @@ const NosotrosPage = () => {
         </div>
       </section>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black p-4">
-        <div className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros3-background bg-contain bg-center bg-no-repeat
-        ring-4 ring-slate-200 rounded-xl py-4 mb-4 justify-end">
+        <div
+          className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros3-background bg-contain bg-center bg-no-repeat
+          ring-4 ring-slate-200 rounded-xl py-4 mb-4 justify-end"
+          aria-label='El Huequito - Pinturas y Decoración en Iquitos, colores que inspiran y calidad que perdura'>
           <div className='w-full flex justify-center items-center p-2'>
             <h1 className='font-lobster italic text-white text-center font-bold text-xl sm:text-xl md:text-2xl lg:text-4xl'
               style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)" }}>
@@ -134,8 +154,10 @@ const NosotrosPage = () => {
         </div>
       </section>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black p-4">
-        <div className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros5-background bg-contain bg-center bg-no-repeat
-        ring-4 ring-slate-200 rounded-xl py-4 mb-4 justify-end">
+        <div
+          className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros5-background bg-contain bg-center bg-no-repeat
+          ring-4 ring-slate-200 rounded-xl py-4 mb-4 justify-end"
+          aria-label='El Huequito - Pinturas y Precios bajos en Iquitos, conoce a las personas detrás de nuestra pasión'>
           <div className='w-3/4 flex justify-center items-end p-2'>
             <h1 className='font-lobster italic text-white text-center font-bold text-xl sm:text-xl md:text-2xl lg:text-4xl'
               style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)" }}>
@@ -159,8 +181,10 @@ const NosotrosPage = () => {
         </div>
       </section>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black p-4">
-        <div className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros4-background bg-contain bg-center bg-no-repeat
-        ring-4 ring-slate-200 rounded-xl py-4 items-end">
+        <div
+          className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros4-background bg-contain bg-center bg-no-repeat
+          ring-4 ring-slate-200 rounded-xl py-4 items-end"
+          aria-label='El Huequito - Pinturas en Iquitos, productos y servicios de calidad para tu hogar y negocio'>
           <div className='w-full flex justify-between items-end p-2'>
             <Link to='/productos' className='w-1/3'>
               <h1 className='w-full font-lobster italic bg-black text-white text-center font-bold text-xl sm:text-xl md:text-2xl lg:text-4xl rounded-xl'

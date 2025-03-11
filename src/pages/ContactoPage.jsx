@@ -51,7 +51,7 @@ const ContactoPage = () => {
         {/* Open Graph (Facebook, LinkedIn) */}
         <meta property="og:title" content="El Huequito - Calidad y Colores que Inspiran" />
         <meta property="og:description" content="Transforma tus espacios con los mejores productos de pintura y decoración. Encuentra calidad y precios bajos en El Huequito." />
-        <meta property="og:image" content="URL_DE_LA_IMAGEN" />
+        <meta property="og:image" content="/imagen.png" />
         <meta property="og:url" content="https://el-huequito.netlify.app/" />
         <meta property="og:type" content="website" />
 
@@ -59,7 +59,7 @@ const ContactoPage = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="El Huequito - Calidad y Colores que Inspiran" />
         <meta name="twitter:description" content="Descubre El Huequito, tu mejor opción en pintura y decoración. Encuentra calidad y precios bajos para renovar tus espacios." />
-        <meta name="twitter:image" content="URL_DE_LA_IMAGEN" />
+        <meta name="twitter:image" content="imagen.png" />
         <meta name="twitter:url" content="https://el-huequito.netlify.app/" />
 
         {/* Favicon */}

@@ -52,7 +52,7 @@ const PromocionPage = () => {
         {/* Open Graph (Facebook, LinkedIn) */}
         <meta property="og:title" content="Promociones - El Huequito | Ofertas en Pintura y Decoración" />
         <meta property="og:description" content="Descubre las promociones exclusivas en pintura y decoración. Calidad garantizada a los mejores precios." />
-        <meta property="og:image" content="URL_DE_LA_IMAGEN" />
+        <meta property="og:image" content="/imagen.png" />
         <meta property="og:url" content="https://el-huequito.netlify.app/promociones" />
         <meta property="og:type" content="website" />
 
@@ -60,11 +60,11 @@ const PromocionPage = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Promociones - El Huequito | Ofertas en Pintura y Decoración" />
         <meta name="twitter:description" content="Aprovecha nuestras ofertas en pintura y decoración. Encuentra calidad y precios bajos en El Huequito." />
-        <meta name="twitter:image" content="URL_DE_LA_IMAGEN" />
+        <meta name="twitter:image" content="/imagen.png" />
         <meta name="twitter:url" content="https://el-huequito.netlify.app/promociones" />
 
         {/* Favicon */}
-        <link rel="icon" type="image/png" href="URL_DEL_FAVICON" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </Helmet>
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Promociones Disponibles</h1>

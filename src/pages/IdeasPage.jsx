@@ -30,15 +30,17 @@ const IdeasPage = () => {
                 <meta property="og:description" content="Explora nuestras ideas de combinación de colores y diseños para inspirar tus proyectos de pintura." />
                 <meta property="og:url" content="https://el-huequito.netlify.app/ideas" />
                 <meta property="og:type" content="website" />
-                <meta property="og:image" content="https://el-huequito.netlify.app/images/ideas.png" />
+                <meta property="og:image" content="/imagen.png" />
 
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Inspiración y Combinaciones de Colores - El Huequito" />
                 <meta name="twitter:description" content="Explora nuestras ideas de combinación de colores y diseños para inspirar tus proyectos de pintura." />
-                <meta name="twitter:image" content="https://el-huequito.netlify.app/images/ideas.png" />
+                <meta name="twitter:image" content="/imagen.png" />
+                {/* Favicon */}
+                <link rel="icon" type="image/png" href="/favicon.png" />
             </Helmet>
             {/* Grid de imágenes */}
-            <div className='w-full p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ring-2 gap-4 ring-slate-800 rounded-xl'>
+            <div className='max-w-[1300px] mx-auto w-full p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ring-2 gap-4 ring-slate-800 rounded-xl'>
                 {ideas.map(idea => (
                     <div key={idea.id} className='flex flex-col ring-2 ring-slate-400 rounded-xl items-center justify-center'>
                         <img 
