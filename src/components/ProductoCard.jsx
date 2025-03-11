@@ -1,6 +1,7 @@
 // src/components/ProductoCard.jsx
 import React, { useState } from "react";
 import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { Helmet } from "react-helmet-async";
 
 const ProductoCard = ({ producto }) => {
     const [isOpen, setIsOpen] = useState(false);
