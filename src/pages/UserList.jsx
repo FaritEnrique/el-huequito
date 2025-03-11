@@ -110,7 +110,7 @@ const UserList = () => {
           </tbody>
         </table> */}
         <Link to="/admin">
-          <button className="bg-sky-500 p-2 rounded-xl text-white">Retornar Administración</button>
+          <button className="bg-sky-500 p-2 mt-2 rounded-xl text-white">Retornar Administración</button>
         </Link>
       </section>
     </main>
