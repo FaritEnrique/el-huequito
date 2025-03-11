@@ -27,7 +27,6 @@ import VerClienteId from './pages/VerClienteId';
 import RegistrarProducto from './pages/RegistrarProducto';
 import GestionProductos from './pages/GestionProductos';
 import GestionIdeasPage from './pages/GestionIdeasPage';
-import { useEffect } from 'react';
 
 const App = () => {
   useEffect(() => {
