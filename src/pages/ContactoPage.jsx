@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "@fontsource/playfair-display/400-italic.css"; // Italic
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -7,6 +7,15 @@ import { useMensajes } from '../hooks/useMensajes';
 import { Helmet } from "react-helmet-async";
 
 const ContactoPage = () => {
+
+  useEffect(() => {
+    if (window.location.hash === "#formulario") {
+      const elemento = document.getElementById("formulario");
+      if (elemento) {
+        elemento.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, []);
 
   const navigate = useNavigate()
 
