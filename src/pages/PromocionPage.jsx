@@ -65,6 +65,40 @@ const PromocionPage = () => {
 
         {/* Favicon */}
         <link rel="icon" type="image/png" href="/favicon.png" />
+
+        {/* JSON-LD */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "name": "Promociones - El Huequito",
+              "url": "https://el-huequito.netlify.app/promociones",
+              "description": "Aprovecha las mejores promociones en pintura y decoración de El Huequito. Ofertas exclusivas y precios bajos para renovar tus espacios con calidad.",
+              "mainEntityOfPage": "https://el-huequito.netlify.app/promociones",
+              "publisher": {
+                "@type": "Organization",
+                "name": "El Huequito",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "/public/images/logos/logo_huequito.png"
+                }
+              },
+              "promotions": ${JSON.stringify(promociones.map((promocion) => ({
+                "@type": "Offer",
+                "name": promocion.titulo,
+                "description": promocion.descripcion,
+                "url": `https://el-huequito.netlify.app/promociones/${promocion.id}`,
+                "priceCurrency": "USD",  // Cambiar si es necesario
+                "price": promocion.precio,  // Asegúrate de que el precio esté presente
+                "priceValidUntil": promocion.fecha_termino,
+                "eligibleRegion": "Global",
+                "image": promocion.imagen_url || "/default-image.jpg"
+              })))}
+            }
+          `}
+        </script>
+
       </Helmet>
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Promociones Disponibles</h1>

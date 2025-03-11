@@ -38,6 +38,22 @@ const IdeasPage = () => {
                 <meta name="twitter:image" content="/imagen.png" />
                 {/* Favicon */}
                 <link rel="icon" type="image/png" href="/favicon.png" />
+
+                {/* JSON-LD Schema */}
+                <script type="application/ld+json">
+                    {`
+                    {
+                        "@context": "http://schema.org",
+                        "@type": "WebPage",
+                        "name": "Inspiración y Combinaciones de Colores - El Huequito",
+                        "description": "Explora nuestras ideas de combinación de colores y diseños para inspirar tus proyectos de pintura.",
+                        "url": "https://el-huequito.netlify.app/ideas",
+                        "image": "/imagen.png",
+                        "keywords": ["ideas de pintura", "combinación de colores", "decoración"]
+                    }
+                    `}
+                </script>
+                
             </Helmet>
             {/* Grid de imágenes */}
             <div className='max-w-[1300px] mx-auto my-2 w-full p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ring-2 gap-4 ring-slate-800 rounded-xl'>

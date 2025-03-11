@@ -24,6 +24,41 @@ const NosotrosPage = () => {
         <meta name="twitter:card" content="summary_large_image" />
         {/* Favicon */}
         <link rel="icon" type="image/png" href="/favicon.png" />
+
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "El Huequito",
+              "url": "https://el-huequito.netlify.app/",
+              "logo": "/images/logos/logo_huequito.png",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+51 954 855 550",
+                "contactType": "Customer Service",
+                "areaServed": "PE",
+                "availableLanguage": "Spanish"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Jirón Arica N° 851",
+                "addressLocality": "Iquitos",
+                "addressRegion": "Loreto",
+                "postalCode": "16001",
+                "addressCountry": "PE"
+              },
+              "description": "El Huequito es una tienda especializada en pinturas y decoración en Iquitos, ofreciendo productos de alta calidad y servicio experto.",
+              "founder": {
+                "@type": "Person",
+                "name": "Oscar Vásquez"
+              },
+              "foundingDate": "1994",
+              "sameAs": "https://el-huequito.netlify.app/nosotros"
+            }
+          `}
+        </script>
+
       </Helmet>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black p-4">
         <div

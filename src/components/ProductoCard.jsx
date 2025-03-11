@@ -9,6 +9,28 @@ const ProductoCard = ({ producto }) => {
 
     return (
         <div className="border rounded-lg p-4 shadow-md">
+            <Helmet>
+                {/* JSON-LD para cada producto individual */}
+                <script type="application/ld+json">
+                    {`
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "Product",
+                        "name": "${producto.nombre}",
+                        "description": "${producto.descripcion || 'Sin descripción'}",
+                        "image": "${producto.imagenUrl || 'https://dummyimage.com/150x150/cccccc/000000.png&text=Producto'}",
+                        "url": "https://el-huequito.netlify.app/productos/${producto.id}",
+                        "price": "${producto.precio}",
+                        "priceCurrency": "PEN",
+                        "brand": {
+                            "@type": "Brand",
+                            "name": "${producto.marca?.nombre || 'Desconocido'}"
+                        }
+                    }
+                    `}
+                </script>
+            </Helmet>
+
             <img
                 src={producto.imagenUrl || "https://dummyimage.com/150x150/cccccc/000000.png&text=Producto"}
                 alt={producto.nombre}

@@ -64,6 +64,25 @@ const ContactoPage = () => {
 
         {/* Favicon */}
         <link rel="icon" type="image/png" href="URL_DEL_FAVICON" />
+
+        <script type="application/ld+json">
+          {`
+          {
+              "@context": "https://schema.org",
+              "@type": "ContactPage",
+              "name": "El Huequito",
+              "url": "https://el-huequito.netlify.app/contacto",
+              "telephone": "+51 954 855 550",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Jirón Arica N° 851",
+                "addressLocality": "Iquitos",
+                "addressCountry": "Perú"
+              }
+          }
+          `}
+        </script>
+
       </Helmet>
       <main className="max-w-[1300px] w-full mx-auto my-4 py-8 flex bg-slate-700 rounded-xl border-2
       border-black">

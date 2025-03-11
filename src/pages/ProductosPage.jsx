@@ -51,8 +51,27 @@ const ProductosPage = () => {
                 <meta name="twitter:title" content="Catálogo de Productos - El Huequito" />
                 <meta name="twitter:description" content="Explora nuestro catálogo de productos de alta calidad. Encuentra pinturas, barnices y más para tus proyectos." />
                 <meta name="twitter:image" content="/imagen.png" />
+                
                 {/* Favicon */}
                 <link rel="icon" type="image/png" href="/favicon.png" />
+
+                {/* JSON-LD para el catálogo de productos */}
+                <script type="application/ld+json">
+                    {`
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "Product",
+                        "name": "Catálogo de Productos El Huequito",
+                        "description": "Explora nuestro catálogo de productos de alta calidad. Encuentra pinturas, barnices y más para tus proyectos.",
+                        "image": "/imagen.png",
+                        "url": "https://el-huequito.netlify.app/productos",
+                        "brand": {
+                            "@type": "Brand",
+                            "name": "El Huequito"
+                        }
+                    }
+                    `}
+                </script>
             </Helmet>
             <h1 className="text-2xl font-bold mb-4">Productos</h1>
 

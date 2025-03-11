@@ -24,6 +24,33 @@ const HomePage = () => {
         <meta property="og:image" content="/imagen.png" />
         {/* Favicon */}
         <link rel="icon" type="image/png" href="/favicon.png" />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "El Huequito",
+              "url": "https://el-huequito.netlify.app",
+              "logo": "/public/images/logos/logo_huequito_fecha.png",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+51 954 855 550",
+                "contactType": "Customer Service"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Jirón Arica N° 851",
+                "addressLocality": "Iquitos",
+                "addressRegion": "Loreto",
+                "postalCode": "16001",
+                "addressCountry": "PE"
+              }
+            }
+          `}
+        </script>
+
       </Helmet>
       <section className="max-w-[800px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black">
         <div className="max-w-[800px] w-full bg-white rounded-xl items-center">
