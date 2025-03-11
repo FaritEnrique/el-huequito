@@ -16,7 +16,7 @@ const NosotrosPage = () => {
     }, []);
 
   return (
-    <main id='nosotros'>
+    <main>
       <Helmet>
         <title>El Huequito | Pinturas en Iquitos y Almacenes El Huequito - Calidad y Compromiso</title>
         <meta name="description" content="Descubre la historia y compromiso de El Huequito, expertos en pinturas en Iquitos. Calidad y variedad en productos para tu hogar y negocio." />
@@ -71,7 +71,7 @@ const NosotrosPage = () => {
         </script>
 
       </Helmet>
-      <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black p-4">
+      <section id='nosotros' className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black p-4">
         <div
           className="w-full min-h-10 aspect-[1200/480] flex bg-nosotros1-background bg-contain bg-center bg-no-repeat
           ring-4 ring-slate-200 rounded-xl py-4 mb-4 justify-center"
