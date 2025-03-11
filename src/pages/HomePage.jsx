@@ -7,8 +7,31 @@ import CarruselMarcas from '../components/CarruselMarcas';
 import VideoPlaceholder from '../pagesHelp/VideoPlaceholder';
 import { Link } from 'react-router';
 import { Helmet } from "react-helmet-async";
+import { FaFacebookSquare, FaWhatsappSquare, FaTwitterSquare } from "react-icons/fa";
 
 const HomePage = () => {
+
+  const handleShare = (platform) => {
+    const url = encodeURIComponent(window.location.href);
+    let shareUrl = "";
+
+    switch (platform) {
+      case "whatsapp":
+        shareUrl = `https://api.whatsapp.com/send?text=${url}`;
+        break;
+      case "facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+        break;
+      case "twitter":
+        shareUrl = `https://twitter.com/intent/tweet?url=${url}`;
+        break;
+      default:
+        return;
+    }
+
+    console.log("Compartiendo en Facebook:", shareUrl);
+    window.open(shareUrl, "_blank");
+  };
 
   return (
     <>
@@ -60,6 +83,34 @@ const HomePage = () => {
               alt="Imagen para Registrarse"
               className='object-contain rounded-xl mx-auto'/>
           </Link>
+        </div>
+      </section>
+      <section className="max-w-[1300px] w-full mx-auto py-4 bg-gray-100 rounded-lg shadow-md">
+        <h1 className="block sm:hidden w-full font-bold text-teal-900 text-center">
+          Compartir en:
+        </h1>
+        <div className="flex justify-center gap-4 py-4">
+          <button
+            onClick={() => handleShare("whatsapp")}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-white bg-green-500 hover:bg-green-600 transition-all duration-300"
+          >
+            <FaWhatsappSquare size={30} />
+            <span className="hidden sm:block">Compartir en WhatsApp</span>
+          </button>
+          <button
+            onClick={() => handleShare("facebook")}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300"
+          >
+            <FaFacebookSquare size={30} />
+            <span className="hidden sm:block">Compartir en Facebook</span>
+          </button>
+          <button
+            onClick={() => handleShare("twitter")}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg text-white bg-[#1DA1F2] hover:bg-[#1A91D2] transition-all duration-300"
+          >
+            <FaTwitterSquare size={30} />
+            <span className="hidden sm:block">Compartir en Twitter</span>
+          </button>
         </div>
       </section>
       <section className="max-w-[1300px] w-full mx-auto my-4 flex flex-wrap rounded-xl border-2 border-black">
