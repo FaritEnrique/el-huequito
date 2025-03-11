@@ -40,7 +40,7 @@ const IdeasPage = () => {
                 <link rel="icon" type="image/png" href="/favicon.png" />
             </Helmet>
             {/* Grid de imágenes */}
-            <div className='max-w-[1300px] mx-auto w-full p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ring-2 gap-4 ring-slate-800 rounded-xl'>
+            <div className='max-w-[1300px] mx-auto my-2 w-full p-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ring-2 gap-4 ring-slate-800 rounded-xl'>
                 {ideas.map(idea => (
                     <div key={idea.id} className='flex flex-col ring-2 ring-slate-400 rounded-xl items-center justify-center'>
                         <img 
