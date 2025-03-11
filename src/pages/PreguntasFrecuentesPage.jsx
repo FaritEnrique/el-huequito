@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import usePreguntas from "../hooks/usePreguntas";
+import { Helmet } from "react-helmet-async";
 
 const PreguntasFrecuentesPage = () => {
   const { preguntas, fetchPreguntas, removePregunta } = usePreguntas();

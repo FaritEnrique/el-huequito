@@ -229,7 +229,7 @@ const ContactoPage = () => {
             <h1 className='text-center py-2 text-xl text-white font-bold font-cormorant italic md:text-2xl lg:text-3xl'>
               Escríbenos y te responderemos dentro de las próximas 24 horas
             </h1>
-            <form onSubmit={handleSubmit(onSubmit)} className='ring-4 ring-sky-400 mx-auto rounded-lg p-6 bg-slate-300 md:w-3/4 lg:w-1/2'>
+            <form id='formulario' onSubmit={handleSubmit(onSubmit)} className='ring-4 ring-sky-400 mx-auto rounded-lg p-6 bg-slate-300 md:w-3/4 lg:w-1/2'>
               <div className='w-full mb-3'>
                 <label className='p-2' htmlFor="">Nombre Completo:</label>
                 <br />

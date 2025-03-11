@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'sonner';
@@ -27,8 +27,14 @@ import VerClienteId from './pages/VerClienteId';
 import RegistrarProducto from './pages/RegistrarProducto';
 import GestionProductos from './pages/GestionProductos';
 import GestionIdeasPage from './pages/GestionIdeasPage';
+import { useEffect } from 'react';
 
 const App = () => {
+  useEffect(() => {
+    window.onpopstate = () => {
+      window.location.reload();
+    };
+  }, []);
   return (
     <HelmetProvider>
       <BrowserRouter>

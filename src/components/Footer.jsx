@@ -55,7 +55,7 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Contacto</h3>
           <ul>
             <li className="text-gray-400 hover:text-orange-400">
-              <Link to='/contacto'>
+              <Link to='/contacto#formulario'>
                 Formulario de Contacto
               </Link>
             </li>
@@ -143,7 +143,7 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="https://www.instagram.com/p/DA5C54tO16m/"
+                href="#"
                 target="_blank" rel="noopener noreferrer"
                 className="text-gray-400 hover:text-orange-400">
                 <div className="flex justify-between w-28 items-center mt-2">
@@ -153,7 +153,7 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="https://www.youtube.com/@danikahtravelsac7404"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-orange-400">

@@ -21,7 +21,7 @@ const IdeasPage = () => {
     return (
         <main>
             <Helmet>
-                <title>Inspiración y Combinaciones de Colores - El Huequito</title>
+                <title>El Huequito - Inspiración y Combinaciones de Colores</title>
                 <meta name="description" content="Explora nuestras ideas de combinación de colores y diseños para inspirar tus proyectos de pintura." />
                 <meta name="keywords" content="ideas de pintura, combinación de colores, inspiración, decoración" />
                 <meta name="robots" content="index, follow" />
