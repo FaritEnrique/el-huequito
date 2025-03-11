@@ -2,10 +2,21 @@ import React from 'react'
 import { Helmet } from "react-helmet-async";
 import { VscCheckAll } from "react-icons/vsc";
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const NosotrosPage = () => {
+
+  useEffect(() => {
+      if (window.location.hash === "#nosotros") {
+        const elemento = document.getElementById("formulario");
+        if (elemento) {
+          elemento.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    }, []);
+
   return (
-    <main>
+    <main id='nosotros'>
       <Helmet>
         <title>El Huequito | Pinturas en Iquitos y Almacenes El Huequito - Calidad y Compromiso</title>
         <meta name="description" content="Descubre la historia y compromiso de El Huequito, expertos en pinturas en Iquitos. Calidad y variedad en productos para tu hogar y negocio." />

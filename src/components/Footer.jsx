@@ -20,7 +20,7 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Información</h3>
           <ul>
             <li>
-              <Link to='/nosotros' className="text-gray-400 hover:text-orange-400">
+              <Link to='/nosotros#nosotros' className="text-gray-400 hover:text-orange-400">
                 Sobre Nosotros
               </Link>
             </li>
