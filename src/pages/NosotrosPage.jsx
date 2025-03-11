@@ -8,7 +8,7 @@ const NosotrosPage = () => {
 
   useEffect(() => {
       if (window.location.hash === "#nosotros") {
-        const elemento = document.getElementById("formulario");
+        const elemento = document.getElementById("nosotros");
         if (elemento) {
           elemento.scrollIntoView({ behavior: "smooth", block: "start" });
         }
