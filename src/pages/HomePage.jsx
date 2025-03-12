@@ -5,7 +5,7 @@ import '@fontsource/lobster'; // Importación de la fuente Lobster
 import { TbPointFilled } from "react-icons/tb";
 import CarruselMarcas from '../components/CarruselMarcas';
 import VideoPlaceholder from '../pagesHelp/VideoPlaceholder';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet-async";
 import { FaFacebookSquare, FaWhatsappSquare, FaTwitterSquare } from "react-icons/fa";
 
@@ -178,16 +178,16 @@ const HomePage = () => {
             <ul className='pt-1 space-y-1'>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />
-                Mate
+                Latex Lavable Acabado Mate
               </li>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />
-                Satinado
+                Latex Lavable Acabado Satinado
               </li>
             </ul>
           </div>
           <div className='w-full md:w-1/4'>
-            <img src="/images/fotosProductos/foto_pintura_exterior.png" alt="Foto Pintado Exterior" className='object-contain rounded-lg' />
+            <img src="/images/fotosProductos/foto_pintura_exterior.png" alt="Foto Pintado Exterior El Huequito" className='object-contain rounded-lg' />
           </div>
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
@@ -203,6 +203,10 @@ const HomePage = () => {
             <ul className='pt-1 space-y-1'>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />
+                Poliuretano
+              </li>
+              <li className="flex items-center pl-2">
+                <TbPointFilled className="text-black text-2xl mr-2" />
                 Acrílico
               </li>
               <li className="flex items-center pl-2">
@@ -212,7 +216,7 @@ const HomePage = () => {
             </ul>
           </div>
           <div className='w-full md:w-1/4'>
-            <img src="/images/fotosProductos/foto_pintura_automotriz2.png" alt="Foto Pintura Automotriz" className='object-contain rounded-lg' />
+            <img src="/images/fotosProductos/foto_pintura_automotriz2.png" alt="Foto Pintura Automotriz El Huequito" className='object-contain rounded-lg' />
           </div>
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
@@ -244,7 +248,7 @@ const HomePage = () => {
             </ul>
           </div>
           <div className='w-full md:w-1/4'>
-            <img src="/images/fotosProductos/foto_pintura_industrial.png" alt="Foto Pintura Industrial" className='object-contain rounded-lg' />
+            <img src="/images/fotosProductos/foto_pintura_industrial.png" alt="Foto Pintura Industrial El Huequito" className='object-contain rounded-lg' />
           </div>
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
@@ -277,7 +281,7 @@ const HomePage = () => {
             </ul>
           </div>
           <div className='w-full md:w-1/4'>
-            <img src="/images/fotosProductos/productos_madera.png" alt="Foto Pintura Industrial" className='object-contain rounded-lg' />
+            <img src="/images/fotosProductos/productos_madera.png" alt="Foto Productos para Madera El Huequito" className='object-contain rounded-lg' />
           </div>
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
@@ -299,20 +303,16 @@ const HomePage = () => {
             <ul className='pt-1 space-y-1'>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />
-                Base Decorativa
+                Temple Fino
               </li>
               <li className="flex items-center pl-2">
                 <TbPointFilled className="text-black text-2xl mr-2" />
                 Sellador para Pared e Imprimantes
               </li>
-              <li className="flex items-center pl-2">
-                <TbPointFilled className="text-black text-2xl mr-2" />
-                Base al Aceite
-              </li>
             </ul>
           </div>
           <div className='w-full md:w-1/4'>
-            <img src="/images/fotosProductos/foto_selladores.png" alt="Foto Pintura Industrial" className='object-contain rounded-lg' />
+            <img src="/images/fotosProductos/foto_selladores.png" alt="Foto Selladores El Huequito" className='object-contain rounded-lg' />
           </div>
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
@@ -342,7 +342,7 @@ const HomePage = () => {
             </ul>
           </div>
           <div className='w-full md:w-1/4'>
-            <img src="/images/fotosProductos/disolventes.png" alt="Foto Pintura Industrial" className='object-contain rounded-lg' />
+            <img src="/images/fotosProductos/disolventes.png" alt="Foto Disolvente El Huequito" className='object-contain rounded-lg' />
           </div>
         </div>
         <div className='w-full p-2 my-2 md:p-6 flex flex-wrap items-center border-2 border-blue-300 bg-slate-200 rounded-lg'>
@@ -371,7 +371,7 @@ const HomePage = () => {
             </ul>
           </div>
           <div className='w-full md:w-1/4'>
-            <img src="/images/fotosProductos/brochas.png" alt="Foto Pintura Industrial" className='object-contain rounded-lg' />
+            <img src="/images/fotosProductos/brochas.png" alt="Foto Productos Varios El Huequito" className='object-contain rounded-lg' />
           </div>
         </div>
       </section>
