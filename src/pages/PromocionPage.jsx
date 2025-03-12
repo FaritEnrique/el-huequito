@@ -52,7 +52,7 @@ const PromocionPage = () => {
         {/* Open Graph (Facebook, LinkedIn) */}
         <meta property="og:title" content="Promociones - El Huequito | Ofertas en Pintura y Decoración" />
         <meta property="og:description" content="Descubre las promociones exclusivas en pintura y decoración. Calidad garantizada a los mejores precios." />
-        <meta property="og:image" content="/imagen.png" />
+        <meta property="og:image" content="https://el-huequito.netlify.app/imagen.png" />
         <meta property="og:url" content="https://el-huequito.netlify.app/promociones" />
         <meta property="og:type" content="website" />
 
@@ -60,7 +60,7 @@ const PromocionPage = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Promociones - El Huequito | Ofertas en Pintura y Decoración" />
         <meta name="twitter:description" content="Aprovecha nuestras ofertas en pintura y decoración. Encuentra calidad y precios bajos en El Huequito." />
-        <meta name="twitter:image" content="/imagen.png" />
+        <meta name="twitter:image" content="https://el-huequito.netlify.app/imagen.png" />
         <meta name="twitter:url" content="https://el-huequito.netlify.app/promociones" />
 
         {/* Favicon */}
@@ -81,7 +81,7 @@ const PromocionPage = () => {
                 "name": "El Huequito",
                 "logo": {
                   "@type": "ImageObject",
-                  "url": "/public/images/logos/logo_huequito.png"
+                  "url": "https://i.postimg.cc/WbdkCRfp/logo-huequito-fecha.png"
                 }
               },
               "promotions": ${JSON.stringify(promociones.map((promocion) => ({
@@ -89,7 +89,7 @@ const PromocionPage = () => {
                 "name": promocion.titulo,
                 "description": promocion.descripcion,
                 "url": `https://el-huequito.netlify.app/promociones/${promocion.id}`,
-                "priceCurrency": "USD",  // Cambiar si es necesario
+                "priceCurrency": "S/",
                 "price": promocion.precio,  // Asegúrate de que el precio esté presente
                 "priceValidUntil": promocion.fecha_termino,
                 "eligibleRegion": "Global",

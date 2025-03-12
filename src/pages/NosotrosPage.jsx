@@ -25,13 +25,13 @@ const NosotrosPage = () => {
         {/* Open Graph */}
         <meta property="og:title" content="El Huequito | Pinturas en Iquitos" />
         <meta property="og:description" content="Conoce la historia y calidad de El Huequito, expertos en pinturas y decoración." />
-        <meta property="og:image" content="/imagen.png" />
+        <meta property="og:image" content="https://el-huequito.netlify.app/imagen.png" />
         <meta property="og:url" content="https://www.elhuequito.com/nosotros" />
         <meta property="og:type" content="website" />
         {/* Twitter */}
         <meta name="twitter:title" content="El Huequito | Pinturas en Iquitos" />
         <meta name="twitter:description" content="Conoce la historia y calidad de El Huequito, expertos en pinturas y decoración." />
-        <meta name="twitter:image" content="/imagen.png" />
+        <meta name="twitter:image" content="https://el-huequito.netlify.app/imagen.png" />
         <meta name="twitter:card" content="summary_large_image" />
         {/* Favicon */}
         <link rel="icon" type="image/png" href="/favicon.png" />
@@ -43,7 +43,7 @@ const NosotrosPage = () => {
               "@type": "Organization",
               "name": "El Huequito",
               "url": "https://el-huequito.netlify.app/",
-              "logo": "/images/logos/logo_huequito.png",
+              "logo": "https://i.postimg.cc/WbdkCRfp/logo-huequito-fecha.png",
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+51 954 855 550",

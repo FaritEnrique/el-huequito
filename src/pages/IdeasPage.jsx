@@ -30,12 +30,12 @@ const IdeasPage = () => {
                 <meta property="og:description" content="Explora nuestras ideas de combinación de colores y diseños para inspirar tus proyectos de pintura." />
                 <meta property="og:url" content="https://el-huequito.netlify.app/ideas" />
                 <meta property="og:type" content="website" />
-                <meta property="og:image" content="/imagen.png" />
+                <meta property="og:image" content="https://el-huequito.netlify.app/imagen.png" />
 
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Inspiración y Combinaciones de Colores - El Huequito" />
                 <meta name="twitter:description" content="Explora nuestras ideas de combinación de colores y diseños para inspirar tus proyectos de pintura." />
-                <meta name="twitter:image" content="/imagen.png" />
+                <meta name="twitter:image" content="https://el-huequito.netlify.app/imagen.png" />
                 {/* Favicon */}
                 <link rel="icon" type="image/png" href="/favicon.png" />
 
@@ -48,7 +48,7 @@ const IdeasPage = () => {
                         "name": "Inspiración y Combinaciones de Colores - El Huequito",
                         "description": "Explora nuestras ideas de combinación de colores y diseños para inspirar tus proyectos de pintura.",
                         "url": "https://el-huequito.netlify.app/ideas",
-                        "image": "/imagen.png",
+                        "image": "https://el-huequito.netlify.app/imagen.png",
                         "keywords": ["ideas de pintura", "combinación de colores", "decoración"]
                     }
                     `}

@@ -22,6 +22,20 @@ const PreguntasFrecuentesPage = () => {
         <meta name="keywords" content="preguntas frecuentes, dudas, respuestas, productos, servicio al cliente" />
         <meta name="robots" content="index, follow" />
 
+        {/* Open Graph */}
+        <meta property="og:title" content="El Huequito | Pinturas en Iquitos" />
+        <meta property="og:description" content="Conoce la historia y calidad de El Huequito, expertos en pinturas y decoración." />
+        <meta property="og:image" content="https://el-huequito.netlify.app/imagen.png" />
+        <meta property="og:url" content="https://www.elhuequito.com/nosotros" />
+        <meta property="og:type" content="website" />
+        {/* Twitter */}
+        <meta name="twitter:title" content="El Huequito | Pinturas en Iquitos" />
+        <meta name="twitter:description" content="Conoce la historia y calidad de El Huequito, expertos en pinturas y decoración." />
+        <meta name="twitter:image" content="https://el-huequito.netlify.app/imagen.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        {/* Favicon */}
+        <link rel="icon" type="image/png" href="/favicon.png" />
+
         {/* JSON-LD Schema */}
         <script type="application/ld+json">
           {`
