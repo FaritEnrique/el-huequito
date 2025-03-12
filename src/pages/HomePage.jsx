@@ -44,12 +44,12 @@ const HomePage = () => {
         <meta property="og:url" content="https://el-huequito.netlify.app/" />
         <meta property="og:type" content="website" />
         <meta name="robots" content="index, follow" />
-        <meta property="og:image" content="https://i.postimg.cc/C52VzrDY/imagen.png" />
+        <meta property="og:image" content="https://el-huequito.netlify.app/imagen.png" />
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="El Huequito - Calidad y Percio en Pinturas" />
         <meta name="twitter:description" content="Descubre El Huequito, tu mejor opción en pintura y decoración. Encuentra calidad y precios bajos para renovar tus espacios." />
-        <meta name="twitter:image" content="https://i.postimg.cc/C52VzrDY/imagen.png" />
+        <meta name="twitter:image" content="https://el-huequito.netlify.app/imagen.png" />
         <meta name="twitter:url" content="https://el-huequito.netlify.app/" />
         {/* Favicon */}
         <link rel="icon" type="image/png" href="/favicon.png" />
@@ -62,7 +62,7 @@ const HomePage = () => {
               "@type": "Organization",
               "name": "El Huequito",
               "url": "https://el-huequito.netlify.app",
-              "logo": "https://i.postimg.cc/WbdkCRfp/logo-huequito-fecha.png",
+              "logo": "https://el-huequito.netlify.app/imagen.png",
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+51 954 855 550",

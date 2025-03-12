@@ -45,12 +45,12 @@ const ProductosPage = () => {
                 <meta property="og:description" content="Explora nuestro catálogo de productos de alta calidad. Encuentra pinturas, barnices y más para tus proyectos." />
                 <meta property="og:url" content="https://el-huequito.netlify.app/productos" />
                 <meta property="og:type" content="website" />
-                <meta property="og:image" content="https://i.postimg.cc/C52VzrDY/imagen.png" />
+                <meta property="og:image" content="https://el-huequito.netlify.app/imagen.png" />
 
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content="Catálogo de Productos - El Huequito" />
                 <meta name="twitter:description" content="Explora nuestro catálogo de productos de alta calidad. Encuentra pinturas, barnices y más para tus proyectos." />
-                <meta name="twitter:image" content="https://i.postimg.cc/C52VzrDY/imagen.png" />
+                <meta name="twitter:image" content="https://el-huequito.netlify.app/imagen.png" />
                 
                 {/* Favicon */}
                 <link rel="icon" type="image/png" href="/favicon.png" />
@@ -63,7 +63,7 @@ const ProductosPage = () => {
                         "@type": "Product",
                         "name": "Catálogo de Productos El Huequito",
                         "description": "Explora nuestro catálogo de productos de alta calidad. Encuentra pinturas, barnices y más para tus proyectos.",
-                        "image": "https://i.postimg.cc/C52VzrDY/imagen.png",
+                        "image": "https://el-huequito.netlify.app/imagen.png",
                         "url": "https://el-huequito.netlify.app/productos",
                         "brand": {
                             "@type": "Brand",
