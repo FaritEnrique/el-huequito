@@ -128,7 +128,7 @@ const ContactoPage = () => {
                 <p className='w-20'>Celular:</p><span>+51 954 855 550</span>
               </div>
               <div className='w-full flex gap-10 my-2'>
-                <p className='w-20'>Correo:</p><span>elhuequito@gmail.com</span>
+                <p className='w-20'>Correo:</p><span>corporacionelhuequito@gmail.com</span>
               </div>
               <div className='w-full flex gap-10 my-2'>
                 <p className='bg-white p-2 text-justify'>El horario de atención es de lunes a sabado de 8:00 a.m a 8:00 p.m. 
